@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, NavLink } from 'react-router-dom';
+import "./Header.module.css"
 const Header = () => {
   const menuItem = <>
-  <li><Link to="/home">HOME</Link></li>
-  <li><Link to="/menu">MENU</Link></li>
-  <li><Link to="/blogs">BLOGS</Link></li>
-  <li><Link to="/blogs">OUR EXPERTS</Link></li>
-  <li><Link to="/about">ABOUT</Link></li>
-  <li><Link to="/contact">CONTACT</Link></li>
+  <li><NavLink to="/">HOME</NavLink></li>
+  <li><NavLink to="/menu">MENU</NavLink></li>
+  <li><NavLink to="/blogs">BLOGS</NavLink></li>
+  <li><NavLink to="/experts">OUR EXPERTS</NavLink></li>
+  <li><NavLink to="/about">ABOUT</NavLink></li>
+  <li><NavLink to="/contact">CONTACT</NavLink></li>
   </>
   return (
     <>
@@ -35,7 +35,7 @@ const Header = () => {
         {menuItem}
       </ul>
     </div>
-    <a className="text-sm md:text-xl cursor-pointer ml-2">MOONLIT-BITES</a>
+    <Link to="/" className="text-sm md:text-xl font-semibold  cursor-pointer ml-2">MOONLIT-BITES</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1 font-semibold">

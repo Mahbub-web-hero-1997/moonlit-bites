@@ -4,8 +4,9 @@ import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './Routes/Route.jsx'
 
+
 createRoot(document.getElementById('root')).render(
-  <div className='w-full px-3 mx-auto border-4'>
+  <div className='w-full md:px-2 mx-auto'>
      <StrictMode>
    <RouterProvider router={router}/>
   </StrictMode>,

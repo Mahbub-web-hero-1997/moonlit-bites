@@ -13,7 +13,7 @@ const Home = () => {
         <>
           <div className='w-full mx-auto no-scrollbar'>
                 <Banner /> 
-                <Menu />
+               { <Menu />}
                 <About />
                 <Contact />
                 <Experts/>

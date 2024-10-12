@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import "./Header.module.css"
 const Header = () => {
+  const [navbarBg, setNavbarBg] = useState(false);
+  const changeBg = () => {
+     if (window.scrollY >= 80){
+    setNavbarBg(true)
+    }
+    else {
+      setNavbarBg(false)
+    }
+  }
+  useEffect(() => {
+    window.addEventListener("scroll", changeBg)
+    return ()=>{removeEventListener("scroll", changeBg)}
+  },[])
   const menuItem = <>
-  <li><NavLink to="/">HOME</NavLink></li>
-  <li><NavLink to="/menu">MENU</NavLink></li>
-  <li><NavLink to="/blogs">BLOGS</NavLink></li>
-  <li><NavLink to="/experts">OUR EXPERTS</NavLink></li>
-  <li><NavLink to="/about">ABOUT</NavLink></li>
-  <li><NavLink to="/contact">CONTACT</NavLink></li>
+  <li><NavLink className="text-black font-semibold" to="/">HOME</NavLink></li>
+  <li><NavLink className="text-black font-semibold" to="/menu">MENU</NavLink></li>
+  <li><NavLink className="text-black font-semibold" to="/blogs">BLOGS</NavLink></li>
+  <li><NavLink className="text-black font-semibold" to="/experts">OUR EXPERTS</NavLink></li>
+  <li><NavLink className="text-black font-semibold" to="/about">ABOUT</NavLink></li>
+  <li><NavLink className="text-black font-semibold" to="/contact">CONTACT</NavLink></li>
   </>
   return (
     <>
-      <div className="navbar sticky top-0 z-20 border-b border-gray-400">
+      <div className={`navbar sticky top-0 left-0 w-full z-10 transition-colors duration-500 ease-in-out ${
+        navbarBg ? "bg-white" : "bg-transparent"
+      }`}>
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost p-0 lg:hidden">

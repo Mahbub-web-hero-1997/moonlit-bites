@@ -6,11 +6,18 @@ import Experts from "../Components/Experts/Experts";
 import About from "../Components/About/About";
 import Contact from "../Components/Contact/Contact";
 
+import Root from "../Components/Root";
+
 export const router = createBrowserRouter([
+   
     {
         path: "/",
-        element: <Home />,
+        element: <Root />,
         children: [
+            {
+                path: "/",
+                element:<Home/>
+        },
             {
         path: "/menu",
         element:<Menu/>

@@ -5,7 +5,7 @@ const Menu = ({ menu }) => {
     const { category, name, image, price, recipe } = menu;
     
     return (
-        <div className="card bg-base-100 border-4 w-96 h-[450px] rounded-none shadow-xl mx-auto">
+        <div className="card bg-base-100 w-96 h-[450px] rounded-none shadow-xl mx-auto">
   <figure>
                 <img
                     className='w-full'

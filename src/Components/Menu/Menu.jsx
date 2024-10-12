@@ -5,21 +5,24 @@ const Menu = ({ menu }) => {
     const { category, name, image, price, recipe } = menu;
     
     return (
-        <div className="card bg-base-100 w-96 h-[450px] rounded-none shadow-xl mx-auto">
-  <figure>
-                <img
-                    className='w-full'
+        <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
+  <figure className='relative '>
+          <img
+                    className='w-full rounded-tl-md rounded-tr-md '
       src={image}
       alt="Shoes" />
-  </figure>
-  <div className="card-body">
+        </figure>       
+        <div className='absolute w-full h-[256px] bg-black hover:opacity-45 transition-all duration-300 opacity-60 top-0 left-0 rounded-tl-md rounded-tr-md '> 
+        </div>
+        <h4 className=' z-20 absolute right-3 top-3 text-md text-white text-center font-bold  bg-orange-500 w-[80px] h-[50px] rounded-full p-3'>${price}</h4>
+  <div className=" card-body mb-2 hover:-translate-y-10  transition-all duration-700 z-30 bg-white w-[95%] mx-auto rounded-tr-3xl rounded-tl-3xl">
     <h2 className="card-title">
       {name}            
     </h2>
                 <p>{ recipe}</p>
-    <div className="card-actions justify-end">
-      <div className="badge badge-outline">Fashion</div>
-      <div className="badge badge-outline">Products</div>
+    <div className="card-actions justify-between">
+      <div className="badge badge-outline bg-orange-500 p-5 text-white font-semibold"><Link>Add to cart</Link></div>
+      <div className="badge badge-outline bg-orange-500 p-5 text-white font-semibold"><Link>Buy Now</Link></div>
     </div>
   </div>
 </div>

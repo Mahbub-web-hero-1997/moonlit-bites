@@ -25,7 +25,7 @@ const Header = () => {
   </>
   return (
     <>
-      <div className="navbar sticky top-0  w-full z-10 pt-4 md:pt-0 bg-base-100 transition-colors duration-500 ease-in-out">
+      <div className="navbar sticky top-0  w-full z-50 pt-4 md:pt-0 bg-base-100 transition-colors duration-500 ease-in-out">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost p-0 lg:hidden">

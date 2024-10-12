@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Menu = ({ menu }) => {
-    const { category, name, image, price, recipe } = menu;
+    const { name, image, price, recipe } = menu;
     
     return (
         <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
@@ -21,8 +21,8 @@ const Menu = ({ menu }) => {
     </h2>
                 <p>{ recipe}</p>
     <div className="card-actions justify-between">
-      <div className="badge badge-outline border-orange-500 p-5 text-orange-500 font-semibold"><Link>Add to cart</Link></div>
-      <div className="badge badge-outline border-orange-500 p-5 text-orange-500 font-semibold"><Link>Buy Now</Link></div>
+      <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov"><Link className=''>Add to cart</Link></div>
+      <div className="badge  hover:bg-orange-500 hover:text-white  badge-outline border-orange-500 p-5 text-orange-500 font-semibold"><Link>Buy Now</Link></div>
     </div>
   </div>
 </div>

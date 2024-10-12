@@ -20,7 +20,8 @@ export const router = createBrowserRouter([
         },
             {
                 path: "/menu",
-                element: <Menu />,                
+                element: <Menu />,  
+                loader:()=>fetch('http://localhost:5000/pagination')
             },
             {
                 path: "/blogs",

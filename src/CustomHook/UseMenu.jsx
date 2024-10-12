@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const useMenu = () => {
-    const [menus, setMenus] = useState([])
+    const [menus, setMenus] = useState([])  
   
     useEffect(() => {
          

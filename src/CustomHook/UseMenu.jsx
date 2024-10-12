@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const useMenuForHome = () => {
+const useMenu = () => {
     const [menus, setMenus] = useState([])
   
     useEffect(() => {
@@ -12,4 +12,4 @@ const useMenuForHome = () => {
     return menus
 };
 
-export default useMenuForHome;
+export default useMenu;

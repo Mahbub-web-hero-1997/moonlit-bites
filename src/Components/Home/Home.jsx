@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../Shared/Header';
 import { Outlet } from 'react-router-dom';
 import Banner from '../Banner/Banner';
-import Menu from '../Menu/Menu';
+import Menu from '../Menu/Menus';
 import About from '../About/About';
 import Contact from '../Contact/Contact';
 import Experts from '../Experts/Experts';

@@ -7,6 +7,7 @@ import Experts from '../Experts/Experts';
 import useMenuForHome from '../../CustomHook/UseMenu';
 import { Link } from 'react-router-dom';
 import SectionHeading from '../Shared/SectionHeading';
+import Category from '../Shared/Category';
 
 
 const Home = () => {
@@ -16,7 +17,8 @@ const Home = () => {
         <>
           <div className='w-full mx-auto no-scrollbar'>
           <Banner /> 
-            <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our best menu"}/>
+          <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our best menu"} />
+          <Category/>
            <div className='grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20 mt-5'>
                 {
                    menus.slice(0,6).map((menu)=>(     <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">

@@ -5,15 +5,16 @@ import Menu from './Menu';
 import MenuBanner from './MenuBanner';
 import useMenu from '../../CustomHook/UseMenu';
 import SectionHeading from '../Shared/SectionHeading';
+import Category from '../Shared/Category';
+
 
 
 
 const Menus = () => {
-    const menus = useMenu()
-    console.log(menus);
+    const menus = useMenu()  
     
     const { totalItems } = useLoaderData() 
-    console.log(totalItems);
+ 
     
     const [menuPerPage, setMenuPerPage] = useState(10)
     const totalPages = Math.ceil(totalItems / menuPerPage)   
@@ -21,8 +22,9 @@ const Menus = () => {
 
     return (
         <>
-            <MenuBanner />             
-            <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our best menu"}/>
+            <MenuBanner />              
+            <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our best menu"} />
+            <Category/>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20 mt-5 '>
                 {
                    menus.slice(0,6).map((menu)=>(<Menu key={menu._id} menu={menu}/>))

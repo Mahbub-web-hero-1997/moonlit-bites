@@ -1,0 +1,12 @@
+import React from 'react';
+
+const SectionHeading = ({heading, subHeading}) => {
+    return (
+        <div className='w-full md:w-1/4 mx-auto text-center mt-5'>
+            <p className='text-orange-500 font-xl'>{ subHeading}</p>
+            <h1 className='text-xl md:text-3xl font-semibold uppercase border-t-2 border-b-2 py-2 mt-2'>{ heading}</h1>
+        </div>
+    );
+};
+
+export default SectionHeading;

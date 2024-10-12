@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Menu from './Menu';
+import MenuBanner from './MenuBanner';
 
 
 
@@ -17,6 +18,7 @@ const Menus = () => {
     
     return (
         <>
+            <MenuBanner/>
         <h1 className=' text-3xl font-bold w-[98%] mx-auto '>{menus.length}</h1>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20'>
                 {

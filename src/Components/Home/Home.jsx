@@ -25,7 +25,7 @@ const Home = () => {
 },[setPopularMenus])
     return (
         <>
-          <div className='w-full mx-auto no-scrollbar'>
+          <div className='w-full mx-auto '>
           <Banner /> 
           <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our popular menu"} />  
            <Marquee speed={20} >

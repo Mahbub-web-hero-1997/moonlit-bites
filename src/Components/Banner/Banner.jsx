@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import video from "../../assets/banner/bg_video_3.mp4"
 import useMenu from '../../CustomHook/UseMenu';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,10 +6,11 @@ import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper/module
 import 'swiper/css';
 import { Link } from 'react-router-dom';
 import Aos from 'aos';
+import { AuthContext } from '../../ContextAPI/AuthProvider';
 
 
 const Banner = () => {
-    const menus = useMenu()
+    const {menus} = useContext(AuthContext)
     useEffect(() => {
        
       Aos.init();
@@ -28,7 +29,7 @@ const Banner = () => {
             <div className='w-full  bg-black inset-0 absolute opacity-40 -z-20'>
                
             </div>
-            <div className=' w-full md:w-2/3 h-full flex justify-end items-center'>
+            <div className='md:w-2/3 h-full flex justify-end items-center'>
                          <Swiper
                 className= ' text-white  '
       // install Swiper modules
@@ -44,10 +45,10 @@ const Banner = () => {
                         <h1 className='text-2xl md:text-6xl font-semibold'>{menu.name}</h1>                        
                             <p className=' w-86 leading-[2] tracking-widest text-xl p-2'>{menu.recipe}</p>
                         <div className='flex mt-3'>
-                            <p className=' w-1/2 md:w-1/5 md:text-xl border border-gray-500 p-2'>Price: ${menu.price}</p>
-                            <p className='w-1/2 md:w-1/3 text-xl border border-gray-500 p-2'>Salt / Olive Oil / Meat</p>
+                            <p className='w-1/5 text-xl border border-gray-500 p-2'>Price: ${menu.price}</p>
+                            <p className='w-1/5 text-xl border border-gray-500 p-2'>Price: ${menu.price}</p>
                         </div>
-                        <Link  to="#" className='w-full md:w-[150px] mt-4 rounded-md  text-center text-white font-semibold px-6 py-3 block border border-gray-500 hover:bg-orange-600'>Order-Now</Link>
+                        <Link  to="#" className='w-[150px] mt-4 rounded-md  text-center text-orange-500 font-semibold px-6 py-3 block border border-gray-500 hover:bg-orange-600 hover:text-white'>Order-Now</Link>
                     </SwiperSlide>))
       }
               

@@ -5,7 +5,7 @@ const Menu = ({ menu }) => {
     const { name, image, price, recipe } = menu;
     
     return (
-        <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
+        <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto ">
   <figure className='relative '>
           <img
                     className='w-full rounded-tl-md rounded-tr-md '

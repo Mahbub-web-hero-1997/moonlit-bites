@@ -1,29 +1,21 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import Menu from './Menu';
 import MenuBanner from './MenuBanner';
 import useMenu from '../../CustomHook/UseMenu';
 import SectionHeading from '../Shared/SectionHeading';
 import Category from '../Shared/Category';
+import { AuthContext } from '../../ContextAPI/AuthProvider';
 
 
 
 
 
 const Menus = () => {
-    const [menus, setMenus, istrue, settrue] = useMenu()
-    console.log(istrue);    
-   
-    
-    useEffect(() => {
-       console.log(menus);
-       
-   },[menus])
+    const {menus} = useContext(AuthContext)
     
     const { totalItems } = useLoaderData() 
- 
-    
     const [menuPerPage, setMenuPerPage] = useState(10)
     const totalPages = Math.ceil(totalItems / menuPerPage)   
     const pages = [...Array(totalPages).keys()] 

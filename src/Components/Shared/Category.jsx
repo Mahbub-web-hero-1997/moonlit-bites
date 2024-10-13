@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-
+import useMenu from '../../CustomHook/UseMenu';
+import axios from 'axios';
 const Category = () => { 
-    const [selectedCategory, setSelectedCategory] = useState('')
-     const handleCategory = (e) => {
-        const selected = e.target.innerText.toLowerCase();  
-        console.log(selected);    
-    }
-   
-   
+    const [menus, setMenus, istrue, settrue,handlePopularMenus]=useMenu()
+  
    
     return (
 <>
-         <div className='grid grid-cols-6 gap-20 p-4  border-y my-8 '>           
-        < Link onClick={()=>handleCategory()} to="#" className=' flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-xl font-semibold'><img className=' w-28 h-28 rounded-full hover:scale-105 ' src="https://i.ibb.co.com/k9RHBXB/salad-bg.jpg" alt="" />
+         <div className='grid grid-cols-7 gap-20 p-4  border-y my-8 '>           
+        < button onClick={()=>handlePopularMenus()}  to="#" className=' flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-xl font-semibold'><img className=' w-28 h-28 rounded-full hover:scale-105 ' src="https://i.ibb.co.com/k9RHBXB/salad-bg.jpg" alt="" />
+                            <h1 className=''>All</h1>
+                            </button> 
+        < button  to="#" className=' flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-xl font-semibold'><img className=' w-28 h-28 rounded-full hover:scale-105 ' src="https://i.ibb.co.com/k9RHBXB/salad-bg.jpg" alt="" />
                             <h1 className=''>Salad</h1>
-                            </Link> 
+                            </button> 
                             < Link to="#" className=' flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-xl font-semibold'><img className=' w-28 h-28 rounded-full hover:scale-105 ' src="https://i.ibb.co.com/f9mTDGf/slide2.jpg" alt="" />
                             <h1 className=''>Pizza</h1>
                             </Link> 

@@ -22,7 +22,7 @@ const Menu = ({ menu }) => {
                 <p>{ recipe}</p>
     <div className="card-actions justify-between">
       <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov"><Link className=''>Add to cart</Link></div>
-      <div className="badge  hover:bg-orange-500 hover:text-white  badge-outline border-orange-500 p-5 text-orange-500 font-semibold"><Link>Buy Now</Link></div>
+      <div className="badge  badge-outline border-orange-500 p-5 text-orange-500 font-semibold"><Link>Buy Now</Link></div>
     </div>
   </div>
 </div>

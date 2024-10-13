@@ -10,8 +10,16 @@ import Category from '../Shared/Category';
 
 
 
+
 const Menus = () => {
-    const menus = useMenu()  
+    const [menus, setMenus, istrue, settrue] = useMenu()
+    console.log(istrue);    
+   
+    
+    useEffect(() => {
+       console.log(menus);
+       
+   },[menus])
     
     const { totalItems } = useLoaderData() 
  

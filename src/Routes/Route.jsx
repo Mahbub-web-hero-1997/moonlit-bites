@@ -5,9 +5,8 @@ import Blogs from "../Components/Blogs/Blogs";
 import Experts from "../Components/Experts/Experts";
 import About from "../Components/About/About";
 import Contact from "../Components/Contact/Contact";
-
 import Root from "../Components/Root";
-import Category from "../Components/Shared/Category";
+
 
 export const router = createBrowserRouter([
    
@@ -40,10 +39,7 @@ export const router = createBrowserRouter([
                 path: "/contact",
                 element:<Contact/>
             },
-            {
-                path: "/category",
-                element:<Category/>
-            }
+       
         ]
     },
    

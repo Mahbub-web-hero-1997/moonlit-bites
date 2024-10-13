@@ -1,27 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import Banner from '../Banner/Banner';
-import Menu from '../Menu/Menus';
 import About from '../About/About';
 import Contact from '../Contact/Contact';
 import Experts from '../Experts/Experts';
-import useMenuForHome from '../../CustomHook/UseMenu';
 import { Link } from 'react-router-dom';
 import SectionHeading from '../Shared/SectionHeading';
+import axios from 'axios';
 import Category from '../Shared/Category';
+import Marquee from 'react-fast-marquee';
+
+
 
 
 const Home = () => {
-    const menus = useMenuForHome()   
+  // const menus = useMenuForHome() 
+  const [popularMenus, setPopularMenus] = useState([])  
+  useEffect(() => {
+    axios.get('http://localhost:5000/menu')
+    .then(res => {
+      const popularItem = res.data.filter(items => items.category === "popular")
+      setPopularMenus(popularItem)      
+  })
        
+},[setPopularMenus])
     return (
         <>
           <div className='w-full mx-auto no-scrollbar'>
           <Banner /> 
-          <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our best menu"} />
-          <Category/>
+          <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our popular menu"} />  
+           <Marquee speed={20} >
            <div className='grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20 mt-5'>
                 {
-                   menus.slice(0,6).map((menu)=>(     <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
+              popularMenus.slice(0, 3).map((menu) => (
+                     <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
   <figure className='relative '>
           <img
                     className='w-full rounded-tl-md rounded-tr-md '
@@ -41,9 +52,12 @@ const Home = () => {
       <div className="badge badge-outline border-orange-500 p-5 text-orange-500 font-semibold"><Link>Buy Now</Link></div>
     </div>
   </div>
-</div>))
+</div>
+                   ))
                 }
-        </div>
+          </div>
+             
+            </Marquee>   
                 <About />
                 <Contact />
                 <Experts/>

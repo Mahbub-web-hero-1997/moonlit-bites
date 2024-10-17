@@ -28,8 +28,8 @@ const Home = () => {
           <div className='w-full mx-auto '>
           <Banner /> 
           <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our popular menu"} />  
-           <Marquee speed={20} >
-           <div className='grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20 mt-5'>
+           <Marquee className='md:w-[90%' speed={20} >
+           <div className='grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20 mt-5 ]'>
                 {
               popularMenus.slice(0, 3).map((menu) => (
                      <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">

@@ -8,6 +8,7 @@ import SectionHeading from '../Shared/SectionHeading';
 import axios from 'axios';
 import Marquee from 'react-fast-marquee';
 import { Helmet } from 'react-helmet-async';
+import Opening from './Opening';
 
 
 
@@ -64,9 +65,7 @@ const Home = () => {
           </div>
              
             </Marquee>   
-                <About />
-                <Contact />
-                <Experts/>              
+              <Opening/>           
         </div>
         </>
     );

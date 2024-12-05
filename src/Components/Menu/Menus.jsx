@@ -3,18 +3,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import Menu from './Menu';
 import MenuBanner from './MenuBanner';
-import useMenu from '../../CustomHook/UseMenu';
 import SectionHeading from '../Shared/SectionHeading';
 import Category from '../Shared/Category';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 
 
 
 
 const Menus = () => {
-    const {menus} = useContext(AuthContext)
-    
+    const {menus} = useContext(AuthContext)    
     const { totalItems } = useLoaderData() 
     const [menuPerPage, setMenuPerPage] = useState(10)
     const totalPages = Math.ceil(totalItems / menuPerPage)   
@@ -22,6 +21,9 @@ const Menus = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Menu</title>
+            </Helmet>
             <MenuBanner />              
             <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our best menu"} />
             <Category/>

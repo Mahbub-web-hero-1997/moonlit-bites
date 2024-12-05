@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 const Category = () => { 
     const {
@@ -16,6 +15,7 @@ const Category = () => {
    
     return (
 <>
+
          <div className='grid grid-cols-7 gap-20 p-4  border-y my-8 sticky top-16 left-12 z-50 bg-base-100 '>           
         < button onClick={()=>handleAllMenus()}  className=' flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-xl font-semibold'><img className=' w-10 h-10 rounded-full hover:scale-105 ' src="https://i.ibb.co.com/k9RHBXB/salad-bg.jpg" alt="" />
                             <h1 className=''>All</h1>

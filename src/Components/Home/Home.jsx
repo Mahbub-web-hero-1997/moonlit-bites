@@ -6,8 +6,8 @@ import Experts from '../Experts/Experts';
 import { Link } from 'react-router-dom';
 import SectionHeading from '../Shared/SectionHeading';
 import axios from 'axios';
-import Category from '../Shared/Category';
 import Marquee from 'react-fast-marquee';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -15,6 +15,8 @@ import Marquee from 'react-fast-marquee';
 const Home = () => {
   // const menus = useMenuForHome() 
   const [popularMenus, setPopularMenus] = useState([])  
+  console.log(popularMenus);
+  
   useEffect(() => {
     axios.get('http://localhost:5000/menu')
     .then(res => {
@@ -24,14 +26,18 @@ const Home = () => {
        
 },[setPopularMenus])
     return (
-        <>
+      <>
+         <Helmet>
+                <title>Home</title>
+            </Helmet>
           <div className='w-full mx-auto '>
           <Banner /> 
           <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our popular menu"} />  
-           <Marquee className='md:w-[90%' speed={20} >
+           <Marquee className='md:w-[90%' speed={50} >
            <div className='grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20 mt-5 ]'>
                 {
               popularMenus.slice(0, 3).map((menu) => (
+                
                      <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
   <figure className='relative '>
           <img
@@ -47,9 +53,9 @@ const Home = () => {
       {menu.name}            
     </h2>
                 <p>{ menu.recipe}</p>
-    <div className="card-actions justify-between">
-      <div className="badge badge-outline border-orange-500 p-5 text-orange-500 font-semibold"><Link>Add to cart</Link></div>
-      <div className="badge badge-outline border-orange-500 p-5 text-orange-500 font-semibold"><Link>Buy Now</Link></div>
+      <div className="card-actions justify-between">
+      <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov"><Link className=''>Add to cart</Link></div>
+      <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov"><Link>Buy Now</Link></div>
     </div>
   </div>
 </div>
@@ -60,8 +66,7 @@ const Home = () => {
             </Marquee>   
                 <About />
                 <Contact />
-                <Experts/>
-              
+                <Experts/>              
         </div>
         </>
     );

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import video from "../../assets/banner/bg_video_3.mp4"
-import useMenu from '../../CustomHook/UseMenu';
+import shape from "../../assets/banner/shape.png"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper/modules';
 import 'swiper/css';
@@ -17,7 +17,7 @@ const Banner = () => {
   
     },[])
     return (
-        <div className='  relative w-[98%] mx-auto h-[calc(100vh-24px)] overflow-hidden px-5 mb-5'>
+        <div className='  relative w-[100%] mx-auto h-[calc(100vh-24px)] overflow-hidden px-5 mb-5'>
             <video className='absolute left-0 top-0 h-full w-full object-cover -z-50'
                 autoPlay
                 loop
@@ -53,7 +53,9 @@ const Banner = () => {
       }
               
     </Swiper>
-   </div>
+    
+            </div>
+            <img className='w-full absolute left-0 bottom-0' src={shape} alt="" />
         </div>     
 
     );

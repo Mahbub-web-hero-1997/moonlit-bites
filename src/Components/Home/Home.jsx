@@ -3,7 +3,7 @@ import Banner from '../Banner/Banner';
 import SectionHeading from '../Shared/SectionHeading';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
-import Opening from './Opening';
+import Opening from './Story';
 import PopularMenu from './PopularMenu';
 
 

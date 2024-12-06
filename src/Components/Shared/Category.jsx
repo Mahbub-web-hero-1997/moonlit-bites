@@ -2,14 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 const Category = () => { 
     const {
-        handlePopularMenus,
+    handlePopularMenus,
       handleAllMenus,
       handleSaladItems,
       handlePizzaItems,
       handleDessertItems,
       handleDrinksItems,
-      handleSoupItems,
-      menus,
+      handleSoupItems,     
   }=useContext(AuthContext)
   
    

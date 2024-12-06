@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 
 @import 'node_modules/vanilla-infinite-marquee/infinite-marquee.css';
 @import 'node_modules/vanilla-infinite-marquee/infinite-marquee.scss';

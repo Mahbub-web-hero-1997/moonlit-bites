@@ -22,7 +22,7 @@ const Menus = () => {
     return (
         <>
             <Helmet>
-                <title>Menu</title>
+                <title>moonlit || menu</title>
             </Helmet>
             <MenuBanner />              
             <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our best menu"} />

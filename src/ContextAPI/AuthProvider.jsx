@@ -7,15 +7,12 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   
     const [menus, setMenus] = useState([])
-   const [stories, setStories]=useState([]) 
+  
     useEffect(() => {         
     axios.get("http://localhost:5000/menu")
     .then(res=>setMenus(res.data))
     }, []) 
-    useEffect(() => {
-        axios.get("http://localhost:5000/Story")
-        .then(res=>setStories(res.data))
-    },[])
+  
     const handleAllMenus = () => {
         
         axios.get("http://localhost:5000/menu")
@@ -83,7 +80,7 @@ const AuthProvider = ({ children }) => {
       handleDrinksItems,
       handleSoupItems,
       menus,
-      stories,
+      
   };
 
   return (

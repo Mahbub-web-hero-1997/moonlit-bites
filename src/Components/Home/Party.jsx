@@ -44,7 +44,7 @@ const Party = () => {
                                         <h1 className='text-4xl font-semibold mb-5 mt-10 md:mt-0 text-center md:text-left'>{party.title}</h1>
                                         <hr className='w-full md:w-2/3 border-1 border-orange-500 mb-5' />
                                         <p className='text-md text-gray-600 mb-5'>{party.items}</p>
-                                        <p className='text-gray-600 mb-6 text-justify'>{party.description}</p>
+                                        <p className='text-gray-600 mb-6 text-justify '>{party.description}</p>
                                         <button className='btn w-full md:w-[200px] bg-orange-500 hover:bg-gray-100 hover:text-orange-500 hover:border-1 hover:border-orange-500 text-white '>Book Now</button>
                                     </div>
                                 </div>

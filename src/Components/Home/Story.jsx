@@ -48,7 +48,7 @@ const Story = () => {
                    
                 </div>  
                 <div className='relative w-full md:w-[40%] p-2 shadow-xl bg-white rounded-sm  '>
-                       <div className=' w-20 h-20 flex justify-center items-center absolute  rounded-full top-0 left-[40%] md:left-[42%] -mt-10 bg-white shadow-2xl border-[1px] border-orange-500 '>
+                       <div className=' w-20 h-20 flex justify-center items-center absolute  rounded-full top-0 left-[40%] md:left-[42%] -mt-10 bg-white shadow-2xl border-t-[2px] border-l-[1px] border-r-[1px] border-orange-500 '>
                                     <GiForkKnifeSpoon className='text-4xl text-orange-500'/>
                     </div>
                     <h1 className='mt-12 text-center text-4xl mb-5'>Book A Table</h1>

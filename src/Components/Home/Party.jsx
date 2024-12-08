@@ -36,8 +36,18 @@ const Party = () => {
                                     <div className='w-24 h-24 rounded-full bg-white shadow-inner absolute top-[180px] right-[140px] md:top-[20%] md:right-[-44px] '>
                                     <p className='text-xl font-semibold text-orange-500 text-center mt-3'>Price</p>
                                     <p className='text-xl text-center font-serif'>${ party.price}</p>
+                                    </div>                                    
                                 </div>
-                            </div>
+                                <div className='w-full md:w-[55%] md:ml-16'>
+                                    {/* <h1>Special Offer</h1> */}
+                                    <div className='mt-4'>
+                                        <h1 className='text-4xl font-semibold mb-5'>{party.title}</h1>
+                                        <hr className='w-full md:w-2/3 border-1 border-orange-500 mb-5' />
+                                        <p className='text-xl text-gray-600 mb-5'>{party.items}</p>
+                                        <p className='text-gray-600 mb-5'>{party.description}</p>
+                                        <button className='btn w-full md:w-[150px] bg-orange-500 text-white'>Book Now</button>
+                                    </div>
+                                </div>
                           </div>
                     </SwiperSlide>)
                }

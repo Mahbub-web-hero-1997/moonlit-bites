@@ -5,6 +5,8 @@ import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import Opening from './Story';
 import PopularMenu from './PopularMenu';
+import Story from './Story';
+import Party from './Party';
 
 
 
@@ -21,7 +23,8 @@ const Home = () => {
           <Banner /> 
           <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our popular menu"} />  
         <PopularMenu/>
-              <Opening/>           
+          <Story />
+          <Party/>
         </div>
         </>
     );

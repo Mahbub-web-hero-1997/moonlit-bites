@@ -34,12 +34,12 @@ const Menus = () => {
                    menus.slice(0,6).map((menu)=>(<Menu key={menu._id} menu={menu}/>))
                 }
             </div>
-            <div className='flex justify-center gap-4  w-1/2 text-center px-4 border  mx-auto -mt-12'>
-                <button  className='font-semibold text-orange-500'>Prev</button>
+            <div className='  w-full  md:w-1/2 text-center px-4 border  mx-auto mt-5'>
+                <button  className='font-semibold text-orange-500 mr-4'>Prev</button>
                 {
-                    pages.map(page => <button key={page._id} className='btn  bg-orange-500 font-semibold text-white'>{ page}</button>)
+                    pages.map(page => <button key={page._id} className='btn btn-sm md:btn md:bg-orange-500 font-semibold md:text-white '>{ page}</button>)
                 }
-                <button className='font-semibold text-orange-500'>Next</button>
+                <button className='font-semibold text-orange-500 ml-4'>Next</button>
                 <select name="" id="">
                     <option value="10">10</option>
                     <option value="15">15</option>

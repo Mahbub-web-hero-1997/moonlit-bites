@@ -17,12 +17,12 @@ const PopularMenu = () => {
 },[setPopularMenus])
     return (
         <>
-         <Marquee className=' w-full md:w-[90%]  ' speed={50} >
+         <Marquee className=' w-full md:w-[90%] ' speed={50} >
            <div className=' hidden md:grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20 mt-5 '>
                 {
               popularMenus.slice(0, 3).map((menu) => (
                 
-                     <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
+                     <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto border-4 border-red-600 ">
   <figure className='relative '>
           <img
                     className='w-full rounded-tl-md rounded-tr-md '

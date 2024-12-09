@@ -15,12 +15,9 @@ const Expert = () => {
     return (
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6 p-1 md:p-8 h-screen  '>
             {
-                experts.map(expert =>
-                    
-                    <div className=' w-full border-[1px] md:relative'>
-                       
-                            <img src={expert.img} alt="" className=' w-full md:h-1/2' />
-                       
+                experts.map(expert =>                    
+                    <div className=' w-full border-[1px] md:relative'>                       
+                            <img src={expert.img} alt="" className=' w-full md:h-1/2' />                       
                         <div className='w-3/4 md:h-32 bg-white rounded-t-md p-3 mx-auto md:absolute 
                           md:bottom-[30%] left-[13%] border-b-[1px] md:mb-4'>
                             <h1 className='text-xl font-semibold text-center text-gray-500'>{expert.name}</h1>
@@ -34,9 +31,7 @@ const Expert = () => {
                                 <Link to="#"><FaLinkedinIn className='text-xl text-sky-500' /></Link>                               
                             </div>
                         </div>
-
                     </div>
-
                 )
             }
         </div>

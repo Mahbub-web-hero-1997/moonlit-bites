@@ -9,6 +9,7 @@ import Story from './Story';
 import Party from './Party';
 import Expert from './Experte';
 import Footer from '../Shared/Footer';
+import Blogs from '../Blogs/Blogs';
 
 
 

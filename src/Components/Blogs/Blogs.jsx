@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 const Blogs = () => {
     return (
-        <>  
+        <>  \
               <Helmet>
                 <title>moonlit || blogs</title>
             </Helmet>

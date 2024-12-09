@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { TiSocialFacebook } from "react-icons/ti";
 import { FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import SectionHeading from '../Shared/SectionHeading';
 
 
 const Expert = () => {     
@@ -13,7 +14,9 @@ const Expert = () => {
         .then(res=>setExperts(res.data))
     },[])
     return (
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 p-1 md:p-8 h-screen  '>
+        <>
+            <SectionHeading heading={"Our Expert"}/>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 p-1 md:p-8 h-screen md:pt-2  '>
             {
                 experts.map(expert =>                    
                     <div className=' w-full border-[1px] md:relative'>                       
@@ -35,6 +38,7 @@ const Expert = () => {
                 )
             }
         </div>
+        </>
     );
 };
 

@@ -7,6 +7,7 @@ import Opening from './Story';
 import PopularMenu from './PopularMenu';
 import Story from './Story';
 import Party from './Party';
+import Expert from './Experte';
 
 
 
@@ -24,7 +25,8 @@ const Home = () => {
           <SectionHeading subHeading={"---From 9:00am to 9:00pm---"} heading={"Try our popular menu"} />  
         <PopularMenu/>
           <Story />
-          <Party/>
+          <Party />
+          <Expert/>
         </div>
         </>
     );

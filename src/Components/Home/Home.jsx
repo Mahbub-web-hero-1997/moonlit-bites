@@ -8,6 +8,7 @@ import PopularMenu from './PopularMenu';
 import Story from './Story';
 import Party from './Party';
 import Expert from './Experte';
+import Footer from '../Shared/Footer';
 
 
 
@@ -26,7 +27,7 @@ const Home = () => {
         <PopularMenu/>
           <Story />
           <Party />
-          <Expert/>
+          <Expert />         
         </div>
         </>
     );

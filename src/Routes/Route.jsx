@@ -7,6 +7,7 @@ import About from "../Components/About/About";
 import Contact from "../Components/Contact/Contact";
 import Root from "../Components/Root";
 import Review from "../Components/Reviews/Reviews";
+import Login from "../Components/Login/Login";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
             {
                 path: "/review",
                 element:<Review/>
+            },
+            {
+                path: "/login",
+                element:<Login/>
             }
        
         ]

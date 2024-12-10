@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FaRegEye,FaRegEyeSlash  } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -22,6 +24,10 @@ const Login = () => {
                         </span>   
                     </label>            
                 </form>
+                <div className='text-sm mt-3'>Don't have an account?
+                    <Link to="/register" className='ml-2 text-blue-500'>Register Here!</Link>
+                </div>
+                <SocialLogin/>
         </div>
         </>
     );

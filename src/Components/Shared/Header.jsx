@@ -9,6 +9,7 @@ const Header = () => {
   <li><NavLink className="text-black font-semibold" to="/menu">MENU</NavLink></li>
   <li><NavLink className="text-black font-semibold" to="/blogs">BLOGS</NavLink></li>
   {/* <li><NavLink className="text-black font-semibold" to="/experts">OUR EXPERTS</NavLink></li> */}
+  <li><NavLink className="text-black font-semibold" to="/review">REVIEW</NavLink></li>
   <li><NavLink className="text-black font-semibold" to="/about">ABOUT</NavLink></li>
   <li><NavLink className="text-black font-semibold" to="/contact">CONTACT</NavLink></li>
   </>

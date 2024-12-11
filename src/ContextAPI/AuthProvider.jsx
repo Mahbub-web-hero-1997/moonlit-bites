@@ -1,12 +1,25 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import auth from "../firebase.config";
 
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
-  
+const AuthProvider = ({ children }) => {  
     const [menus, setMenus] = useState([])
+    const [loading, setLoading]=useState(true)
+    const [user, setUser] = useState(null)
+    
+    useEffect(() => {
+        const unSubscribe= onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser)
+            setLoading(false)
+        })
+        return () => {
+            return unSubscribe()
+        }
+    },[])
   
     useEffect(() => {         
     axios.get("http://localhost:5000/menu")

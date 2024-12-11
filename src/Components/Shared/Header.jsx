@@ -1,8 +1,11 @@
 
 import { Link, NavLink } from 'react-router-dom';
 import "./Header.module.css"
+import AuthProvider, { AuthContext } from '../../ContextAPI/AuthProvider';
+import { useContext } from 'react';
 
 const Header = () => {
+  const{user}=useContext(AuthContext)
   
   const menuItem = <>
   <li><NavLink className="text-black font-semibold" to="/">HOME</NavLink></li>
@@ -76,7 +79,8 @@ const Header = () => {
         </div>
       </div>
     </div>
-    {/* <div className="dropdown dropdown-end">
+          {
+            user?<div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
           <img
@@ -96,8 +100,8 @@ const Header = () => {
         <li><a>Settings</a></li>
         <li><a>Logout</a></li>
       </ul>
-    </div> */}
-          <Link to="/login">Login</Link>
+    </div>:<Link to="/login">Login</Link>  
+    }        
             </div>
         
 

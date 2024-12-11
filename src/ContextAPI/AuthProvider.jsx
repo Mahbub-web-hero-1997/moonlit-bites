@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase.config";
 
 
@@ -25,6 +25,14 @@ const AuthProvider = ({ children }) => {
     axios.get("http://localhost:5000/menu")
     .then(res=>setMenus(res.data))
     }, []) 
+
+    const createUser = (email, password) => {
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+
+    const login = (email, password) => {
+        return signInWithEmailAndPassword(auth,email,password)
+    }
   
     const handleAllMenus = () => {
         
@@ -93,6 +101,8 @@ const AuthProvider = ({ children }) => {
       handleDrinksItems,
       handleSoupItems,
       menus,
+      createUser,
+      login,
       
   };
 

@@ -4,8 +4,25 @@ import "./Header.module.css"
 import AuthProvider, { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useContext } from 'react';
 
+
 const Header = () => {
-  const{user}=useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext)
+  const handleSignOut = () => {
+    logOut()
+    
+            .then(result => {
+            console.log("user Successfully signout", result);
+            
+            })
+            .catch(err => {
+            console.log(err.message);
+            
+        })
+
+  }
+
+ 
+  
   
   const menuItem = <>
   <li><NavLink className="text-black font-semibold" to="/">HOME</NavLink></li>
@@ -80,7 +97,7 @@ const Header = () => {
       </div>
     </div>
           {
-            !user?<Link to="/login">Login</Link>: <div className="dropdown dropdown-end">
+            user?<div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
           <img
@@ -98,9 +115,9 @@ const Header = () => {
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li onClick={handleSignOut} ><a>Logout</a></li>
       </ul>
-    </div>
+    </div>:<Link  to="/login">Login</Link>
     }        
             </div>
         

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import auth from "../firebase.config";
 
 
@@ -27,11 +27,18 @@ const AuthProvider = ({ children }) => {
     }, []) 
 
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const login = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth,email,password)
+    }
+
+    const logOut = () => {
+        setLoading(true)
+       return signOut(auth)
     }
   
     const handleAllMenus = () => {
@@ -103,6 +110,9 @@ const AuthProvider = ({ children }) => {
       menus,
       createUser,
       login,
+      user,
+      logOut,
+      setLoading,
       
   };
 

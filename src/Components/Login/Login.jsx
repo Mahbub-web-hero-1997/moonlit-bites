@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
-    const {login, setLoading}=useContext(AuthContext)
-    console.log(showPassword);
+    const {login, setLoading,loading}=useContext(AuthContext) 
  const {
     register,
     handleSubmit,
@@ -16,15 +16,26 @@ const Login = () => {
     formState: { errors },
     } = useForm()
     const onSubmit = (data) => {
-        login(data.email, data.password)
+        loading;
+        login(data.email, data.password)       
             .then(result => {
-                const loggedInUser = result.data;
-                console.log(loggedInUser);
-                setLoading
+                const loggedInUser = result.user;
+                console.log(loggedInUser);  
+                Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Login Successful",
+  showConfirmButton: false,
+  timer: 1500
+});
             })
             .catch(err => {
             console.error(err.message)
+            })
+            .finally(() => {
+            setLoading(false)
         })
+        
     }
     return (
         <>        

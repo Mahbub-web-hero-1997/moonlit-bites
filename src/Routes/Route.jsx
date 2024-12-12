@@ -9,6 +9,7 @@ import Root from "../Components/Root";
 import Review from "../Components/Reviews/Reviews";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
+import PrivateRoute from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/review",
-                element:<Review/>
+                element:<PrivateRoute><Review/></PrivateRoute>
             },
             {
                 path: "/login",

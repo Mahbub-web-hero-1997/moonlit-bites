@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaRegEye,FaRegEyeSlash  } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, replace, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useForm } from 'react-hook-form';
@@ -8,7 +8,10 @@ import Swal from 'sweetalert2';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
-    const {login, setLoading,loading}=useContext(AuthContext) 
+    const { login, setLoading, loading } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from=location?.state?.from?.pathname||"/home"
  const {
     register,
     handleSubmit,
@@ -27,7 +30,8 @@ const Login = () => {
   title: "Login Successful",
   showConfirmButton: false,
   timer: 1500
-});
+                });
+                navigate(from,{replace:true})
             })
             .catch(err => {
             console.error(err.message)

@@ -1,10 +1,58 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
-
+import React, { useContext, useEffect } from 'react';
+import { Link, replace, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../ContextAPI/AuthProvider';
+import Swal from 'sweetalert2';
+import UseAxios from '../../CustomHook/UseAxios';
 
 const Menu = ({ menu }) => {
-    const { name, image, price, recipe } = menu;
+  const { name, image, price, recipe, _id } = menu;
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const axiosSecure=UseAxios()
+  const handleAddToCart = (food) => {   
+    if (user && user?.email) {
+     
+      const cartData = {
+        cartId : _id,
+        email : user.email,
+        name, 
+        image, 
+        price,
+      }
+      axiosSecure.post("/cart", cartData)
+        .then(res => {
+          console.log(res.data);
+          Swal.fire({
+  position: "center",
+  icon: "success",
+  title: "Successfully added",
+  showConfirmButton: false,
+  timer: 1500
+});
+        
+      })
+      
+      
+    }
+    else {
+      Swal.fire({
+  title: "You are't logged in.",
+  text: "Please loge in for add to cart this item",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "LogeIn"
+}).then((result) => {
+  if (result.isConfirmed) {
+    //  navigate to Login Page
+    navigate("/login", {state:{from:location}})
+  }
+});
+    }
+    
+  }
 
     return (
         <div className="card bg-base-100 w-full h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto  ">
@@ -23,7 +71,8 @@ const Menu = ({ menu }) => {
     </h2>
                 <p>{ recipe}</p>
     <div className="card-actions justify-between">
-      <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov"><Link className=''>Add to cart</Link></div>
+            <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov"><Link onClick={handleAddToCart} className=''>Add to cart</Link></div>
+            
       <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov"><Link>Buy Now</Link></div>
     </div>
   </div>

@@ -14,8 +14,7 @@ import { Helmet } from 'react-helmet-async';
 
 const Menus = () => {
     const { menus } = useContext(AuthContext)  
-    console.log(menus);
-    
+    // console.log(menus);    
     const { totalItems } = useLoaderData() 
     const [menuPerPage, setMenuPerPage] = useState(10)
     const totalPages = Math.ceil(totalItems / menuPerPage)   

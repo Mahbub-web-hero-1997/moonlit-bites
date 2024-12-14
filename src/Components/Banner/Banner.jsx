@@ -43,7 +43,7 @@ const Banner = () => {
           speed={1000}
         >
           {menus.slice(0, 6).map((menu) => (
-            <SwiperSlide className="md:ml-2 transition-all duration-300">
+            <SwiperSlide key={menu._id} className="md:ml-2 transition-all duration-300">
               <h1 className="text-2xl md:text-6xl font-semibold">
                 {menu.name}
               </h1>

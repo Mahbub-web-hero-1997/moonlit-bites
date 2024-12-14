@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const PopularMenu = () => {
   const [popularMenus, setPopularMenus] = useState([]);
-  console.log(popularMenus);
+  // console.log(popularMenus);
 
   useEffect(() => {
     axios.get('http://localhost:5000/menu').then((res) => {
@@ -20,7 +20,7 @@ const PopularMenu = () => {
       <Marquee className=" w-full md:w-[90%]  " speed={50} pauseOnHover={stop}>
         <div className=" hidden md:grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20 mt-5 ">
           {popularMenus.slice(0, 3).map((menu) => (
-            <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
+            <div key={menu._id} className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
               <figure className="relative ">
                 <img
                   className="w-full rounded-tl-md rounded-tr-md "

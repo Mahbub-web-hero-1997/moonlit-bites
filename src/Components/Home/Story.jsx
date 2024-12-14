@@ -24,7 +24,7 @@ const Story = () => {
             Our Story
           </h1>
           {stories.map((story) => (
-            <div className="flex flex-col">
+            <div key={story._id} className="flex flex-col">
               <h2 className="text-xl md:text-3xl mb-4 md:mb-8">
                 {story.title}
               </h2>

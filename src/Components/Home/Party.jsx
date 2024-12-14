@@ -27,7 +27,7 @@ const Party = () => {
         speed={2000}
       >
         {parties.map((party) => (
-          <SwiperSlide>
+          <SwiperSlide key={party._id}>
             <div className="flex flex-col md:flex-row w-full mx-auto ">
               <div className="relative w-full md:w-[45%] ">
                 <img className="w-full h-[100%]" src={party.img} alt="" />

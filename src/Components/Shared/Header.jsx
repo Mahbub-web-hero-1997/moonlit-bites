@@ -2,9 +2,14 @@ import { Link, NavLink } from 'react-router-dom';
 import './Header.module.css';
 import AuthProvider, { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useContext } from 'react';
+import UseCart from '../../CustomHook/UseCart';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = UseCart()
+  console.log(cart);
+  
+  
   const handleSignOut = () => {
     logOut()
       .then((result) => {
@@ -117,7 +122,7 @@ const Header = () => {
                   />
                 </svg>
                 <span className="badge badge-sm bg-red-500 text-white font-bold indicator-item">
-                  8
+                  {cart.length}
                 </span>
               </div>
             </div>

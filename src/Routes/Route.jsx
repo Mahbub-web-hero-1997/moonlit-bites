@@ -10,6 +10,8 @@ import Review from '../Components/Reviews/Reviews';
 import Login from '../Components/Login/Login';
 import Register from '../Components/Register/Register';
 import PrivateRoute from './PrivateRoute';
+import UserDashboard from '../Components/Dashboard/UserDashboard/UserDashboard';
+import Cart from '../Components/Dashboard/UserDashboard/Cart';
 
 export const router = createBrowserRouter([
   {
@@ -59,4 +61,14 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/dashboard",
+    element: <UserDashboard />,
+    children: [
+      {
+        path: "/dashboard/cart",
+        element:<Cart/>
+      }
+    ]
+  }
 ]);

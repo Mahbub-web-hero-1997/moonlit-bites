@@ -15,7 +15,7 @@ const Home = () => {
       <Helmet>
         <title>moonlit || home</title>
       </Helmet>
-      <div className="w-full mx-auto ">
+      <div className="w-full mx-auto md:px-1 ">
         <Banner />
         <SectionHeading
           subHeading={'---From 9:00am to 9:00pm---'}

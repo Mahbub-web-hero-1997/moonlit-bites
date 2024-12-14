@@ -12,6 +12,11 @@ import Register from '../Components/Register/Register';
 import PrivateRoute from './PrivateRoute';
 import UserDashboard from '../Components/Dashboard/UserDashboard/UserDashboard';
 import Cart from '../Components/Dashboard/UserDashboard/Cart';
+import UserHome from '../Components/Dashboard/UserDashboard/UserHome';
+import Order from '../Components/Dashboard/UserDashboard/UserOrder';
+import UserOrder from '../Components/Dashboard/UserDashboard/UserOrder';
+import UserPayment from '../Components/Dashboard/UserDashboard/UserPayment';
+import UserReview from '../Components/Dashboard/UserDashboard/UserReview';
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +73,22 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/cart",
         element:<Cart/>
+      },
+      {
+        path: "/dashboard/userHome",
+        element:<UserHome/>
+      },
+      {
+        path: "/dashboard/userOrder",
+        element: <UserOrder/>        
+      },
+      {
+        path: "/dashboard/userPayment",
+        element:<UserPayment/>
+      },
+      {
+        path: "/dashboard/userReview",
+        element:<UserReview/>
       }
     ]
   }

@@ -61,7 +61,8 @@ const Story = () => {
               type="text"
               placeholder="Name Here"
             />
-            <input
+            <input             
+              
               className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3"
               type="email"
               placeholder="Example@gmail"
@@ -85,7 +86,7 @@ const Story = () => {
             />
             <input
               type="submit"
-              value="Book-NOW"
+              value="Book-Now"
               className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3 bg-orange-500 text-white cursor-pointer"
             />
           </form>

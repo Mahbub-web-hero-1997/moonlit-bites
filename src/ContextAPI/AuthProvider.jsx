@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 import auth from '../firebase.config';
 
@@ -14,6 +15,8 @@ const AuthProvider = ({ children }) => {
   const [menus, setMenus] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  console.log(user);
+  
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -38,11 +41,19 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  
 
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
   };
+
+  const updateUserProfile = (firstName,  url) => {
+    return updateProfile(auth.currentUser, {
+      displayName: firstName,
+      photoURL:url
+    })
+  }
 
   const handleAllMenus = () => {
     axios.get('http://localhost:5000/menu').then((res) => {
@@ -99,8 +110,10 @@ const AuthProvider = ({ children }) => {
     login,
     user,
     logOut,
+    updateUserProfile,
     setLoading,
     loading,
+
   };
 
   return (

@@ -1,25 +1,53 @@
 import React, { useContext, useState } from 'react';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import SocialLogin from '../SocialLogin/SocialLogin';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
+import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const axiosPublic=UseAxiosPublic()
   const {
     register,
     handleSubmit,
+    reset,
 
     formState: { errors },
   } = useForm();
+  const navigate=useNavigate()
 
   const onSubmit = (data) => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        
+        updateUserProfile(data.name, data.photoUrl)
+          .then(()=> {
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            }
+            axiosPublic.post("/user", userInfo)
+              .then(res => {
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Account Successfully Created',
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+              }
+            })
+            reset()    
+        
+          navigate("/")  
+        })
       })
       .catch((err) => {
         console.error(err.message);
@@ -27,28 +55,28 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full h-screen md:h-[450px] md:w-1/3 mx-auto p-4 mt-14 shadow-lg ">
+    <div className="w-full h-screen md:h-[500px] md:w-1/3 mx-auto p-4 mt-18 shadow-lg ">
       <h1 className="text-2xl font-semibold text-center">Please Register!</h1>
       <hr className="w-2/3 md:w-1/2  mx-auto mt-3 bg-orange-500" />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 mt-6"
+        className="flex flex-col gap-4 mt-4"
         action=""
       >
-        <div className="flex justify-between gap-1">
+       
           <input
             type="text"
-            {...register('firstName')}
-            placeholder="Enter Your First Name"
+            {...register('name')}
+            placeholder="Enter Your Name"
             className="border-b-[1px] border-orange-500 outline-none p-2"
-          />
-          <input
-            type="text"
-            {...register('lastName')}
-            placeholder="Enter Your Last Name"
-            className="border-b-[1px] border-orange-500 outline-none p-2"
-          />
-        </div>
+          />    
+        
+        <input
+          type="url"
+          {...register('photoUrl')}
+          placeholder="Enter Your PhotoUrl"
+          className="border-b-[1px] border-orange-500 outline-none p-2"
+        />
         <input
           type="email"
           {...register('email')}

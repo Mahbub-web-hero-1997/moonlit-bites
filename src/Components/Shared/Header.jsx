@@ -5,7 +5,8 @@ import { useContext } from 'react';
 import UseCart from '../../CustomHook/UseCart';
 
 const Header = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext); 
+  
   const [cart] = UseCart()
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
   
@@ -27,6 +28,8 @@ const Header = () => {
         <NavLink className="text-black font-semibold" to="/dashboard">
           Dashboard
         </NavLink>
+      </li>
+      <li>
         <NavLink
           onClick={handleSignOut}
           className="text-black font-semibold"
@@ -174,7 +177,7 @@ const Header = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src={user.photoURL}
                   />
                 </div>
               </div>
@@ -182,6 +185,7 @@ const Header = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
+                <h3 className='text-xl text-orange-500 font-semibold'>{user.displayName}</h3>
                 {userDashboardMenu}
               </ul>
             </div>

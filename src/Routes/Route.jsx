@@ -51,9 +51,9 @@ export const router = createBrowserRouter([
       {
         path: '/review',
         element: (
-          <PrivateRoute>
+         
             <Review />
-          </PrivateRoute>
+         
         ),
       },
       {
@@ -67,29 +67,33 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
-    element: <UserDashboard />,
+    path: '/dashboard',
+    element: (
+      <PrivateRoute>
+        <UserDashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
-        path: "/dashboard/cart",
-        element:<Cart/>
+        path: '/dashboard/cart',
+        element: <Cart />,
       },
       {
-        path: "/dashboard/userHome",
-        element:<UserHome/>
+        path: '/dashboard/userHome',
+        element: <UserHome />,
       },
       {
-        path: "/dashboard/userOrder",
-        element: <UserOrder/>        
+        path: '/dashboard/userOrder',
+        element: <UserOrder />,
       },
       {
-        path: "/dashboard/userPayment",
-        element:<UserPayment/>
+        path: '/dashboard/userPayment',
+        element: <UserPayment />,
       },
       {
-        path: "/dashboard/userReview",
-        element:<UserReview/>
-      }
-    ]
-  }
+        path: '/dashboard/userReview',
+        element: <UserReview />,
+      },
+    ],
+  },
 ]);

@@ -5,7 +5,7 @@ import { IoIosStar } from "react-icons/io";
 
 const UserDashboard = () => {
     return (
-        <div className='flex w-full'>
+        <div className='flex w-full bg-gray-100'>
             <div className='w-56 h-screen bg-orange-500 px-2'>
                 <ul className='mt-3 text-white uppercase'>
                     <li className='text-center text-xl font-semibold '><NavLink to="/">MOONLIT-BITES</NavLink></li>
@@ -18,7 +18,7 @@ const UserDashboard = () => {
                 </ul>
                
            </div>
-            <div>
+            <div className='w-full'>
                 {<Outlet/>}
            </div>
         </div>

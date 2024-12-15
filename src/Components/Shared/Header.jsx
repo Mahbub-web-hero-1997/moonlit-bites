@@ -23,13 +23,20 @@ const Header = () => {
   
   const userDashboardMenu = (
     <>
-     <li>
+      <li>
         <NavLink className="text-black font-semibold" to="/dashboard">
           Dashboard
         </NavLink>
+        <NavLink
+          onClick={handleSignOut}
+          className="text-black font-semibold"
+          to="/dashboard"
+        >
+          LogOut
+        </NavLink>
       </li>
     </>
-  )
+  );
 // Menu Items
   const menuItem = (
     <>

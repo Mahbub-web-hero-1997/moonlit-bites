@@ -7,7 +7,7 @@ import UseCart from '../../CustomHook/UseCart';
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = UseCart()
-  console.log(cart);
+  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
   
   
   const handleSignOut = () => {
@@ -145,9 +145,14 @@ const Header = () => {
             >
               <div className="card-body">
                 <span className="text-lg font-bold">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">              
-                  <NavLink className="btn btn-primary btn-block" to="/dashboard/cart">View cart</NavLink>
+                <span className="text-info">Subtotal: ${totalPrice}</span>
+                <div className="card-actions">
+                  <NavLink
+                    className="btn btn-primary btn-block"
+                    to="/dashboard/cart"
+                  >
+                    View cart
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -170,7 +175,7 @@ const Header = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
-               {userDashboardMenu}
+                {userDashboardMenu}
               </ul>
             </div>
           ) : (

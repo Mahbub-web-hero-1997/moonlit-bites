@@ -5,16 +5,17 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const [cart] = UseCart();
-  return (
+  const totalPrice = cart.reduce((total, item) => total + item.price, 0) 
+    return (
     <>
       <SectionHeading subHeading={'My cart'} />
-      <div className=" w-full md:w-[80%] mx-auto bg-white p-5 ">
+      <div className=" w-full md:w-[80%] mx-auto bg-white p-5 h-screen ">
         <div className="flex justify-between items-center p-3 bg-[#614500] text-white">
           <p className="text-xl text-center">
             Total Selected Items:{' '}
             <span className="text-orange-500">{cart.length}</span>{' '}
           </p>
-          <p className="text-xl text-center">Total Price:</p>
+          <p className="text-xl text-center">Total Price: { totalPrice}</p>
           <Link
             className="btn text-xl text-white hover:text-gray-600 bg-[#b38000]  p-2 outline-none border-l-[1px]"
             to="#"

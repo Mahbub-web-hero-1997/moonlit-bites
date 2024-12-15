@@ -6,7 +6,7 @@ import { IoIosStar } from "react-icons/io";
 const UserDashboard = () => {
     return (
         <div className='flex w-full bg-gray-100'>
-            <div className='w-56 h-screen bg-orange-500 px-2 md:sticky top-0 left-0'>
+            <div className='w-56 h-screen bg-orange-500 px-2 md:fixed md:top-0 md:left-0 '>
                 <ul className='mt-3 text-white uppercase'>
                     <li className='text-center text-xl font-semibold '><NavLink to="/">MOONLIT-BITES</NavLink></li>
                    <hr className='w-full md:w-3/4 mx-auto my-3' />
@@ -18,7 +18,7 @@ const UserDashboard = () => {
                 </ul>
                
            </div>
-            <div className='w-full'>
+            <div className='w-full h-auto'>
                 {<Outlet/>}
            </div>
         </div>

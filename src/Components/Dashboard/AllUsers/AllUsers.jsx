@@ -1,51 +1,68 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import UseAxios from '../../../CustomHook/UseAxios';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaUsers } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../../ContextAPI/AuthProvider';
 
 const AllUsers = () => {
-    // Load All user Using Tanstack Query
-  const axiosSecure = UseAxios();
+  // Load All user Using Tanstack Query
+  const axiosSecure = UseAxios();  
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/user');
+      const res = await axiosSecure.get('/user', {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('access-token')}`,
+        },
+      });
+
       return res.data;
     },
   });
-    // User Deleted Function
-    const handleDeleteUser = (id) => {
-        console.log(id);
-        
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!',
-        }).then((result) => {
-          if (result.isConfirmed) {
-           
-              axiosSecure.delete(`/user/${id}`)
-                  .then(res => {
-                     refetch()
-                      if (res.data.deletedCount > 0) {
-                        Swal.fire({
-                          title: 'Deleted!',
-                          text: 'User has been Successfully deleted.',
-                          icon: 'success',
-                        });
-                      }
-              })
+  // User Deleted Function
+  const handleDeleteUser = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/user/${id}`).then((res) => {
+          refetch();
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'User has been Successfully deleted.',
+              icon: 'success',
+            });
           }
         });
-        
-    }
+      }
+    });
+  };
+  // User Admin Role Chang Function
+  const handleMakeAdmin = (id) => {
+    axiosSecure.patch(`/user/admin/${id}`).then((res) => {
+      refetch();
+    //   console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: `now an Admin`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
   return (
     <div className=" w-full mx-auto bg-white p-5">
       <div className="flex justify-between items-center p-3 bg-[#614500] text-white">
@@ -73,9 +90,16 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button>
-                    <FaUsers className="text-2xl text-orange-500" />
-                  </button>
+                  {user.role === 'admin' ? (
+                    <p className="text-orange-500 font-semibold">Admin</p>
+                  ) : (
+                    <button>
+                      <FaUsers
+                        onClick={() => handleMakeAdmin(user._id)}
+                        className="text-2xl text-orange-500"
+                      />
+                    </button>
+                  )}
                 </td>
                 <td>
                   <button>

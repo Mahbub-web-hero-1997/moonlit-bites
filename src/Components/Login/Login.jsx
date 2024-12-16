@@ -5,6 +5,7 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import UseAxios from '../../CustomHook/UseAxios';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,6 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || '/';
+  const axiosSecure=UseAxios()
   const {
     register,
     handleSubmit,
@@ -23,16 +25,20 @@ const Login = () => {
     login(data.email, data.password)
       .then((result) => {
         const loggedInUser = result.user;
+        const userInfo={name:loggedInUser.displayName, email:loggedInUser.email}
         console.log(loggedInUser);
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Login Successful',
-          showConfirmButton: false,
-          timer: 1500,
+        axiosSecure.post('/user', userInfo).then((res) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Login Successful',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate(from, { replace: true });
         });
-        navigate(from, { replace: true });
-      })
+        })
+        
       .catch((err) => {
         console.error(err.message);
       })

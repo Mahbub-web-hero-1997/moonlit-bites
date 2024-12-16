@@ -67,7 +67,7 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? 'text-gray-600' : ''
                   }
-                  to="/dashboard/userReview"
+                  to="/dashboard/allUsers"
                 >
                   All Users
                 </NavLink>
@@ -164,7 +164,7 @@ const Dashboard = () => {
             </li>
           </ul>
         </div>
-        <div className="w-full h-auto">{<Outlet />}</div>
+        <div className="w-full h-auto mx-auto md:ml-60">{<Outlet />}</div>
       </div>
     );
 };

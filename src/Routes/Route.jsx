@@ -17,6 +17,7 @@ import UserOrder from '../Components/Dashboard/UserDashboard/UserOrder';
 import UserPayment from '../Components/Dashboard/UserDashboard/UserPayment';
 import UserReview from '../Components/Dashboard/UserDashboard/UserReview';
 import Dashboard from '../Components/Dashboard/UserDashboard/Dashboard';
+import AllUsers from '../Components/Dashboard/AllUsers/AllUsers';
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        path: "/dashboard/allUsers",
+        element:<AllUsers/>
+    },
       {
         path: '/dashboard/cart',
         element: <Cart />,

@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
   const [menus, setMenus] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  console.log(user);
+  // console.log(user);
   
 
   useEffect(() => {

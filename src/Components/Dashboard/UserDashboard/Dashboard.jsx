@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { FaCartPlus, FaFirstOrder, FaHome } from "react-icons/fa";
 import { IoIosStar } from "react-icons/io";
 
-const UserDashboard = () => {
+const Dashboard = () => {
     return (
         <div className='flex w-full bg-gray-100'>
             <div className='w-56 h-screen bg-orange-500 px-2 md:fixed md:top-0 md:left-0 '>
@@ -25,4 +25,4 @@ const UserDashboard = () => {
     );
 };
 
-export default UserDashboard;
+export default Dashboard;

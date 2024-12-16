@@ -41,7 +41,7 @@ const Cart = () => {
   };
   return (
     <>
-      <SectionHeading subHeading={'My cart'} />
+      {/* <SectionHeading subHeading={'My cart'} /> */}
       <div className=" w-full md:w-[80%] mx-auto bg-white p-5 md:ml-60 ">
         <div className="flex justify-between items-center p-3 bg-[#614500] text-white">
           <p className="text-xl text-center">

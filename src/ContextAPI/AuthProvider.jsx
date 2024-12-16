@@ -2,14 +2,17 @@ import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from 'firebase/auth';
 import auth from '../firebase.config';
 
 export const AuthContext = createContext();
+const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [menus, setMenus] = useState([]);
@@ -33,18 +36,23 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const createUser = (email, password) => {
-    setLoading(true);
+   loading;
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const login = (email, password) => {
-    setLoading(true);
+   loading;
     return signInWithEmailAndPassword(auth, email, password);
   };
-  
+
+  const googleLogin = () => {
+    loading
+    return signInWithPopup(auth, provider)
+  }
+
 
   const logOut = () => {
-    setLoading(true);
+   loading;
     return signOut(auth);
   };
 
@@ -108,6 +116,7 @@ const AuthProvider = ({ children }) => {
     menus,
     createUser,
     login,
+    googleLogin,
     user,
     logOut,
     updateUserProfile,

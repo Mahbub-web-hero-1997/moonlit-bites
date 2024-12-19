@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
         axiosSecurePublic.post("/jwt", userInfo)
           .then(res => {
             localStorage.setItem("access-token", res.data.token)
-            console.log(res.data.token);
+            // console.log(res.data.token);
             
         })
       }
@@ -127,16 +127,15 @@ const AuthProvider = ({ children }) => {
     handleDessertItems,
     handleDrinksItems,
     handleSoupItems,
-    menus,
     createUser,
     login,
     googleLogin,
-    user,
     logOut,
     updateUserProfile,
     setLoading,
+    menus,
+    user,
     loading,
-
   };
 
   return (

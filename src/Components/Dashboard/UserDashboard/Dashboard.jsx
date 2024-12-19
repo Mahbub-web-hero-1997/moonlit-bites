@@ -5,9 +5,13 @@ import { IoIosStar } from "react-icons/io";
 import { FcHome } from 'react-icons/fc';
 import { ImSpoonKnife } from 'react-icons/im';
 import { TbBrandBooking } from 'react-icons/tb';
+import UseAdmin from '../../../CustomHook/UseAdmin';
 
 const Dashboard = () => {
-    const isAdmin = true;
+  const [isAdmin] = UseAdmin()
+  console.log(isAdmin);
+  // const isAdmin = true;
+  
     return (
       <div className="flex w-full bg-gray-100">
         <div className="w-56 h-screen bg-orange-500 px-4 md:fixed md:top-0 md:left-0 ">

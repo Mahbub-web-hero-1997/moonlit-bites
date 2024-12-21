@@ -56,7 +56,7 @@ const Menu = ({ menu }) => {
         <img
           className="w-full h-full rounded-tl-md rounded-tr-md "
           src={image}
-          alt="Shoes"
+          alt="image"
         />
       </figure>
       <div className="absolute w-full h-[250px] md:h-[272px] bg-black hover:opacity-45 transition-all duration-300 opacity-60 top-0 left-0 rounded-tl-md rounded-tr-md mb-1"></div>

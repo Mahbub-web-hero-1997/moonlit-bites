@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const Items = () => {
+const AddItems = () => {
   const {
     register,
     handleSubmit,
@@ -82,4 +82,4 @@ const Items = () => {
   );
 };
 
-export default Items;
+export default AddItems;

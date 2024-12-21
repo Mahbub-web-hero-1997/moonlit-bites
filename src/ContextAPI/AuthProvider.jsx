@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/menu').then((res) => setMenus(res.data));
+    axiosSecurePublic.get('http://localhost:5000/menu').then((res) => setMenus(res.data));
   }, []);
 
   const createUser = (email, password) => {

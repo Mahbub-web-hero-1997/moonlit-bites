@@ -19,7 +19,8 @@ import UserReview from '../Components/Dashboard/UserDashboard/UserReview';
 import Dashboard from '../Components/Dashboard/UserDashboard/Dashboard';
 import AllUsers from '../Components/Dashboard/AllUsers/AllUsers';
 import AdminRoute from './AdminRoute';
-import Items from '../Components/Dashboard/AddItems/Items';
+import AddItems from '../Components/Dashboard/AddItems/AddItems';
+import GetItems from '../Components/Dashboard/GetAllItems/GetItems';
 
 export const router = createBrowserRouter([
   {
@@ -85,7 +86,15 @@ export const router = createBrowserRouter([
         path: '/dashboard/addItems',
         element: (
           <AdminRoute>
-            <Items />
+            <AddItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: '/dashboard/manage',
+        element: (
+          <AdminRoute>
+            <GetItems />
           </AdminRoute>
         ),
       },

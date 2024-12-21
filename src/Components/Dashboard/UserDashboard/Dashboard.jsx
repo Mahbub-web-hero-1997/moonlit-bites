@@ -49,7 +49,7 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? 'text-gray-600' : ''
                   }
-                  to="/dashboard/userOrder"
+                  to="/dashboard/manage"
                 >
                   Manage Items
                 </NavLink>
@@ -168,7 +168,9 @@ const Dashboard = () => {
             </li>
           </ul>
         </div>
-        <div className="w-full h-screen mx-auto md:ml-60 pt-10">{<Outlet />}</div>
+        <div className="w-full h-screen mx-auto md:ml-60 pt-10">
+          {<Outlet />}
+        </div>
       </div>
     );
 };

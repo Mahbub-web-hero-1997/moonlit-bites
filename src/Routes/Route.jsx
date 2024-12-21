@@ -18,6 +18,8 @@ import UserPayment from '../Components/Dashboard/UserDashboard/UserPayment';
 import UserReview from '../Components/Dashboard/UserDashboard/UserReview';
 import Dashboard from '../Components/Dashboard/UserDashboard/Dashboard';
 import AllUsers from '../Components/Dashboard/AllUsers/AllUsers';
+import AdminRoute from './AdminRoute';
+import Items from '../Components/Dashboard/AddItems/Items';
 
 export const router = createBrowserRouter([
   {
@@ -51,11 +53,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/review',
-        element: (
-         
-            <Review />
-         
-        ),
+        element: <Review />,
       },
       {
         path: '/login',
@@ -70,15 +68,15 @@ export const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: (
-      <PrivateRoute>
-      <Dashboard></Dashboard>
-      </PrivateRoute>
+      <AdminRoute>
+        <Dashboard></Dashboard>
+      </AdminRoute>
     ),
     children: [
       {
-        path: "/dashboard/allUsers",
-        element:<AllUsers/>
-    },
+        path: '/dashboard/allUsers',
+        element: <AllUsers />,
+      },
       {
         path: '/dashboard/cart',
         element: <Cart />,
@@ -99,6 +97,10 @@ export const router = createBrowserRouter([
         path: '/dashboard/userReview',
         element: <UserReview />,
       },
+      {
+        path: "/dashboard/addItems",
+        element:<Items/>
+      }
     ],
   },
 ]);

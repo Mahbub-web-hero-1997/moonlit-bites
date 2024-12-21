@@ -68,14 +68,26 @@ export const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: (
-      <AdminRoute>
+      <PrivateRoute>
         <Dashboard></Dashboard>
-      </AdminRoute>
+      </PrivateRoute>
     ),
     children: [
       {
         path: '/dashboard/allUsers',
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: '/dashboard/addItems',
+        element: (
+          <AdminRoute>
+            <Items />
+          </AdminRoute>
+        ),
       },
       {
         path: '/dashboard/cart',
@@ -97,10 +109,6 @@ export const router = createBrowserRouter([
         path: '/dashboard/userReview',
         element: <UserReview />,
       },
-      {
-        path: "/dashboard/addItems",
-        element:<Items/>
-      }
     ],
   },
 ]);

@@ -12,43 +12,16 @@ const Items = () => {
         formState: { errors },
     } = useForm();
      const onSubmit = (data) => {
-        createUser(data.email, data.password)
-          .then((result) => {
-            const user = result.user;
-            console.log(user);
-            
-            updateUserProfile(data.name, data.photoUrl)
-              .then(()=> {
-                const userInfo = {
-                  name: data.name,
-                  email: data.email,
-                }
-                axiosPublic.post("/user", userInfo)
-                  .then(res => {
-                    if (res.data.insertedId) {
-                      Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Account Successfully Created',
-                        showConfirmButton: false,
-                        timer: 1500,
-                      });
-                  }
-                })
-                reset()    
-            
-              navigate("/")  
-            })
-          })
-          .catch((err) => {
-            console.error(err.message);
-          });
+  console.log(data);
+  
       };
     
     return (
       <div className="w-full h-screen md:h-[500px] md:w-1/2 mx-auto p-4 mt-18 shadow-lg overflow-hidden">
-        <h1 className="text-2xl font-semibold text-center">Add Product</h1>
-        <hr className="w-2/3 md:w-1/2  mx-auto mt-3 bg-orange-500" />
+        <h1 className="text-2xl font-semibold text-center text-orange-500">
+          Add Product
+        </h1>
+        <hr className="w-2/3 md:w-1/2  mx-auto mt-3" />
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-4 mt-4"
@@ -67,18 +40,26 @@ const Items = () => {
               placeholder="Price"
               className="border-b-[1px] border-orange-500 outline-none px-2 py-4 w-1/2"
             />
-            <input
-              type="text"
+            <select
               {...register('Category')}
-              placeholder="Category"
-              className="border-b-[1px] border-orange-500 outline-none px-2 py-4 w-1/2"
-            />
+              className="border-b-[1px] border-orange-500 outline-none px-2 py-4 w-1/2 text-gray-500"             
+              id=""
+            >
+              <option disabled selected>
+                Pick your favorite Simpson
+              </option>
+              <option>Homer</option>
+              <option>Marge</option>
+              <option>Bart</option>
+              <option>Lisa</option>
+              <option>Maggie</option>
+            </select>
           </div>
 
           <textarea
             type="text"
-            {...register('productTitle')}
-            placeholder="Product Title"
+            {...register('recipe')}
+            placeholder="Product Description"
             className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
           />
 

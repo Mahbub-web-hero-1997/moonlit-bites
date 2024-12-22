@@ -49,7 +49,7 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? 'text-gray-600' : ''
                   }
-                  to="/dashboard/manage"
+                  to="/dashboard/allItems"
                 >
                   Manage Items
                 </NavLink>

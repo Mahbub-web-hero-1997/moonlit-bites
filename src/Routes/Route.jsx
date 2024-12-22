@@ -21,6 +21,7 @@ import AllUsers from '../Components/Dashboard/AllUsers/AllUsers';
 import AdminRoute from './AdminRoute';
 import AddItems from '../Components/Dashboard/AddItems/AddItems';
 import GetItems from '../Components/Dashboard/GetAllItems/GetItems';
+import ManageItems from '../Components/Dashboard/ManageItems/ManageItems';
 
 export const router = createBrowserRouter([
   {
@@ -91,10 +92,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/manage',
+        path: '/dashboard/allItems',
         element: (
           <AdminRoute>
             <GetItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: '/dashboard/manage',
+        element: (
+          <AdminRoute>
+           <ManageItems/>
           </AdminRoute>
         ),
       },

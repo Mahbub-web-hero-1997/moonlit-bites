@@ -5,6 +5,7 @@ import { MdDeleteForever } from 'react-icons/md';
 import { HiMiniPencilSquare } from 'react-icons/hi2';
 import Swal from 'sweetalert2';
 import Category from '../../Shared/Category';
+import { Link } from 'react-router-dom';
 
 const GetItems = () => {
   const axiosSecure = UseAxios();
@@ -82,9 +83,11 @@ const GetItems = () => {
                 <td>{item.category}</td>
                 <td>{item.price}</td>
                 <td>
-                  <button onClick={() => handleUpdateItem(item._id)}>
-                    <HiMiniPencilSquare className="text-3xl text-orange-500" />
-                  </button>
+                  <Link to="/dashboard/manage">
+                    <button onClick={() => handleUpdateItem(item._id)}>
+                      <HiMiniPencilSquare className="text-3xl text-orange-500" />
+                    </button>
+                  </Link>
                 </td>
                 <td>
                   <button onClick={() => handleDeleteItem(item._id)}>

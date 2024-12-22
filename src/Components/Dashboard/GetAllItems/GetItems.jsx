@@ -3,26 +3,57 @@ import UseAxios from '../../../CustomHook/UseAxios';
 import { useQuery } from '@tanstack/react-query';
 import { MdDeleteForever } from 'react-icons/md';
 import { HiMiniPencilSquare } from 'react-icons/hi2';
+import Swal from 'sweetalert2';
 import Category from '../../Shared/Category';
 
 const GetItems = () => {
   const axiosSecure = UseAxios();
-  const { data: allItems=[] } = useQuery({
+  const { data: allItems = [], refetch } = useQuery({
     queryKey: 'items',
     queryFn: async () => {
-        const res = await axiosSecure.get('/menu');
-        console.log(allItems[0]);
-        
+      const res = await axiosSecure.get('/menu');
       return res.data;
     },
   });
 
+  const handleUpdateItem = async (item) => {
+    // console.log(item);
+    const res = await axiosSecure.patch(`/menu/${item._id}`);
+    console.log(res.data);
+  };
+
+  const handleDeleteItem = (id) => {
+     Swal.fire({
+       title: 'Are you sure?',
+       text: "You won't be able to revert this!",
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#3085d6',
+       cancelButtonColor: '#d33',
+       confirmButtonText: 'Yes, delete it!',
+     }).then((result) => {
+       if (result.isConfirmed) {
+         axiosSecure.delete(`/menu/${id}`).then((res) => {
+           refetch()
+           if (res.data.modifiedCount > 0) {
+             Swal.fire({
+               title: 'Deleted!',
+               text: 'Your file has been deleted.',
+               icon: 'success',
+             });
+           }
+         });
+       }
+     });
+  };
+
   return (
-      <div className=" w-full mx-auto bg-white p-5">
-          {/* <Category/> */}
+    <div className=" w-full mx-auto bg-white p-5">
+      {/* <Category/> */}
       <div className="flex justify-between items-center p-3 bg-[#614500] text-white">
         <p className="text-xl text-center">
-          Total Users: <span className="text-orange-500">{allItems.length}</span>
+          Total Users:{' '}
+          <span className="text-orange-500">{allItems.length}</span>
         </p>
       </div>
       <div className="overflow-x-auto">
@@ -34,7 +65,7 @@ const GetItems = () => {
               <th>Image</th>
               <th>Product Name</th>
               <th>Category</th>
-              <th>Price</th>              
+              <th>Price</th>
               <th>Update</th>
               <th>Delete</th>
             </tr>
@@ -44,17 +75,19 @@ const GetItems = () => {
             {allItems.map((item, index) => (
               <tr key={item._id} className="shadow-md hover:shadow-none">
                 <th>{index + 1}</th>
-                <td><img className='w-16 h-16' src={item.image} alt="" /></td>
+                <td>
+                  <img className="w-16 h-16" src={item.image} alt="" />
+                </td>
                 <td>{item.name}</td>
                 <td>{item.category}</td>
                 <td>{item.price}</td>
                 <td>
-                  <button>
+                  <button onClick={() => handleUpdateItem(item._id)}>
                     <HiMiniPencilSquare className="text-3xl text-orange-500" />
                   </button>
                 </td>
                 <td>
-                  <button>
+                  <button onClick={() => handleDeleteItem(item._id)}>
                     <MdDeleteForever className="text-3xl text-orange-500" />
                   </button>
                 </td>

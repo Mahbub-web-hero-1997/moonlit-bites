@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/dashboard/allUsers',
+        path: 'allUsers',
         element: (
           <AdminRoute>
             <AllUsers />
@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/addItems',
+        path: 'addItems',
         element: (
           <AdminRoute>
             <AddItems />
@@ -92,7 +92,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/allItems',
+        path: 'allItems',
         element: (
           <AdminRoute>
             <GetItems />
@@ -100,12 +100,13 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/manage',
+        path: 'manage/:id',
         element: (
           <AdminRoute>
-           <ManageItems/>
+            <ManageItems />
           </AdminRoute>
         ),
+        loader: ({ params }) =>fetch(`http://localhost:5000/menu/${params.id}`),
       },
       {
         path: '/dashboard/cart',

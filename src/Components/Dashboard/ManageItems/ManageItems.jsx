@@ -1,9 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const ManageItem = () => {
+  const item = useLoaderData();
+  console.log(item);
+
   const {
     register,
     handleSubmit,
@@ -16,7 +19,7 @@ const ManageItem = () => {
   };
 
   return (
-    <div className="w-full h-screen md:h-[500px] md:w-1/2 mx-auto p-4 mt-18 shadow-lg overflow-hidden">
+    <div className="w-full h-screen md:h-[400px] md:w-1/2 mx-auto p-4 mt-18 shadow-lg overflow-hidden">
       <h1 className="text-2xl font-semibold text-center text-orange-500">
         Add Product
       </h1>
@@ -29,6 +32,7 @@ const ManageItem = () => {
         <input
           type="text"
           {...register('name')}
+          value={item.name}
           required
           placeholder="Product Name"
           className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
@@ -36,6 +40,7 @@ const ManageItem = () => {
         <div className="flex w-full gap-2">
           <input
             type="number"
+            value={ item.price}
             {...register('price')}
             required
             placeholder="Price"
@@ -43,6 +48,7 @@ const ManageItem = () => {
           />
           <select
             {...register('category')}
+            value={item.category}
             required
             className="border-b-[1px] border-orange-500 outline-none px-2 py-4 w-1/2 text-gray-500"
             id=""
@@ -50,27 +56,28 @@ const ManageItem = () => {
             <option disabled selected>
               Pick your favorite Simpson
             </option>
-            <option>Homer</option>
-            <option>Marge</option>
-            <option>Bart</option>
-            <option>Lisa</option>
-            <option>Maggie</option>
+            <option>Salad</option>
+            <option>Pizza</option>
+            <option>Popular</option>
+            <option>Drinks</option>
+            <option>Soup</option>
           </select>
         </div>
 
         <textarea
           type="text"
           {...register('recipe')}
+          value={item.recipe}
           required
           placeholder="Product Description"
           className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
         />
-        <input
+        {/* <input
           type="file"
           {...register('image')}
           required
           className=" outline-none border-b-[1px] border-orange-500 px-2 py-4 bg-white text-gray-500"
-        />
+        /> */}
 
         <input
           type="submit"

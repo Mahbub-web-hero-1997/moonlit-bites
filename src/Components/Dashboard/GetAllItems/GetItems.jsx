@@ -17,12 +17,6 @@ const GetItems = () => {
     },
   });
 
-  const handleUpdateItem = async (item) => {
-    // console.log(item);
-    const res = await axiosSecure.patch(`/menu/${item._id}`);
-    console.log(res.data);
-  };
-
   const handleDeleteItem = (id) => {
      Swal.fire({
        title: 'Are you sure?',
@@ -83,8 +77,8 @@ const GetItems = () => {
                 <td>{item.category}</td>
                 <td>{item.price}</td>
                 <td>
-                  <Link to="/dashboard/manage">
-                    <button onClick={() => handleUpdateItem(item._id)}>
+                  <Link to={`/dashboard/manage/${item._id}`}>
+                    <button>
                       <HiMiniPencilSquare className="text-3xl text-orange-500" />
                     </button>
                   </Link>

@@ -3,9 +3,11 @@ import './Header.module.css';
 import AuthProvider, { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useContext } from 'react';
 import UseCart from '../../CustomHook/UseCart';
+import UseAdmin from '../../CustomHook/UseAdmin';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext); 
+  const [isAdmin]=UseAdmin()
   
   const [cart] = UseCart()
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
@@ -123,7 +125,8 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end w-1/6 ml-40">
-          <div className="dropdown dropdown-end">
+          {
+            !isAdmin?<div className="dropdown dropdown-end">
             <div
               tabIndex={0}
               role="button"
@@ -166,7 +169,8 @@ const Header = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div>:''
+          }
           {user ? (
             <div className="dropdown dropdown-end">
               <div

@@ -10,7 +10,7 @@ const UseAxios = () => {
   const { logOut } = useContext(AuthContext)
   const navigate=useNavigate()
   // Axios Interceptor Request
-  axiosSecure.interceptors.request.use((config) => {
+  axiosSecure.interceptors.request.use(config => {
 // console.log("Axios Intercept in AxiosSecure ");
     const token = localStorage.getItem("access-token")   
     config.headers.authorization= `Bearer ${token}`

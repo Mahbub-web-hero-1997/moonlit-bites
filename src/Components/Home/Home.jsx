@@ -4,10 +4,11 @@ import SectionHeading from '../Shared/SectionHeading';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import Opening from './Story';
-import PopularMenu from './PopularMenu';
 import Story from './Story';
 import Party from './Party';
 import Expert from './Experte';
+import PopularMenus from './PopularMenu/PopularMenus';
+
 
 const Home = () => {
   return (
@@ -21,7 +22,7 @@ const Home = () => {
           subHeading={'---From 9:00am to 9:00pm---'}
           heading={'Try our popular menu'}
         />
-        <PopularMenu />
+       <PopularMenus/>
         <Story />
         <Party />
         <Expert />

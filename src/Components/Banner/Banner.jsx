@@ -4,21 +4,15 @@ import shape from '../../assets/banner/shape.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {
   A11y,
-  Autoplay,
-  Navigation,
-  Pagination,
-  Scrollbar,
+  Autoplay, 
 } from 'swiper/modules';
 import 'swiper/css';
 import { Link } from 'react-router-dom';
-import Aos from 'aos';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 
 const Banner = () => {
   const { menus } = useContext(AuthContext);
-  useEffect(() => {
-    Aos.init();
-  }, []);
+ 
   return (
     <div className="  relative w-[100%] mx-auto h-[calc(100vh-24px)] overflow-hidden px-5 mb-5">
       <video

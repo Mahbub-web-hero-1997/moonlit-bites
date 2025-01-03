@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
+import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
+import { AuthContext } from '../../ContextAPI/AuthProvider';
+import Blog from './Blog';
 
 const Blogs = () => {
+  const { blogs } = useContext(AuthContext)  
+  
   return (
     <>
       <Helmet>
         <title>moonlit || blogs</title>
       </Helmet>
       <div className="flex justify-center items-center h-[calc(100vh-95px)]">
-        <h1 className="text-3xl font-bold text-center">
-          Don't wary This Blogs is Coming Soon.
-        </h1>
+        {
+          blogs.map(blog => {
+            <Blog key={blog._id} blog={blog} />
+          })
+        }
       </div>
     </>
   );

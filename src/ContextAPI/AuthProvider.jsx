@@ -17,26 +17,23 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [menus, setMenus] = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const axiosSecurePublic = UseAxiosPublic();
   // console.log(user);
-  
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        const userInfo = { email: currentUser.email }
-        axiosSecurePublic.post("/jwt", userInfo)
-          .then(res => {
-            localStorage.setItem("access-token", res.data.token)
-            // console.log(res.data.token);
-            
-        })
-      }
-      else {     
-        localStorage.removeItem("access-token")
+        const userInfo = { email: currentUser.email };
+        axiosSecurePublic.post('/jwt', userInfo).then((res) => {
+          localStorage.setItem('access-token', res.data.token);
+          // console.log(res.data.token);
+        });
+      } else {
+        localStorage.removeItem('access-token');
       }
       setLoading(false);
     });
@@ -46,36 +43,45 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    axiosSecurePublic.get('http://localhost:5000/menu').then((res) => setMenus(res.data));
+    axiosSecurePublic
+      .get('http://localhost:5000/menu')
+      .then((res) => setMenus(res.data));
+  }, []);
+
+  useEffect(() => {
+    axiosSecurePublic.get('/blogs').then((res) => {
+      if (res.data) {
+        setBlogs(res.data);
+      }
+    });
   }, []);
 
   const createUser = (email, password) => {
-   loading;
+    loading;
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const login = (email, password) => {
-   loading;
+    loading;
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const googleLogin = () => {
-    loading
-    return signInWithPopup(auth, provider)
-  }
-
+    loading;
+    return signInWithPopup(auth, provider);
+  };
 
   const logOut = () => {
-   loading;
+    loading;
     return signOut(auth);
   };
 
-  const updateUserProfile = (firstName,  url) => {
+  const updateUserProfile = (firstName, url) => {
     return updateProfile(auth.currentUser, {
       displayName: firstName,
-      photoURL:url
-    })
-  }
+      photoURL: url,
+    });
+  };
 
   const handleAllMenus = () => {
     axios.get('http://localhost:5000/menu').then((res) => {
@@ -136,6 +142,7 @@ const AuthProvider = ({ children }) => {
     menus,
     user,
     loading,
+    blogs,
   };
 
   return (

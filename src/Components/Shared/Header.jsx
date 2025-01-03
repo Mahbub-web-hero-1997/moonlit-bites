@@ -4,6 +4,7 @@ import AuthProvider, { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useContext } from 'react';
 import UseCart from '../../CustomHook/UseCart';
 import UseAdmin from '../../CustomHook/UseAdmin';
+import Swal from 'sweetalert2';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext); 
@@ -15,8 +16,17 @@ const Header = () => {
   
   const handleSignOut = () => {
     logOut()
-      .then((result) => {
-        console.log('user Successfully signout', result);
+      .then((result) => {      
+        localStorage.removeItem('access-token');
+                Swal.fire({
+                     position: 'top-end',
+                     icon: 'success',
+                     title: 'You Successfully SignOut.',
+                     showConfirmButton: false,
+                     timer: 1500,
+                   });
+        // console.log('user Successfully signout', result);
+       
       })
       .catch((err) => {
         console.log(err.message);

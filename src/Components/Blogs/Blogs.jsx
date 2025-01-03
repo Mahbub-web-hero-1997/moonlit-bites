@@ -12,11 +12,11 @@ const Blogs = () => {
       <Helmet>
         <title>moonlit || blogs</title>
       </Helmet>
-      <div className="flex justify-center items-center h-[calc(100vh-95px)]">
+      <div className="w-full mx-auto">
         {
-          blogs.map(blog => {
-            <Blog key={blog._id} blog={blog} />
-          })
+          blogs.map(blog => 
+            <Blog key={blog._id} blog={blog} />   
+          )
         }
       </div>
     </>

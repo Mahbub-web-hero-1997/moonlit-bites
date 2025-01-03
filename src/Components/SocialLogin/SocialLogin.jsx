@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
-import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import UseAxios from '../../CustomHook/UseAxios';
 
 
 const SocialLogin = () => {
   const { googleLogin } = useContext(AuthContext)
-  const axiosPublic = UseAxiosPublic()
+  const axiosSecure = UseAxios()
   const navigate=useNavigate()
  
   const handleGoogleLogin = () => {
@@ -18,12 +19,20 @@ const SocialLogin = () => {
           name: result.user?.displayName,
           email:result.user?.email,
         }
-        axiosPublic.post("/user", userInfo)
+        axiosSecure.post("/user", userInfo)
           .then(res => {
-          console.log(res.data);          
+            if (res.data) {
+           Swal.fire({
+             position: 'top-end',
+             icon: 'success',
+             title: 'Welcome! You Successfully LoggedIn',
+             showConfirmButton: false,
+             timer: 1500,
+           });
+         }        
         })
     })
-   navigate('/')
+  //  navigate('/')
   }
   
   return (

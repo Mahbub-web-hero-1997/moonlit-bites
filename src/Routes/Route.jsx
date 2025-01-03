@@ -23,6 +23,7 @@ import AddItems from '../Components/Dashboard/AddItems/AddItems';
 import GetItems from '../Components/Dashboard/GetAllItems/GetItems';
 import ManageItems from '../Components/Dashboard/ManageItems/ManageItems';
 import UserBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
+import Checkout from '../Components/CheckOut/Checkout';
 
 export const router = createBrowserRouter([
   {
@@ -66,6 +67,11 @@ export const router = createBrowserRouter([
         path: '/register',
         element: <Register />,
       },
+      {
+        path: '/checkout/:id',
+        element: <Checkout />,
+        loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`),
+      },
     ],
   },
   {
@@ -107,7 +113,8 @@ export const router = createBrowserRouter([
             <ManageItems />
           </AdminRoute>
         ),
-        loader: ({ params }) =>fetch(`http://localhost:5000/menu/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
       {
         path: 'cart',
@@ -131,8 +138,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'blogs',
-        element: <UserBlogs />
-      }
+        element: <UserBlogs />,
+      },
     ],
   },
 ]);

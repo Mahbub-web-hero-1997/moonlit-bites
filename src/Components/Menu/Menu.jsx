@@ -7,7 +7,7 @@ import UseCart from '../../CustomHook/UseCart';
 
 const Menu = ({ menu }) => {
   const { name, image, price, recipe, _id } = menu;
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext); 
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = UseAxios();
@@ -49,6 +49,12 @@ const Menu = ({ menu }) => {
       });
     }
   };
+  // Handle Checkout Function
+
+  const handleBuyNow = (id) => {
+    console.log(id);
+    
+  }
 
   return (
     <div className="card bg-base-100 w-full h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto  ">
@@ -68,13 +74,13 @@ const Menu = ({ menu }) => {
         <p>{recipe}</p>
         <div className="card-actions justify-between">
           <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov">
-             <Link onClick={handleAddToCart} className="">
+            <Link onClick={handleAddToCart} className="">
               Add to cart
-  </Link>
+            </Link>
           </div>
 
           <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov">
-            <Link>Buy Now</Link>
+            <Link to={`/checkout/${_id}`} onClick={() =>handleBuyNow(_id)}>Buy Now</Link>
           </div>
         </div>
       </div>

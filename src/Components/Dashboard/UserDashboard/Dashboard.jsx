@@ -22,8 +22,7 @@ const Dashboard = () => {
   // const isAdmin = true;
 
   return (
-    <>
-      
+    <>      
     <div className="flex w-full bg-gray-100">
       <div className="w-56 h-screen bg-orange-500 px-4 md:fixed md:top-0 md:left-0  ">
         {isAdmin ? (

@@ -32,7 +32,7 @@ const SocialLogin = () => {
          }        
         })
     })
-  //  navigate('/')
+   navigate('/')
   }
   
   return (

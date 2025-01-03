@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 const ManageItem = () => {
   const item = useLoaderData();
-  console.log(item);
+  // console.log(item);
 
   const {
     register,

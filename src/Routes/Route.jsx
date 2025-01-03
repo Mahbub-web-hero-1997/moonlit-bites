@@ -22,6 +22,7 @@ import AdminRoute from './AdminRoute';
 import AddItems from '../Components/Dashboard/AddItems/AddItems';
 import GetItems from '../Components/Dashboard/GetAllItems/GetItems';
 import ManageItems from '../Components/Dashboard/ManageItems/ManageItems';
+import UserBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
 
 export const router = createBrowserRouter([
   {
@@ -109,25 +110,29 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>fetch(`http://localhost:5000/menu/${params.id}`),
       },
       {
-        path: '/dashboard/cart',
+        path: 'cart',
         element: <Cart />,
       },
       {
-        path: '/dashboard/userHome',
+        path: 'userHome',
         element: <UserHome />,
       },
       {
-        path: '/dashboard/userOrder',
+        path: 'userOrder',
         element: <UserOrder />,
       },
       {
-        path: '/dashboard/userPayment',
+        path: 'userPayment',
         element: <UserPayment />,
       },
       {
-        path: '/dashboard/userReview',
+        path: 'userReview',
         element: <UserReview />,
       },
+      {
+        path: 'blogs',
+        element: <UserBlogs />
+      }
     ],
   },
 ]);

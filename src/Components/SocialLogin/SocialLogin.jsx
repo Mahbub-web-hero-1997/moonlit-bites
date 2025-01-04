@@ -9,7 +9,7 @@ import UseAxios from '../../CustomHook/UseAxios';
 
 const SocialLogin = () => {
   const { googleLogin } = useContext(AuthContext)
-  const axiosSecure = UseAxios()
+  const axiosSecure = UseAxios()  
   const navigate=useNavigate()
  
   const handleGoogleLogin = () => {
@@ -19,6 +19,7 @@ const SocialLogin = () => {
           name: result.user?.displayName,
           email:result.user?.email,
         }
+        console.log(userInfo);        
         axiosSecure.post("/user", userInfo)
           .then(res => {
             if (res.data) {

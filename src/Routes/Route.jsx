@@ -12,8 +12,8 @@ import Register from '../Components/Register/Register';
 import PrivateRoute from './PrivateRoute';
 import Cart from '../Components/Dashboard/UserDashboard/Cart';
 import UserHome from '../Components/Dashboard/UserDashboard/UserHome';
-import Order from '../Components/Dashboard/UserDashboard/UserOrder';
-import UserOrder from '../Components/Dashboard/UserDashboard/UserOrder';
+import Order from '../Components/Dashboard/UserDashboard/UserOrder/UserOrders';
+import UserOrder from '../Components/Dashboard/UserDashboard/UserOrder/UserOrders';
 import UserPayment from '../Components/Dashboard/UserDashboard/UserPayment';
 import UserReview from '../Components/Dashboard/UserDashboard/UserReview';
 import Dashboard from '../Components/Dashboard/UserDashboard/Dashboard';
@@ -24,6 +24,8 @@ import GetItems from '../Components/Dashboard/GetAllItems/GetItems';
 import ManageItems from '../Components/Dashboard/ManageItems/ManageItems';
 import UserBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
 import Checkout from '../Components/CheckOut/Checkout';
+import { useContext } from 'react';
+import { AuthContext } from '../ContextAPI/AuthProvider';
 
 export const router = createBrowserRouter([
   {
@@ -133,6 +135,7 @@ export const router = createBrowserRouter([
       {
         path: 'userOrder',
         element: <UserOrder />,
+        
       },
       {
         path: 'userPayment',

@@ -11,7 +11,7 @@ const Checkout = () => {
   const { image, name, recipe, price } = item;
   const axiosSecure = UseAxios();
   const navigate = useNavigate();
-  const bookingData = {
+  const orderData = {
     image,
     name,
     price,
@@ -23,8 +23,8 @@ const Checkout = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    const bookingInfo = { ...data, bookingData };
-    axiosSecure.post('/booking', bookingInfo).then((res) => {
+    const orderInfo = { ...data, orderData };
+    axiosSecure.post('/booking', orderInfo).then((res) => {
       if (res.data.insertedId) {
         Swal.fire({
           position: 'top-end',

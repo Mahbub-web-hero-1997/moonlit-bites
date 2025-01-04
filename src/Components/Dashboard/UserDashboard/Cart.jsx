@@ -39,6 +39,7 @@ const Cart = () => {
       }
     });
   };
+  
   return (
     <>
       {/* <SectionHeading subHeading={'My cart'} /> */}
@@ -87,7 +88,7 @@ const Cart = () => {
                   <td>
                     <button onClick={() => handleDelete(item._id)}>
                       <MdDeleteForever className="text-3xl text-orange-500" />
-                    </button>
+                    </button>                 
                   </td>
                 </tr>
               ))}

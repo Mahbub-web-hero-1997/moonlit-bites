@@ -1,22 +1,42 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
+import UseAxios from '../../CustomHook/UseAxios';
+import Swal from 'sweetalert2';
 
 const Checkout = () => {
   const { user } = useContext(AuthContext);
   const item = useLoaderData();
-  console.log(item);
   const { image, name, recipe, price } = item;
+  const axiosSecure = UseAxios();
+  const navigate = useNavigate();
+  const bookingData = {
+    image,
+    name,
+    price,
+  };
   const {
     register,
     handleSubmit,
     reset,
-
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    const bookingInfo = { ...data, bookingData };
+    axiosSecure.post('/booking', bookingInfo).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your Order Has Been Successfully Booked',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    });
+      reset()
+    navigate('/menu');
   };
 
   return (
@@ -56,15 +76,22 @@ const Checkout = () => {
               placeholder="+880"
               className="border-b-[1px] border-orange-500 outline-none px-2 py-4 w-full md:w-[50%]"
             />
-          </div>         
+          </div>
+          <input
+            type="email"
+            {...register('email')}
+            required
+            value={user?.email}
+            placeholder="example@gmail.com"
+            className="border-b-[1px] border-orange-500 outline-none px-2 py-4 w-full"
+          />
           <textarea
             type="text"
             {...register('address')}
-            
             required
             placeholder="Enter Your Delivery Address. "
             className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
-          />    
+          />
           <input
             type="submit"
             value="Confirm-Order"

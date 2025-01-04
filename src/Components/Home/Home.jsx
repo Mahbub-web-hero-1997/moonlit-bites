@@ -6,8 +6,9 @@ import { Helmet } from 'react-helmet-async';
 import Opening from './Story';
 import Story from './Story';
 import Party from './Party';
-import Expert from './Experte';
+import Expert from './Expert';
 import PopularMenus from './PopularMenu/PopularMenus';
+
 
 
 const Home = () => {
@@ -27,6 +28,7 @@ const Home = () => {
         <Party />
         <Expert />
       </div>
+      
     </>
   );
 };

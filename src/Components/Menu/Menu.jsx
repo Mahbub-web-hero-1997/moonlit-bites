@@ -7,11 +7,11 @@ import UseCart from '../../CustomHook/UseCart';
 
 const Menu = ({ menu }) => {
   const { name, image, price, recipe, _id } = menu;
-  const { user } = useContext(AuthContext); 
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = UseAxios();
-  const [, refetch]=UseCart()
+  const [, refetch] = UseCart();
   const handleAddToCart = () => {
     if (user && user?.email) {
       const cartData = {
@@ -30,7 +30,7 @@ const Menu = ({ menu }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        refetch()
+        refetch();
       });
     } else {
       Swal.fire({
@@ -52,9 +52,8 @@ const Menu = ({ menu }) => {
   // Handle Checkout Function
 
   const handleBuyNow = (id) => {
-    console.log(id);
-    
-  }
+    // console.log(id);
+  };
 
   return (
     <div className="card bg-base-100 w-full h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto  ">
@@ -80,7 +79,32 @@ const Menu = ({ menu }) => {
           </div>
 
           <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov">
-            <Link to={`/checkout/${_id}`} onClick={() =>handleBuyNow(_id)}>Buy Now</Link>
+            <button
+              onClick={() => document.getElementById('my_modal_4').showModal()}
+            >
+              <Link onClick={() => handleBuyNow(_id)}>Buy Now</Link>
+            </button>
+            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+            <dialog
+              id="my_modal_4"
+              className=" w-full md:w-1/2  bg-transparent"
+            >
+              <div className="modal-box w-full md:w-4/2 h-[400px] md:h-[500px] max-w-5xl">
+                <h3 className="font-bold ">
+                  If you are interested in buying the{' '}
+                  <span className="text-orange-600">{name}</span>, please fill
+                  the form below and click on the confirm button.{' '}
+                </h3>               
+                <div className="modal-action"></div>
+                <div className="flex justify-between">
+                  <button className="btn">Confirm-Order</button>
+                  <form method="dialog">
+                    {/* if there is a button, it will close the modal */}
+                    <button className="btn">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
           </div>
         </div>
       </div>

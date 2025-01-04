@@ -69,8 +69,13 @@ export const router = createBrowserRouter([
       },
       {
         path: '/checkout/:id',
-        element: <Checkout />,
-        loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
     ],
   },

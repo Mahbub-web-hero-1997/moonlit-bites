@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import UseAxios from '../../CustomHook/UseAxios';
 import UseCart from '../../CustomHook/UseCart';
 
-const Menu = ({ menu, handleConfirmOrder }) => {
+const Menu = ({ menu }) => {
   const { name, image, price, recipe, _id } = menu;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -79,33 +79,7 @@ const Menu = ({ menu, handleConfirmOrder }) => {
           </div>
 
           <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov">
-            <button
-              onClick={() => document.getElementById('my_modal_4').showModal()}
-            >
-              <Link onClick={() => handleBuyNow(_id)}>Buy Now</Link>
-            </button>
-            {/* You can open the modal using document.getElementById('ID').showModal() method */}
-            <dialog
-              id="my_modal_4"
-              className=" w-full md:w-1/2  bg-transparent"
-            >
-              <div className="modal-box w-full md:w-4/2 h-[400px] md:h-[500px] max-w-5xl">
-                <h3 className="font-bold ">
-                  If you are interested in buying the{' '}
-                  <span className="text-orange-600">{name}</span>, please fill
-                  the form below and click on the confirm button.{' '}
-                </h3>
-                <div className="modal-action"></div>
-                <div className="flex justify-between">                
-                  <form method="dialog">
-                    {/* if there is a button, it will close the modal */}
-                    <button className="bg-white text-orange-600 hover:text-white hover:bg-orange-600 px-3 py-2 rounded-md btn">
-                      Cancel
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </dialog>
+            <Link to={`/checkout/${_id}`} onClick={() => handleBuyNow(_id)}>Buy Now</Link>
           </div>
         </div>
       </div>

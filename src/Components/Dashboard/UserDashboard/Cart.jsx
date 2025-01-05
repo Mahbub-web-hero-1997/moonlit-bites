@@ -8,7 +8,7 @@ import UseAxios from '../../../CustomHook/UseAxios';
 
 const Cart = () => {
   const [cart, refetch] = UseCart();
-  // console.log(cart);
+  console.log(cart);
   const axiosSecure = UseAxios();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
   const handleDelete = (id) => {
@@ -45,13 +45,15 @@ const Cart = () => {
       {/* <SectionHeading subHeading={'My cart'} /> */}
       <div className=" w-full mx-auto bg-white p-5">
         <div className="flex justify-between items-center p-3 bg-[#614500] text-white">
-          <p className="text-xl text-center">
-            Total Selected Items:{' '}
-            <span className="text-orange-500">{cart.length}</span>
-          </p>
-          <p className="text-xl text-center">
-            Total Price: <span className="text-orange-500">{totalPrice}</span>
-          </p>
+          <div>
+            <p className=" md:text-xl md:text-center">
+              Total Selected Items:{' '}
+              <span className="text-orange-500">{cart.length}</span>
+            </p>
+            <p className="md:text-xl md:text-center">
+              Total Price: <span className="text-orange-500">{totalPrice}</span>
+            </p>
+          </div>
           <Link
             className="btn text-xl text-white hover:text-gray-600 bg-[#b38000]  p-2 outline-none border-l-[1px]"
             to="#"
@@ -75,7 +77,7 @@ const Cart = () => {
               {/* row 1 */}
               {cart.map((item, index) => (
                 <tr key={item._id} className="shadow-md">
-                  <th>{index+1}</th>
+                  <th>{index + 1}</th>
                   <td>
                     <img
                       className="w-[40px] h-[45px] rounded-full"
@@ -88,7 +90,7 @@ const Cart = () => {
                   <td>
                     <button onClick={() => handleDelete(item._id)}>
                       <MdDeleteForever className="text-3xl text-orange-500" />
-                    </button>                 
+                    </button>
                   </td>
                 </tr>
               ))}

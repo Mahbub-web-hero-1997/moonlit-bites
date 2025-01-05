@@ -51,7 +51,7 @@ const UserOrders = () => {
               </Link>
             </div>
             <div className='overflow-x-scroll h-screen md:h-auto'>
-              <table className="table table-zebra overflow-x-scroll ">
+              <table className="table rounded-none table-zebra overflow-x-scroll md:overflow-hidden ">
                 {/* head */}
                 <thead className="bg-orange-500 text-white text-md ">
                   <tr>

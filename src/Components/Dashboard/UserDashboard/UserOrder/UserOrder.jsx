@@ -12,7 +12,7 @@ const UserOrder = ({ order, index }) => {
       <th>{index + 1}</th>
       <td>
         <img
-          className="w-[150px] h-[50px]"
+          className="w-[100px] h-[50px]"
           src={image}
           alt=""
         />

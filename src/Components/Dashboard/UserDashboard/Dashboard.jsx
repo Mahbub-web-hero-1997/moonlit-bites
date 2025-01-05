@@ -43,14 +43,14 @@ const Dashboard = () => {
           className="absolute top-0 left-0 m-4 md:hidden"
         >
           {isShow ? (
-            <FaBars className="text-xl text-orange-600 fixed top-0 left-0" />
+            <FaBars className="text-xl text-orange-600 fixed top-0 left-0 " />
           ) : (
-            <MdCancel className="text-2xl text-white bg-orange-500 fixed top-0 left-0 mt-3" />
+            <MdCancel className="text-2xl text-white bg-orange-500 fixed top-0 left-0 mt-3 z-50" />
           )}
         </button>
         <div
-          className={`w-[300px] md:w-[400px] h-screen bg-orange-500 px-4 ${
-            isShow ? `hidden` : 'block'
+          className={`w-[90%] md:w-56 h-screen bg-orange-500 px-4 fixed top-0 left-0 z-20  ${
+            isShow ? `hidden ease-in-out	` : 'block ease-in-out	'
           }`}
         >
           {isAdmin ? (

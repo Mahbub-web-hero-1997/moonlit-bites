@@ -45,12 +45,12 @@ const Cart = () => {
       {/* <SectionHeading subHeading={'My cart'} /> */}
       <div className=" w-full mx-auto bg-white p-5">
         <div className="flex justify-between items-center p-3 bg-[#614500] text-white">
-          <div>
-            <p className=" md:text-xl md:text-center">
+          <div className="md:flex">
+            <p className=" md:text-xl md:text-center ">
               Total Selected Items:{' '}
               <span className="text-orange-500">{cart.length}</span>
             </p>
-            <p className="md:text-xl md:text-center">
+            <p className="md:text-xl md:text-center md:ml-20">
               Total Price: <span className="text-orange-500">{totalPrice}</span>
             </p>
           </div>

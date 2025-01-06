@@ -5,11 +5,13 @@ import Footer from './Shared/Footer';
 
 const Root = () => {
   return (
-    <div>
-      <Header />
-      {<Outlet />}
-      {/* <Footer/> */}
-    </div>
+    <>
+      <div>
+        <Header />
+        {<Outlet />}
+      </div>
+      <Footer/>
+    </>
   );
 };
 

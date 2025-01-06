@@ -14,7 +14,7 @@ const Expert = () => {
   return (
     <>
       <SectionHeading heading={'Our Expert'} />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-1 md:p-8 h-screen md:pt-2  ">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-1 md:p-8  md:pt-2  ">
         {experts.map((expert) => (
           <div key={expert._id} className=" w-full border-[1px] md:relative">
             <img src={expert.img} alt="" className=" w-full md:h-1/2" />

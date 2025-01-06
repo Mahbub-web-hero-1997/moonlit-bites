@@ -27,8 +27,7 @@ const Home = () => {
        <PopularMenus/>
         <Story />
         <Party />
-        <Expert />
-        {/* <Footer/> */}
+        <Expert />       
       </div>
       
     </>

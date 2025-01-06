@@ -124,7 +124,7 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:5000/menu/${params.id}`),
       },
       {
-        path: 'cart',
+        path: 'cart/',
         element: <Cart />,
         
       },
@@ -135,7 +135,6 @@ export const router = createBrowserRouter([
       {
         path: 'userOrder',
         element: <UserOrder />,
-        
       },
       {
         path: 'userPayment',

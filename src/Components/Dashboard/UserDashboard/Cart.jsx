@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import { MdDeleteForever } from 'react-icons/md';
 import Swal from 'sweetalert2';
 import UseAxios from '../../../CustomHook/UseAxios';
+import { FaCartArrowDown } from 'react-icons/fa6';
 
 const Cart = () => {
   const [cart, refetch] = UseCart();
-  console.log(cart);
+  
+  // console.log(cart);
   const axiosSecure = UseAxios();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
   const handleDelete = (id) => {
@@ -39,7 +41,10 @@ const Cart = () => {
       }
     });
   };
-  
+  const handleBuyNow = (id) => {
+    console.log(id);
+    
+  }
   return (
     <>
       {/* <SectionHeading subHeading={'My cart'} /> */}
@@ -70,7 +75,8 @@ const Cart = () => {
                 <th>Item Image</th>
                 <th>Item Name</th>
                 <th>Price</th>
-                <th>Action</th>
+                <th className="text-center">Delete</th>
+                <th className="text-center">Buy</th>
               </tr>
             </thead>
             <tbody>
@@ -87,10 +93,18 @@ const Cart = () => {
                   </td>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
-                  <td>
+                  <td className="text-center">
                     <button onClick={() => handleDelete(item._id)}>
                       <MdDeleteForever className="text-3xl text-orange-500" />
                     </button>
+                  </td>
+                  <td className="text-center text-orange-500 font-bold ">                   
+                    <Link
+                      to={`/checkout/${item._id}`}
+                      onClick={() => handleBuyNow(item)}
+                    >
+                      <FaCartArrowDown className="text-xl md:text-2xl" />
+                    </Link>
                   </td>
                 </tr>
               ))}

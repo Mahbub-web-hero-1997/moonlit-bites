@@ -6,7 +6,7 @@ import UseAxios from '../../../CustomHook/UseAxios';
 import UseCart from '../../../CustomHook/UseCart';
 
 const PopularMenu = ({menu}) => {
-    const { name, image, price, recipe, } = menu;
+    const { name, image, price, recipe,_id } = menu;
    const { user } = useContext(AuthContext);
    const navigate = useNavigate();
    const location = useLocation();
@@ -51,7 +51,10 @@ const PopularMenu = ({menu}) => {
        });
      }
    };
-    
+  const handleBuyNow = (id) => {
+      console.log(id);
+      
+    }
   return (
     <div className="card bg-base-100 w-96 h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto">
       <figure className="relative ">
@@ -75,7 +78,9 @@ const PopularMenu = ({menu}) => {
             </Link>
           </div>
           <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov">
-            <Link>Buy Now</Link>
+            <Link to={`/checkout/${_id}`} onClick={() => handleBuyNow(_id)}>
+              Buy Now
+            </Link>
           </div>
         </div>
       </div>

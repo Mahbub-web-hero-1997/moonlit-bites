@@ -100,7 +100,7 @@ const Cart = () => {
                   </td>
                   <td className="text-center text-orange-500 font-bold ">                   
                     <Link
-                      to={`/checkout/${item._id}`}
+                      to={`/checkout/${item.cartId}`}
                       onClick={() => handleBuyNow(item)}
                     >
                       <FaCartArrowDown className="text-xl md:text-2xl" />

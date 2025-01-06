@@ -26,6 +26,7 @@ import UserBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
 import Checkout from '../Components/CheckOut/Checkout';
 import { useContext } from 'react';
 import { AuthContext } from '../ContextAPI/AuthProvider';
+import AllOrders from '../Components/Dashboard/AllOrders/AllOrders';
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +111,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <GetItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: 'allOrder',
+        element: (
+          <AdminRoute>
+          <AllOrders/>
           </AdminRoute>
         ),
       },

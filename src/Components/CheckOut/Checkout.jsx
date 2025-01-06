@@ -23,7 +23,7 @@ const Checkout = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    const orderInfo = { ...data, orderData };
+    const orderInfo = { data, orderData };
     axiosSecure.post('/booking', orderInfo).then((res) => {
       if (res.data.insertedId) {
         Swal.fire({

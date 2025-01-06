@@ -98,7 +98,7 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? 'text-gray-600' : ''
                   }
-                  to="/dashboard/userPayment"
+                  to="/dashboard/allOrder"
                 >
                   Manage Bookings
                 </NavLink>

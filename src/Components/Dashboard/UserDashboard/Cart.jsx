@@ -9,7 +9,7 @@ import { FaCartArrowDown } from 'react-icons/fa6';
 
 const Cart = () => {
   const [cart, refetch] = UseCart();
-  
+
   // console.log(cart);
   const axiosSecure = UseAxios();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
@@ -24,27 +24,22 @@ const Cart = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-      
-        axiosSecure.delete(`/cart/${id}`)
-          .then(res => {
-            refetch()
-            if (res.data.deletedCount > 0) {
-              Swal.fire({
-                title: 'Deleted!',
-                text: 'Your file has been deleted.',
-                icon: 'success',
-              });
-            }
+        axiosSecure.delete(`/cart/${id}`).then((res) => {
+          refetch();
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your file has been deleted.',
+              icon: 'success',
+            });
           }
-          )
-       
+        });
       }
     });
   };
   const handleBuyNow = (id) => {
-    console.log(id);
-    
-  }
+  
+  };
   return (
     <>
       {/* <SectionHeading subHeading={'My cart'} /> */}
@@ -60,8 +55,9 @@ const Cart = () => {
             </p>
           </div>
           <Link
+            disabled={!cart.length}
+            to="/dashboard/payment"
             className="btn text-xl text-white hover:text-gray-600 bg-[#b38000]  p-2 outline-none border-l-[1px]"
-            to="#"
           >
             Pay-Now
           </Link>
@@ -98,7 +94,7 @@ const Cart = () => {
                       <MdDeleteForever className="text-3xl text-orange-500" />
                     </button>
                   </td>
-                  <td className="text-center text-orange-500 font-bold ">                   
+                  <td className="text-center text-orange-500 font-bold ">
                     <Link
                       to={`/checkout/${item.cartId}`}
                       onClick={() => handleBuyNow(item)}

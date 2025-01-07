@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const Checkout = () => {
   const { user } = useContext(AuthContext);
   const item = useLoaderData();
-  const { image, name, recipe, price } = item;
+  const { image, name, recipe, price, _id } = item;
   const axiosSecure = UseAxios();
   const navigate = useNavigate();
   const orderData = {
@@ -22,10 +22,10 @@ const Checkout = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = (data, id) => {
     const orderInfo = { data, orderData };
     axiosSecure.post('/booking', orderInfo).then((res) => {
-      if (res.data.insertedId) {
+      if (res.data.insertedId) {     
         Swal.fire({
           position: 'top-end',
           icon: 'success',

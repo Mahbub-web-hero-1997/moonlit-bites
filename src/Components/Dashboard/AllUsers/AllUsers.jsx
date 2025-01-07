@@ -7,11 +7,14 @@ import { FaUsers } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../ContextAPI/AuthProvider';
 
+
 const AllUsers = () => {
+  const {user}=useContext(AuthContext)
   // Load All user Using Tanstack Query
   const axiosSecure = UseAxios();  
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
+    enabled:!!user.email&&!!localStorage.getItem("access-token"),
     queryFn: async () => {
       const res = await axiosSecure.get('/user');
 

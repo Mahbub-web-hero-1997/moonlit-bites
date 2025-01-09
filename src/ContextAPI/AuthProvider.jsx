@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     axiosSecurePublic
-      .get('http://localhost:5000/menu')
+      .get('https://y-gamma-lyart.vercel.app/menu')
       .then((res) => setMenus(res.data));
   }, []);
 
@@ -83,42 +83,42 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleAllMenus = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
+    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
       setMenus(res.data);
     });
   };
   const handlePopularMenus = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
+    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'popular');
       setMenus(items);
     });
   };
   const handleSaladItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
+    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'salad');
       setMenus(items);
     });
   };
   const handlePizzaItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
+    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'pizza');
       setMenus(items);
     });
   };
   const handleDessertItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
+    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'dessert');
       setMenus(items);
     });
   };
   const handleDrinksItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
+    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'drinks');
       setMenus(items);
     });
   };
   const handleSoupItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
+    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'soup');
       setMenus(items);
     });

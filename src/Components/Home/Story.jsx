@@ -12,7 +12,7 @@ const Story = () => {
   const [selected, setSelected] = useState();
   useEffect(() => {
     axios
-      .get('http://localhost:5000/Story')
+      .get('https://y-gamma-lyart.vercel.app/Story')
       .then((res) => setStories(res.data));
   }, []);
 

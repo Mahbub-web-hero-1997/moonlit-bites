@@ -2,7 +2,6 @@ import React from 'react';
 import AddItems from '../../AddItems/AddItems';
 
 const UserOrder = ({ order, index }) => {
-  console.log(order);
   const { name, price, image } = order.orderData;
 
     return (

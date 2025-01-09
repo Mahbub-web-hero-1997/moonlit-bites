@@ -6,7 +6,7 @@ import Review from './Review';
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    const url = 'http://localhost:5000/review';
+    const url = 'https://y-gamma-lyart.vercel.app/review';
     axios(url).then((res) => setReviews(res.data));
   }, []);
 

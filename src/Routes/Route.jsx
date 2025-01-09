@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
       {
         path: '/menu',
         element: <Menu />,
-        loader: () => fetch('http://localhost:5000/pagination'),
+        loader: () => fetch('https://y-gamma-lyart.vercel.app/pagination'),
       },
       {
         path: '/blogs',
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`https://y-gamma-lyart.vercel.app/menu/${params.id}`),
       },
     ],
   },
@@ -130,7 +130,7 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`https://y-gamma-lyart.vercel.app/menu/${params.id}`),
       },
       {
         path: 'cart/',

@@ -54,13 +54,13 @@ const Cart = () => {
               Total Price: <span className="text-orange-500">{totalPrice}</span>
             </p>
           </div>
-          <Link
+          {/* <Link
             disabled={!cart.length}
             to="/dashboard/payment"
             className="btn text-xl text-white hover:text-gray-600 bg-[#b38000]  p-2 outline-none border-l-[1px]"
           >
             Pay-Now
-          </Link>
+          </Link> */}
         </div>
         <div className="overflow-x-auto">
           <table className="table table-zebra">

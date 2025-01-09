@@ -34,23 +34,46 @@ const UserOrders = () => {
           message
         ) : (
           <div className=" w-full mx-auto bg-white p-5 ">
-            <div className=" flex justify-between items-center p-3 bg-[#614500] text-white">
-              <p className="text-xl text-center">
+            <div className=" flex flex-col md:flex-row justify-between md:items-center p-3 bg-[#614500] text-white">
+              <p className="text-xl md:text-center">
                 Total Ordered Items:{' '}
                 <span className="text-orange-500">{orders.length}</span>
               </p>
-              <p className="text-xl text-center">
+              <p className="text-xl md:text-center">
                 Total Price:{' '}
                 <span className="text-orange-500">{totalPrice}</span>
               </p>
-              <Link
+              {/* <Link
                 className="btn text-xl text-white hover:text-gray-600 bg-[#b38000]  p-2 outline-none border-l-[1px]"
                 to="#"
               >
                 Pay-Now
-              </Link>
+              </Link> */}
+              {/* Open the modal using document.getElementById('ID').showModal() method */}
+              <button
+                className="btn mt-3"
+                onClick={() =>
+                  document.getElementById('my_modal_5').showModal()
+                }
+              >
+                Pay-Now
+              </button>
+              <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box ">
+                  
+                  <div className="modal-action flex justify-between items-center">
+                    <button className=" rounded-md text-center font-semibold px-6 py-3 bg-orange-600 text-white active:scale-95">
+                      Confirm
+                    </button>
+                    <form method="dialog">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className="text-orange-600">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
             </div>
-            <div className='overflow-x-scroll h-screen md:h-auto'>
+            <div className="overflow-x-scroll h-screen md:h-auto">
               <table className="table rounded-none table-zebra overflow-x-scroll md:overflow-hidden ">
                 {/* head */}
                 <thead className="bg-orange-500 text-white text-md ">

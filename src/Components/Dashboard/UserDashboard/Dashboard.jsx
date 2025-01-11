@@ -167,7 +167,7 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? 'text-gray-600' : ''
                   }
-                  to="/dashboard/userPayment"
+                  to="/dashboard/myPayment"
                 >
                   Payment History
                 </NavLink>

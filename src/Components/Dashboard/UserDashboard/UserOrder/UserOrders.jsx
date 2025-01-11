@@ -10,7 +10,6 @@ import {
   useStripe,
 } from '@stripe/react-stripe-js';
 import PaymentForm from './PaymentForm';
-
 const UserOrders = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrder] = useState([]);
@@ -20,8 +19,8 @@ const UserOrders = () => {
   );
   const message = (
     <>
-      <p className="md:text-2xl font-semibold text-red-600 flex justify-center items-center w-full md:w-1/2 text-center mx-auto px-12 pt-32 md:pt-11 md:px-4">
-        There Have No Active Order Right Now In Your Order Page.
+      <p className="md:text-xl font-semibold text-orange-500 flex justify-center items-center w-full md:w-1/2 text-center mx-auto px-12 pt-32 md:pt-11 md:px-4">
+       Loading....
       </p>
     </>
   );

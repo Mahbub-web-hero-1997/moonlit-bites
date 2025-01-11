@@ -8,14 +8,15 @@ import UseCart from '../../../../CustomHook/UseCart';
 import { useContext } from 'react';
 import { AuthContext } from '../../../../ContextAPI/AuthProvider';
 import UseAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentForm = () => {
   const [error, setError] = useState('');
   const [orders, setOrder] = useState([]);
   const { user } = useContext(AuthContext);
-    const [clientSecret, setClientSecret] = useState('');
-    
-    
+  const [clientSecret, setClientSecret] = useState('');
+  const navigate=useNavigate()
+
   const stripe = useStripe();
   const axiosSecure = UseAxios();
   const elements = useElements();
@@ -63,27 +64,21 @@ const PaymentForm = () => {
     //   Payment Confirmation
 
     const { paymentIntent, error: confirmError } =
-      await stripe.confirmCardPayment(
-         clientSecret ,
-        {
-          payment_method: {
-            card: card,
-            billing_details: {
-              email: user?.email || 'anonymous',
-              name: user?.displayName || 'anonymous',
-            },
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || 'anonymous',
+            name: user?.displayName || 'anonymous',
           },
-        }
-          );
-      if (paymentIntent) {
-          console.log({Payment: "Success"});
-          
-      }
-      else {
-          console.log({err:confirmError.message});
-          
-      }
-
+        },
+      });
+    if (paymentIntent) {
+      console.log({ Payment: 'Success' });
+      navigate('/menu');
+    } else {
+      console.log({ err: confirmError.message });
+    }
   };
   return (
     <form onSubmit={handlePayment}>

@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     axiosSecurePublic
-      .get('https://y-gamma-lyart.vercel.app/menu')
+      .get('http://localhost:5000/menu')
       .then((res) => setMenus(res.data));
   }, []);
 
@@ -83,42 +83,42 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleAllMenus = () => {
-    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
+    axios.get('http://localhost:5000/menu').then((res) => {
       setMenus(res.data);
     });
   };
   const handlePopularMenus = () => {
-    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
+    axios.get('http://localhost:5000/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'popular');
       setMenus(items);
     });
   };
   const handleSaladItems = () => {
-    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
+    axios.get('http://localhost:5000/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'salad');
       setMenus(items);
     });
   };
   const handlePizzaItems = () => {
-    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
+    axios.get('http://localhost:5000/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'pizza');
       setMenus(items);
     });
   };
   const handleDessertItems = () => {
-    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
+    axios.get('http://localhost:5000/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'dessert');
       setMenus(items);
     });
   };
   const handleDrinksItems = () => {
-    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
+    axios.get('http://localhost:5000/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'drinks');
       setMenus(items);
     });
   };
   const handleSoupItems = () => {
-    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
+    axios.get('http://localhost:5000/menu').then((res) => {
       const items = res.data.filter((item) => item.category === 'soup');
       setMenus(items);
     });

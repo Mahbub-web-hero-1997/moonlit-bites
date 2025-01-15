@@ -28,7 +28,7 @@ const UserOrders = () => {
   const axiosPublic = UseAxiosPublic();
   useEffect(() => {
     axiosPublic
-      .get(`https://y-gamma-lyart.vercel.app/booking?email=${user?.email}`)
+      .get(`http://localhost:5000/booking?email=${user?.email}`)
       .then(async (res) => {
         if (res.data) {
           setOrder(res.data);

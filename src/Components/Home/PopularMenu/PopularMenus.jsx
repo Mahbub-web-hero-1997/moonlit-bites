@@ -9,7 +9,7 @@ const PopularMenus = () => {
   // console.log(popularMenus);
 
   useEffect(() => {
-    axios.get('https://y-gamma-lyart.vercel.app/menu').then((res) => {
+    axios.get('http://localhost:5000/menu').then((res) => {
       const popularItem = res.data.filter(
         (items) => items.category === 'popular'
       );

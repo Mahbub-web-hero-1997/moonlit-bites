@@ -1,10 +1,10 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import Swal from 'sweetalert2';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import UseAxios from '../../../../CustomHook/UseAxios';
-import UseCart from '../../../../CustomHook/UseCart';
+
 import { useContext } from 'react';
 import { AuthContext } from '../../../../ContextAPI/AuthProvider';
 import UseAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
@@ -15,7 +15,7 @@ const PaymentForm = () => {
   const [orders, setOrder] = useState([]);
   const { user } = useContext(AuthContext);
   const [clientSecret, setClientSecret] = useState('');
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const stripe = useStripe();
   const axiosSecure = UseAxios();
@@ -23,7 +23,7 @@ const PaymentForm = () => {
   const axiosPublic = UseAxiosPublic();
   useEffect(() => {
     axiosPublic
-      .get(`https://y-gamma-lyart.vercel.app/booking?email=${user?.email}`)
+      .get(`http://localhost:5000/booking?email=${user?.email}`)
       .then(async (res) => {
         if (res.data) {
           setOrder(res.data);
@@ -59,6 +59,8 @@ const PaymentForm = () => {
     if (error) {
       setError(error?.message);
     } else {
+      console.log({ paymentMethod });
+
       setError('');
     }
     //   Payment Confirmation
@@ -73,11 +75,23 @@ const PaymentForm = () => {
           },
         },
       });
-    if (paymentIntent) {
-      console.log({ Payment: 'Success' });
-      navigate('/menu');
-    } else {
-      console.log({ err: confirmError.message });
+    if (confirmError) {
+      console.log({confirmError});      
+    }
+    else {
+      console.log({ paymentIntent });
+      if (paymentIntent.status === "succeeded") {
+      //  Swal.fire({
+      //    position: 'top-end',
+      //    icon: 'success',
+      //    title: 'Your work has been saved',
+      //    showConfirmButton: false,
+      //    timer: 1500,
+      //  });
+        console.log({Message:"Payment Success", TransactionId:paymentIntent.id});
+        
+      }
+      
     }
   };
   return (

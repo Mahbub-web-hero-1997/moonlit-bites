@@ -87,8 +87,21 @@ const PaymentForm = () => {
       //    title: 'Your work has been saved',
       //    showConfirmButton: false,
       //    timer: 1500,
-      //  });
-        console.log({Message:"Payment Success", TransactionId:paymentIntent.id});
+        //  });
+        const paymentDetails = {
+          customer: user?.displayName,
+          email:user?.email,
+          amount: totalPrice,
+          transactionId: paymentIntent.id,
+          paymentMethod: paymentIntent.payment_method_types[0],
+          status: paymentIntent.status,
+        };
+        console.log(paymentDetails);        
+        axiosSecure.post("/payments", paymentDetails )
+          .then(res => {
+          console.log(res.data);          
+        })
+        // console.log({Message:"Payment Success", TransactionId:paymentIntent.id});
         
       }
       

@@ -139,6 +139,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     setLoading,
     menus,
+    setMenus,
     user,
     loading,
     blogs,

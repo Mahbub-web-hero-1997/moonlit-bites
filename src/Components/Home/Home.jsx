@@ -8,7 +8,7 @@ import Story from './Story';
 import Party from './Party';
 import Expert from './Expert';
 import PopularMenus from './PopularMenu/PopularMenus';
-import Footer from '../Shared/Footer';
+
 
 
 

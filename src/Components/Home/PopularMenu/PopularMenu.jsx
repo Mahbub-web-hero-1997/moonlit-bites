@@ -6,7 +6,7 @@ import UseAxios from '../../../CustomHook/UseAxios';
 import UseCart from '../../../CustomHook/UseCart';
 
 const PopularMenu = ({menu}) => {
-    const { name, image, price, recipe,_id } = menu;
+  const { name, image, price, recipe,_id } = menu;
    const { user } = useContext(AuthContext);
    const navigate = useNavigate();
    const location = useLocation();
@@ -20,9 +20,7 @@ const PopularMenu = ({menu}) => {
          name,
          image,
          price,
-         };
-         console.log(first);
-         
+       };
        axiosSecure.post('/cart', cartData).then((res) => {
          console.log(res.data);
          Swal.fire({

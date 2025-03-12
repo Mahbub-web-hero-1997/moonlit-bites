@@ -17,10 +17,10 @@ const Expert = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-1 md:p-8  md:pt-2  ">
         {experts.map((expert) => (
           <div key={expert._id} className=" w-full border-[1px] md:relative">
-            <img src={expert.img} alt="" className=" w-full md:h-1/2" />
+            <img src={expert.img} alt="" className=" w-full " />
             <div
-              className="w-3/4 md:h-32 bg-white rounded-t-md p-3 mx-auto md:absolute 
-                          md:bottom-[30%] left-[13%] border-b-[1px] md:mb-4"
+              className="w-3/4 md:h-32 bg-white rounded-t-md pt-5 mx-auto md:absolute 
+                          md:bottom-[20%] left-[13%] border-b-[1px] "
             >
               <h1 className="text-xl font-semibold text-center text-gray-500">
                 {expert.name}
@@ -29,8 +29,8 @@ const Expert = () => {
                 {expert.designation}
               </p>
             </div>
-            <div className="md:mt-28 p-5">
-              <p className="text-center text-gray-500">{expert.about}</p>
+            <div className="md:mt-20 p-5">
+              <p className="text-center text-gray-500 ">{expert.about}</p>
               <div className="w-full md:w-1/2 flex justify-center items-center gap-4 mx-auto mt-8">
                 <Link to="#">
                   <TiSocialFacebook className="text-2xl text-sky-600" />

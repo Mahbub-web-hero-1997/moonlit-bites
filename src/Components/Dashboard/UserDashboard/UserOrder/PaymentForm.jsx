@@ -1,138 +1,84 @@
+import React, { useContext, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import Swal from 'sweetalert2';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import UseAxios from '../../../../CustomHook/UseAxios';
-
-import { useContext } from 'react';
-import { AuthContext } from '../../../../ContextAPI/AuthProvider';
 import UseAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
-import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../ContextAPI/AuthProvider';
 
-const PaymentForm = () => {
-  const [error, setError] = useState('');
-  const [orders, setOrder] = useState([]);
-  const { user } = useContext(AuthContext);
-  const [clientSecret, setClientSecret] = useState('');
-  const navigate = useNavigate();
-
+const PaymentForm = ({ totalPrice, closeModal, setIsPaid }) => {
   const stripe = useStripe();
-  const axiosSecure = UseAxios();
   const elements = useElements();
   const axiosPublic = UseAxiosPublic();
-  useEffect(() => {
-    axiosPublic
-      .get(`http://localhost:5000/booking?email=${user?.email}`)
-      .then(async (res) => {
-        if (res.data) {
-          setOrder(res.data);
-        }
-      });
-  }, []);
-  const totalPrice = orders.reduce(
-    (total, item) => total + item.orderData.price,
-    0
-  );
-  useEffect(() => {
-    axiosSecure
-      .post(`/create-payment-intent`, { price: totalPrice })
-      .then((res) => {
-        if (res.data.clientSecret) {
-          setClientSecret(res.data.clientSecret);
-        }
-      });
-  }, [axiosSecure, totalPrice]);
-  const handlePayment = async (event) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { user } = useContext(AuthContext);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!stripe || !elements) {
-      return;
-    }
+    setLoading(true);
+    setError(null);
+
+    if (!stripe || !elements) return;
+
     const card = elements.getElement(CardElement);
-    if (!card) {
-      return;
-    }
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card,
-    });
-    if (error) {
-      setError(error?.message);
-    } else {
-      console.log({ paymentMethod });
+    if (!card) return;
 
-      setError('');
-    }
-    //   Payment Confirmation
-
-    const { paymentIntent, error: confirmError } =
-      await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: card,
-          billing_details: {
-            email: user?.email || 'anonymous',
-            name: user?.displayName || 'anonymous',
-          },
-        },
+    try {
+      // ✅ Create Payment Intent
+      const { data } = await axiosPublic.post('/create-payment-intent', {
+        price: totalPrice,
       });
-    if (confirmError) {
-      console.log({confirmError});      
-    }
-    else {
-      console.log({ paymentIntent });
-      if (paymentIntent.status === "succeeded") {
-      //  Swal.fire({
-      //    position: 'top-end',
-      //    icon: 'success',
-      //    title: 'Your work has been saved',
-      //    showConfirmButton: false,
-      //    timer: 1500,
-        //  });
+
+      // ✅ Confirm Payment
+      const { paymentIntent, error } = await stripe.confirmCardPayment(
+        data.clientSecret,
+        {
+          payment_method: {
+            card,
+            billing_details: { name: user?.displayName || 'Customer' },
+          },
+        }
+      );
+
+      if (error) {
+        setError(error.message);
+        console.log(error.message);
+      } else if (paymentIntent.status === 'succeeded') {
+        // ✅ Save payment to database
         const paymentDetails = {
           customer: user?.displayName,
-          email:user?.email,
+          email: user?.email,
           amount: totalPrice,
           transactionId: paymentIntent.id,
           paymentMethod: paymentIntent.payment_method_types[0],
           status: paymentIntent.status,
+          date:new Date(),
+          cartId: cart.map(item=>item._id),
+          menuItemId:cart.map(item=>item.cartId)
         };
-        console.log(paymentDetails);        
-        axiosSecure.post("/payments", paymentDetails )
-          .then(res => {
-          console.log(res.data);          
-        })
-        // console.log({Message:"Payment Success", TransactionId:paymentIntent.id});
-        
+
+        await axiosPublic.post('/payments', { payment:paymentDetails });
+
+        // ✅ Mark as paid & close modal
+        setIsPaid(true);
+        closeModal();
       }
-      
+    } catch (err) {
+      setError('Payment failed. Try again.');
+      console.log(err.message);
     }
+
+    setLoading(false);
   };
+
   return (
-    <form onSubmit={handlePayment}>
-      <CardElement
-        className="border-b-[1px] border-orange-500 outline-none p-3"
-        options={{
-          style: {
-            base: {
-              fontSize: '16px',
-              color: '#424770',
-              '::placeholder': {
-                color: '#aab7c4',
-              },
-            },
-            invalid: {
-              color: '#9e2146',
-            },
-          },
-        }}
-      />
-      <p className="text-red-500">{error}</p>
+    <form onSubmit={handleSubmit}>
+      <CardElement className="border p-3 rounded-md mb-4" />
+      {error && <p className="text-red-500">{error}</p>}
       <button
         type="submit"
-        disabled={!stripe}
-        className=" mt-6 rounded-md  text-center text-white bg-orange-600 font-semibold px-6 py-3 block active:scale-95"
+        disabled={!stripe || loading}
+        className="btn bg-orange-600 text-white w-full mt-4"
       >
-        Pay
+        {loading ? 'Processing...' : 'Pay Now'}
       </button>
     </form>
   );

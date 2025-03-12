@@ -22,19 +22,15 @@ const Dashboard = () => {
   const [isAdmin] = UseAdmin();
   // console.log(isAdmin);
   // const isAdmin = true;
-  const [isShow, setIsShow] = useState(false)
+  const [isShow, setIsShow] = useState(false);
   const handleSidebar = () => {
     if (isShow) {
-    
-     setIsShow(false)
-    }
-    else {
-      setIsShow(true)
+      setIsShow(false);
+    } else {
+      setIsShow(true);
     }
     console.log(isShow);
-    
-  
-}
+  };
   return (
     <>
       <div className="flex w-full relative">
@@ -158,7 +154,7 @@ const Dashboard = () => {
                   }
                   to="/dashboard/userOrder"
                 >
-                  My Order 
+                  My Order
                 </NavLink>
               </li>
               <li className="text-center text-md font-semibold flex items-center gap-2 mt-3 ">

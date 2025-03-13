@@ -4,7 +4,7 @@ import { AuthContext } from '../ContextAPI/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
 const axiosSecure = axios.create({
-  baseURL: 'https://y-gamma-lyart.vercel.app', // Update baseURL as per your environment
+  baseURL: 'http://localhost:5000', 
 });
 
 const UseAxios = () => {

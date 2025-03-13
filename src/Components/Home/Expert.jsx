@@ -7,7 +7,7 @@ import SectionHeading from '../Shared/SectionHeading';
 
 const Expert = () => {
   const [experts, setExperts] = useState([]);
-  const url = 'https://y-gamma-lyart.vercel.app/expert';
+  const url = 'http://localhost:5000/expert';
   useEffect(() => {
     axios(url).then((res) => setExperts(res.data));
   }, []);

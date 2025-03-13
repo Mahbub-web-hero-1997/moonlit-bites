@@ -14,7 +14,7 @@ const UserOrders = () => {
 
   useEffect(() => {
     axiosPublic
-      .get(`https://y-gamma-lyart.vercel.app/booking?email=${user?.email}`)
+      .get(`http://localhost:5000/booking?email=${user?.email}`)
       .then((res) => {
         if (res.data) {
           setOrders(res.data);

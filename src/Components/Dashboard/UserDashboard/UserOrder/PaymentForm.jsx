@@ -22,12 +22,12 @@ const PaymentForm = ({ totalPrice, closeModal, setIsPaid }) => {
     if (!card) return;
 
     try {
-      // ✅ Create Payment Intent
+    
       const { data } = await axiosPublic.post('/create-payment-intent', {
         price: totalPrice,
       });
 
-      // ✅ Confirm Payment
+     
       const { paymentIntent, error } = await stripe.confirmCardPayment(
         data.clientSecret,
         {
@@ -42,7 +42,7 @@ const PaymentForm = ({ totalPrice, closeModal, setIsPaid }) => {
         setError(error.message);
         console.log(error.message);
       } else if (paymentIntent.status === 'succeeded') {
-        // ✅ Save payment to database
+     
         const paymentDetails = {
           customer: user?.displayName,
           email: user?.email,
@@ -57,7 +57,6 @@ const PaymentForm = ({ totalPrice, closeModal, setIsPaid }) => {
 
         await axiosPublic.post('/payments', { payment:paymentDetails });
 
-        // ✅ Mark as paid & close modal
         setIsPaid(true);
         closeModal();
       }

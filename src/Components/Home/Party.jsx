@@ -9,7 +9,7 @@ import SectionHeading from '../Shared/SectionHeading';
 const Party = () => {
   const [parties, setParties] = useState([]);
   useEffect(() => {
-    const url = 'http://localhost:5000/party';
+    const url = 'https://y-gamma-lyart.vercel.app/party';
     axios.get(url).then((res) => setParties(res.data));
   }, []);
 

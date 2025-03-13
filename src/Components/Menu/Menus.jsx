@@ -31,7 +31,7 @@ const Menus = () => {
         heading={'Try our best menu'}
       />
       <Category />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:mb-20 mt-5 ">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:w-[95%] mx-auto md:mb-20 mt-5 ">
         {menus.slice(0, 6).map((menu) => (
           <Menu
             key={menu._id}

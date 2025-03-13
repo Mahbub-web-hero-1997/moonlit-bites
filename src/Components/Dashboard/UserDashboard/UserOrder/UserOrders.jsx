@@ -9,12 +9,12 @@ import PaymentForm from './PaymentForm';
 const UserOrders = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
-  const [isPaid, setIsPaid] = useState(false); // ✅ Track payment status
+  const [isPaid, setIsPaid] = useState(false); 
   const axiosPublic = UseAxiosPublic();
 
   useEffect(() => {
     axiosPublic
-      .get(`http://localhost:5000/booking?email=${user?.email}`)
+      .get(`https://y-gamma-lyart.vercel.app/booking?email=${user?.email}`)
       .then((res) => {
         if (res.data) {
           setOrders(res.data);
@@ -51,7 +51,7 @@ const UserOrders = () => {
               <span className="text-orange-500">${totalPrice}</span>
             </p>
 
-            {/* ✅ Disable button if payment is successful */}
+          
             <button
               className={`btn text-orange-600 ${
                 isPaid ? 'opacity-50 cursor-not-allowed' : ''
@@ -63,7 +63,7 @@ const UserOrders = () => {
             </button>
           </div>
 
-          {/* ✅ Payment Modal */}
+        
           <dialog id="my_modal_3" className="modal">
             <div className="modal-box">
               <p className="text-gray-600 mb-2 font-semibold">Payment Info</p>
@@ -77,7 +77,7 @@ const UserOrders = () => {
                 </button>
               </form>
 
-              {/* ✅ Pass setIsPaid to PaymentForm */}
+            
               <Elements stripe={stripePromise}>
                 <PaymentForm
                   totalPrice={totalPrice}

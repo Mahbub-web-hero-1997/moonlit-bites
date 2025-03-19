@@ -6,7 +6,7 @@ import Blog from './Blog';
 
 const Blogs = () => {
   const { blogs } = useContext(AuthContext)  
-  
+  console.log(blogs);
   return (
     <>
       <Helmet>

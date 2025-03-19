@@ -53,9 +53,10 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    axiosSecurePublic.get('/blogs').then((res) => {
+    axiosSecurePublic.get('/api/v1/blogs/all').then((res) => {
       if (res.data) {
-        setBlogs(res.data);
+        setBlogs(res.data.data);
+        // console.log(res.data.data);
       }
     });
   }, []);

@@ -17,7 +17,7 @@ const Party = () => {
     <>
       <SectionHeading heading={'Party'} subHeading={'Enjoy With Your Family'} />
       <Swiper
-        className="w-full h-auto md:h-[397px] rounded-sm bg-gray-200 my-5 mx-auto "
+        className="w-full h-auto md:h-[497px] rounded-sm bg-gray-200 my-5 mx-auto "
         modules={[Navigation, Pagination, Autoplay]}
         pagination={{ clickable: true }}
         loop={true}

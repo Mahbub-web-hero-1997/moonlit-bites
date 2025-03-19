@@ -60,7 +60,7 @@ const Menu = ({ menu }) => {
       <figure className="relative ">
         <img
           className="w-full h-full rounded-tl-md rounded-tr-md "
-          src={image}
+          src={image[0]}
           alt="image"
         />
       </figure>

@@ -43,8 +43,13 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     axiosSecurePublic
-      .get('http://localhost:5000/menu')
-      .then((res) => setMenus(res.data));
+      .get('http://localhost:5000/api/v1/menus/all')
+     
+      .then((res) => {
+        if (res.data) {
+          setMenus(res.data.data);      
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -83,43 +88,43 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleAllMenus = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
-      setMenus(res.data);
+    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
+      setMenus(res.data.data);
     });
   };
   const handlePopularMenus = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
-      const items = res.data.filter((item) => item.category === 'popular');
+    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
+      const items = res.data.data.filter((item) => item.category === 'popular');
       setMenus(items);
     });
   };
   const handleSaladItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
-      const items = res.data.filter((item) => item.category === 'salad');
+    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
+      const items = res.data.data.filter((item) => item.category === 'salad');
       setMenus(items);
     });
   };
   const handlePizzaItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
-      const items = res.data.filter((item) => item.category === 'pizza');
+    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
+      const items = res.data.data.filter((item) => item.category === 'pizza');
       setMenus(items);
     });
   };
   const handleDessertItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
-      const items = res.data.filter((item) => item.category === 'dessert');
+    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
+      const items = res.data.data.filter((item) => item.category === 'dessert');
       setMenus(items);
     });
   };
   const handleDrinksItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
-      const items = res.data.filter((item) => item.category === 'drinks');
+    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
+      const items = res.data.data.filter((item) => item.category === 'drinks');
       setMenus(items);
     });
   };
   const handleSoupItems = () => {
-    axios.get('http://localhost:5000/menu').then((res) => {
-      const items = res.data.filter((item) => item.category === 'soup');
+    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
+      const items = res.data.data.filter((item) => item.category === 'soup');
       setMenus(items);
     });
   };

@@ -10,15 +10,11 @@ import { Helmet } from 'react-helmet-async';
 
 const Menus = () => {
   const { menus } = useContext(AuthContext);
-  // console.log(menus);
-  const { totalItems } = useLoaderData();
-  const [menuPerPage, setMenuPerPage] = useState(10);
-  const totalPages = Math.ceil(totalItems / menuPerPage);
-  const pages = [...Array(totalPages).keys()];
+
+
   const handleConfirmOrder = (id) => {
     console.log(id);
-    
-  }
+  };
 
   return (
     <>
@@ -31,8 +27,8 @@ const Menus = () => {
         heading={'Try our best menu'}
       />
       <Category />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5  w-full md:w-[95%] mx-auto md:mb-20 mt-5 ">
-        {menus.slice(0, 6).map((menu) => (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5 w-full md:w-[95%] mx-auto md:mb-20 mt-5">
+        {menus.map((menu) => (
           <Menu
             key={menu._id}
             menu={menu}
@@ -40,22 +36,7 @@ const Menus = () => {
           />
         ))}
       </div>
-      <div className="  w-full  md:w-1/2 text-center px-4 border  mx-auto mt-5">
-        <button className="font-semibold text-orange-500 mr-4">Prev</button>
-        {pages.map((page) => (
-          <button
-            key={page._id}
-            className="btn btn-sm md:btn md:bg-orange-500 font-semibold md:text-white "
-          >
-            {page}
-          </button>
-        ))}
-        <button className="font-semibold text-orange-500 ml-4">Next</button>
-        <select name="" id="">
-          <option value="10">10</option>
-          <option value="15">15</option>
-        </select>
-      </div>
+
     </>
   );
 };

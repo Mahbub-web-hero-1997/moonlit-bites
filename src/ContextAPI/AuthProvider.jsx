@@ -47,7 +47,8 @@ const AuthProvider = ({ children }) => {
      
       .then((res) => {
         if (res.data) {
-          setMenus(res.data.data);      
+          setMenus(res.data.data); 
+          // console.log(res.data.data);     
         }
       });
   }, []);
@@ -91,12 +92,14 @@ const AuthProvider = ({ children }) => {
   const handleAllMenus = () => {
     axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
       setMenus(res.data.data);
+      
     });
   };
   const handlePopularMenus = () => {
     axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      const items = res.data.data.filter((item) => item.category === 'popular');
+      const items = res.data.data.filter((item) => item.category === 'popular');  
       setMenus(items);
+      console.log(res.data);
     });
   };
   const handleSaladItems = () => {

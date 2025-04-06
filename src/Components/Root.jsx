@@ -6,7 +6,7 @@ import Footer from './Shared/Footer';
 const Root = () => {
   return (
     <>
-      <div>
+      <div className=''>
         <Header />
         {<Outlet />}
       </div>

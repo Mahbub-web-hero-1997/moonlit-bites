@@ -56,39 +56,46 @@ const Header = () => {
   const menuItem = (
     <>
       <li>
-        <NavLink className="text-black font-semibold" to="/">
+        <NavLink  to="/"
+        className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'}
+        >
           HOME
         </NavLink>
       </li>
       <li>
-        <NavLink className="text-black font-semibold" to="/menu">
+        <NavLink  className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'} to="/menu">
           MENU
         </NavLink>
       </li>
       <li>
-        <NavLink className="text-black font-semibold" to="/blogs">
+        <NavLink  className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'} to="/blogs">
           BLOGS
         </NavLink>
       </li>
       {/* <li><NavLink className="text-black font-semibold" to="/experts">OUR EXPERTS</NavLink></li> */}
       <li>
-        <NavLink className="text-black font-semibold" to="/review">
+        <NavLink
+           className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'}
+          to="/review"
+        >
           REVIEW
         </NavLink>
       </li>
       <li>
-        <NavLink className="text-black font-semibold" to="/about">
+        <NavLink  className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'} to="/about">
           ABOUT
         </NavLink>
       </li>
       <li>
-        <NavLink className="text-black font-semibold" to="/contact">
+        <NavLink
+           className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'}
+          to="/contact"
+        >
           CONTACT
         </NavLink>
       </li>
     </>
     // User Dashboard Menu
-    
   );
   return (
     <>

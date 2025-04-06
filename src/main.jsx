@@ -15,7 +15,7 @@ const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <HelmetProvider>
-      <div className="w-full md:w-[95%] mx-auto ">
+      <div className="w-full md:w-[95%] mx-auto  ">
           <StrictMode>
               <QueryClientProvider client={queryClient}>
                   <AuthProvider>

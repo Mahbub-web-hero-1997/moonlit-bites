@@ -6,6 +6,8 @@ import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import UseAxios from '../../CustomHook/UseAxios';
+import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
+import axios from 'axios';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || '/';
-  const axiosSecure=UseAxios()
+  const axiosPublic = UseAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -22,23 +24,19 @@ const Login = () => {
   } = useForm();
   const onSubmit = (data) => {
     loading;
-    login(data.email, data.password)
-      .then((result) => {
-        const loggedInUser = result.user;
-        const userInfo={name:loggedInUser.displayName, email:loggedInUser.email}
-        console.log(loggedInUser);
-        axiosSecure.post('/user', userInfo).then((res) => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Login Successful',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate(from, { replace: true });
-        });
-        })
-        
+    const userData = {
+      email: data.email,
+      password: data.password,
+    };
+    axios
+      .post('http://localhost:5000/api/v1/user/login', userData, {
+        withCredentials: true,
+      })
+
+      .then((res) => {
+        console.log(res.data);
+      })
+
       .catch((err) => {
         console.error(err.message);
       })

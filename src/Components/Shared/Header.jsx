@@ -55,47 +55,40 @@ const Header = () => {
 // Menu Items
   const menuItem = (
     <>
-      <li>
-        <NavLink  to="/"
-        className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'}
-        >
+      <li >
+        <NavLink className="text-black font-semibold" to="/">
           HOME
         </NavLink>
       </li>
       <li>
-        <NavLink  className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'} to="/menu">
+        <NavLink className="text-black font-semibold" to="/menu">
           MENU
         </NavLink>
       </li>
       <li>
-        <NavLink  className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'} to="/blogs">
+        <NavLink className="text-black font-semibold" to="/blogs">
           BLOGS
         </NavLink>
       </li>
       {/* <li><NavLink className="text-black font-semibold" to="/experts">OUR EXPERTS</NavLink></li> */}
       <li>
-        <NavLink
-           className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'}
-          to="/review"
-        >
+        <NavLink className="text-black font-semibold" to="/review">
           REVIEW
         </NavLink>
       </li>
       <li>
-        <NavLink  className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'} to="/about">
+        <NavLink className="text-black font-semibold" to="/about">
           ABOUT
         </NavLink>
       </li>
       <li>
-        <NavLink
-           className={({ isActive }) =>isActive ? 'text-black bg-gray-100' : 'text-black font-semibold text-gray-300'}
-          to="/contact"
-        >
+        <NavLink className="text-black font-semibold" to="/contact">
           CONTACT
         </NavLink>
       </li>
     </>
     // User Dashboard Menu
+    
   );
   return (
     <>
@@ -211,7 +204,7 @@ const Header = () => {
               </ul>
             </div>
           ) : (
-            <Link to="/login">Login</Link>
+            <Link className='ms-4' to="/login">Login</Link>
           )}
         </div>
       </div>

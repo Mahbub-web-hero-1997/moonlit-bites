@@ -21,37 +21,38 @@ const Register = () => {
   const navigate=useNavigate()
 
   const onSubmit = (data) => {
-    createUser(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+    // createUser(data.email, data.password)
+    //   .then((result) => {
+    //     const user = result.user;
+    //     console.log(user);
         
-        updateUserProfile(data.name, data.photoUrl)
-          .then(()=> {
-            const userInfo = {
-              name: data.name,
-              email: data.email,
-            }
-            axiosPublic.post("/user", userInfo)
-              .then(res => {
-                if (res.data.insertedId) {
-                  Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Account Successfully Created',
-                    showConfirmButton: false,
-                    timer: 1500,
-                  });
-              }
-            })
-            reset()    
+    //     updateUserProfile(data.name, data.photoUrl)
+    //       .then(()=> {
+    //         const userInfo = {
+    //           name: data.name,
+    //           email: data.email,
+    //         }
+    //         axiosPublic.post("/user", userInfo)
+    //           .then(res => {
+    //             if (res.data.insertedId) {
+    //               Swal.fire({
+    //                 position: 'top-end',
+    //                 icon: 'success',
+    //                 title: 'Account Successfully Created',
+    //                 showConfirmButton: false,
+    //                 timer: 1500,
+    //               });
+    //           }
+    //         })
+    //         reset()    
         
-          navigate("/")  
-        })
-      })
-      .catch((err) => {
-        console.error(err.message);
-      });
+    //       navigate("/")  
+    //     })
+    //   })
+    //   .catch((err) => {
+    //     console.error(err.message);
+    //   });
+console.log(data, data.avatar[0]);
   };
 
   return (
@@ -63,18 +64,10 @@ const Register = () => {
         className="flex flex-col gap-4 mt-4"
         action=""
       >
-       
-          <input
-            type="text"
-            {...register('name')}
-            placeholder="Enter Your Name"
-            className="border-b-[1px] border-orange-500 outline-none p-2"
-          />    
-        
         <input
-          type="url"
-          {...register('photoUrl')}
-          placeholder="Enter Your PhotoUrl"
+          type="text"
+          {...register('name')}
+          placeholder="Enter Your Name"
           className="border-b-[1px] border-orange-500 outline-none p-2"
         />
         <input
@@ -105,9 +98,27 @@ const Register = () => {
             onClick={() => setShowPassword(!showPassword)}
             className="absolute top-2 right-0 cursor-pointer "
           >
-            {!showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+            {!showPassword ? (
+              <FaRegEye className="text-orange-500" />
+            ) : (
+              <FaRegEyeSlash className="text-orange-500" />
+            )}
           </span>
         </label>
+
+        <input
+          type="file"
+          {...register('avatar')}
+          placeholder="Enter Your PhotoUrl"
+          // className=""
+          class="border-b-[1px] border-orange-500 outline-none p-2 text-gray-500
+         file:mr-4 file:py-2 file:px-4
+         file:rounded-sm file:border-0
+         file:text-sm file:font-semibold
+         file:bg-orange-500 file:text-white
+         file:cursor-pointer
+         active:file:scale-97"
+        />
         <input
           type="submit"
           value="Register"

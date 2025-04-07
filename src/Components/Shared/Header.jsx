@@ -136,7 +136,7 @@ const Header = () => {
         </div>
         <div className="navbar-end w-1/6 ml-40">
           {
-            !isAdmin?<div className="dropdown dropdown-end">
+            !isAdmin?<div className="dropdown dropdown-end mr-6">
             <div
               tabIndex={0}
               role="button"
@@ -164,9 +164,9 @@ const Header = () => {
             </div>
             <div
               tabIndex={0}
-              className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow"
+              className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow "
             >
-              <div className="card-body">
+              <div className="card-body z-50">
                 <span className="text-lg font-bold">8 Items</span>
                 <span className="text-info">Subtotal: ${totalPrice}</span>
                 <div className="card-actions">

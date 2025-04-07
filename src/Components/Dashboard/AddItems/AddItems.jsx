@@ -50,11 +50,12 @@ const AddItems = () => {
             <option disabled selected>
               Pick your favorite Simpson
             </option>
-            <option>Homer</option>
-            <option>Marge</option>
-            <option>Bart</option>
-            <option>Lisa</option>
-            <option>Maggie</option>
+            <option>Salad</option>
+            <option>Pizza</option>
+            <option>Dessert</option>
+            <option>Popular</option>
+            <option>Drinks</option>
+            <option>Soup</option>
           </select>
         </div>
 

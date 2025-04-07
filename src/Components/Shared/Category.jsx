@@ -13,7 +13,7 @@ const Category = () => {
 
   return (
     <>
-      <div className="grid grid-cols-7 gap-4 md:gap-20 p-4  border-y my-8 sticky top-16 left-12 z-50 bg-base-100 ">
+      <div className="grid grid-cols-7 gap-4 md:gap-20 p-4  border-y my-8 sticky top-16 left-12  bg-base-100 z-10 ">
         <button
           onClick={() => handleAllMenus()}
           className=" flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-sm md:text-xl font-normal md:font-semibold  "

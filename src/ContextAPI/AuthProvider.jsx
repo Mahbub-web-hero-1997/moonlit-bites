@@ -86,18 +86,17 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, {
       displayName: firstName,
       photoURL: url,
-    });
+  });
   };
 
   const handleAllMenus = () => {
     axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      setMenus(res.data.data);
-      
+      setMenus(res.data.data);      
     });
   };
   const handlePopularMenus = () => {
     axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      const items = res.data.data.filter((item) => item.category === 'popular');  
+      const items = res.data.data.filter((item) => item.category === 'Popular');  
       setMenus(items);
       console.log(res.data);
     });

@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log({currentUser});
+      console.log({ currentUser });
       if (currentUser) {
         const userInfo = { email: currentUser.email };
         axiosSecurePublic.post('/jwt', userInfo).then((res) => {
@@ -44,10 +44,10 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     axiosSecurePublic
       .get('http://localhost:5000/api/v1/menus/all')
-     
+
       .then((res) => {
         if (res.data) {
-          setMenus(res.data.data); 
+          setMenus(res.data.data);
           // console.log(res.data.data);     
         }
       });
@@ -86,17 +86,17 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, {
       displayName: firstName,
       photoURL: url,
-  });
+    });
   };
 
   const handleAllMenus = () => {
     axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      setMenus(res.data.data);      
+      setMenus(res.data.data);
     });
   };
   const handlePopularMenus = () => {
     axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      const items = res.data.data.filter((item) => item.category === 'Popular');  
+      const items = res.data.data.filter((item) => item.category === 'Popular');
       setMenus(items);
       console.log(res.data);
     });

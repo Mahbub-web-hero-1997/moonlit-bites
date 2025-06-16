@@ -15,14 +15,14 @@ const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <HelmetProvider>
-      <div className="w-full md:w-[95%] mx-auto  ">
-          <StrictMode>
-              <QueryClientProvider client={queryClient}>
-                  <AuthProvider>
-                        <RouterProvider router={router} />
-                  </AuthProvider>
-              </QueryClientProvider>     
-      </StrictMode>      
-      </div>
+    <div className="w-full md:w-[95%] mx-auto  ">
+      <StrictMode>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </QueryClientProvider>
+      </StrictMode>
+    </div>
   </HelmetProvider>
 );

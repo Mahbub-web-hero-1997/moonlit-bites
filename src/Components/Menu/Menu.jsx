@@ -4,51 +4,62 @@ import { AuthContext } from '../../ContextAPI/AuthProvider';
 import Swal from 'sweetalert2';
 import UseAxios from '../../CustomHook/UseAxios';
 import UseCart from '../../CustomHook/UseCart';
+import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
+import axios from 'axios';
 
 const Menu = ({ menu }) => {
   const { name, image, price, recipe, _id } = menu;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const axiosSecure = UseAxios();
+  // const axiosSecure = UseAxios();
+  // const axiosPublic = UseAxiosPublic();
   const [, refetch] = UseCart();
   const handleAddToCart = () => {
     if (user && user?.email) {
       const cartData = {
-        cartId: _id,
-        email: user.email,
-        name,
-        image,
-        price,
+        productId: _id,
+        quantity: 1,
       };
-      axiosSecure.post('/cart', cartData).then((res) => {
-        console.log(res.data);
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Successfully added',
-          showConfirmButton: false,
-          timer: 1500,
+
+      axios
+        .post('http://localhost:5000/api/v1/cart/addToCart', cartData, { withCredentials: true })
+        .then((res) => {
+          console.log(res.data);
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Successfully added to cart',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
+        })
+        .catch((err) => {
+          console.error('Error adding to cart:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Something went wrong!',
+            text: err?.response?.data?.message || 'Failed to add to cart.',
+          });
         });
-        refetch();
-      });
     } else {
       Swal.fire({
-        title: "You are't logged in.",
-        text: 'Please loge in for add to cart this item',
+        title: "You're not logged in.",
+        text: 'Please log in to add this item to your cart',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'LogeIn',
+        confirmButtonText: 'Login',
       }).then((result) => {
         if (result.isConfirmed) {
-          //  navigate to Login Page
           navigate('/login', { state: { from: location } });
         }
       });
     }
   };
+
   // Handle Checkout Function
 
   const handleBuyNow = (id) => {

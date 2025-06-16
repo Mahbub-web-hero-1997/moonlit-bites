@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Blog = ({blog}) => {
+const Blog = ({ blog }) => {
   const { title, description, images } = blog;
 
   return (

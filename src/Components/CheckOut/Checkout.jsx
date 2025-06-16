@@ -25,7 +25,7 @@ const Checkout = () => {
   const onSubmit = (data, id) => {
     const orderInfo = { data, orderData };
     axiosSecure.post('/booking', orderInfo).then((res) => {
-      if (res.data.insertedId) {     
+      if (res.data.insertedId) {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -35,7 +35,7 @@ const Checkout = () => {
         });
       }
     });
-      reset()
+    reset()
     navigate('/menu');
   };
 

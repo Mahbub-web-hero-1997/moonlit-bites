@@ -2,17 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import video from '../../assets/banner/bg_video_3.mp4';
 import shape from '../../assets/banner/shape.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {
-  A11y,
-  Autoplay, 
-} from 'swiper/modules';
+import { A11y, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 
 const Banner = () => {
   const { menus } = useContext(AuthContext);
- 
+
   return (
     <div className="  relative w-[100%] mx-auto h-[calc(100vh-24px)] overflow-hidden px-5 mb-5">
       <video
@@ -37,7 +34,10 @@ const Banner = () => {
           speed={1000}
         >
           {menus.slice(0, 6).map((menu) => (
-            <SwiperSlide key={menu._id} className="md:ml-2 transition-all duration-300">
+            <SwiperSlide
+              key={menu._id}
+              className="md:ml-2 transition-all duration-300"
+            >
               <h1 className="text-2xl md:text-6xl font-semibold">
                 {menu.name}
               </h1>

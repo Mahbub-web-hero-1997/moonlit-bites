@@ -9,9 +9,6 @@ import Party from './Party';
 import Expert from './Expert';
 import PopularMenus from './PopularMenu/PopularMenus';
 
-
-
-
 const Home = () => {
   return (
     <>
@@ -19,17 +16,16 @@ const Home = () => {
         <title>moonlit || home</title>
       </Helmet>
       <div className="w-full mx-auto md:px-1 ">
-        {/* <Banner /> */}
+        <Banner />
         <SectionHeading
           subHeading={'---From 9:00am to 9:00pm---'}
           heading={'Try our popular menu'}
         />
-       {/* <PopularMenus/>
+        {/* <PopularMenus/>
         <Story />
         <Party />
         <Expert />        */}
       </div>
-      
     </>
   );
 };

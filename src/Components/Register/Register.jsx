@@ -63,20 +63,22 @@ const Register = () => {
         className="flex flex-col gap-4 mt-4"
         action=""
       >
-       
-          <input
-            type="text"
-            {...register('name')}
-            placeholder="Enter Your Name"
-            className="border-b-[1px] border-orange-500 outline-none p-2"
-          />    
-        
         <input
-          type="url"
-          {...register('photoUrl')}
-          placeholder="Enter Your PhotoUrl"
+          type="text"
+          {...register('name')}
+          placeholder="Enter Your Name"
           className="border-b-[1px] border-orange-500 outline-none p-2"
         />
+
+        <input
+          type="file"
+          {...register('photoUrl')}
+          className="w-full p-1 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 border-b-[1px] border-orange-500
+             file:rounded-full file:border-0 file:text-sm file:font-semibold
+             file:bg-orange-500 file:text-white hover:file:bg-orange-600
+             transition duration-300 ease-in-out"
+        />
+
         <input
           type="email"
           {...register('email')}

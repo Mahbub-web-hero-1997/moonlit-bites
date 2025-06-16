@@ -4,7 +4,7 @@ import { AuthContext } from '../ContextAPI/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000', 
+  baseURL: 'https://daily-lens-server.vercel.app/',
 });
 
 const UseAxios = () => {

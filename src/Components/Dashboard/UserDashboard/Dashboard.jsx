@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import {
   FaBars,
@@ -13,15 +13,15 @@ import {
 } from 'react-icons/fa';
 import { IoIosStar } from 'react-icons/io';
 import { FcHome } from 'react-icons/fc';
-import { MdCancel } from 'react-icons/md';
+import { MdCancel, MdLogout } from 'react-icons/md';
 import { ImSpoonKnife } from 'react-icons/im';
 import { TbBrandBooking } from 'react-icons/tb';
 import UseAdmin from '../../../CustomHook/UseAdmin';
+import { AuthContext } from '../../../ContextAPI/AuthProvider';
 
 const Dashboard = () => {
   const [isAdmin] = UseAdmin();
-  // console.log(isAdmin);
-  // const isAdmin = true;
+  const { handleSignOut } = useContext(AuthContext);
   const [isShow, setIsShow] = useState(false);
   const handleSidebar = () => {
     if (isShow) {
@@ -45,9 +45,8 @@ const Dashboard = () => {
           )}
         </button>
         <div
-          className={`w-[90%] md:w-56 h-screen bg-orange-500 px-4 fixed top-0 left-0 z-20  ${
-            isShow ? `hidden ease-in-out	` : 'block ease-in-out	'
-          }`}
+          className={`w-[90%] md:w-56 h-screen bg-orange-500 px-4 fixed top-0 left-0 z-20  ${isShow ? `hidden ease-in-out	` : 'block ease-in-out	'
+            }`}
         >
           {isAdmin ? (
             <ul className="mt-3 text-white uppercase">
@@ -210,6 +209,10 @@ const Dashboard = () => {
             <li className="text-center text-sm md:text-md font-semibold flex items-center gap-2 mt-3 ">
               <FaBlog />
               <NavLink to="/menu">Blog</NavLink>
+            </li>
+            <li className="text-center text-sm md:text-md font-semibold flex items-center gap-2 mt-3 ">
+              <MdLogout />
+              <NavLink onClick={handleSignOut} to="/menu">Logout</NavLink>
             </li>
           </ul>
         </div>

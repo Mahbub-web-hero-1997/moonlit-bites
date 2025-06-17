@@ -1,39 +1,17 @@
 import { Link, NavLink } from 'react-router-dom';
 import './Header.module.css';
-import AuthProvider, { AuthContext } from '../../ContextAPI/AuthProvider';
+import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useContext } from 'react';
 import UseCart from '../../CustomHook/UseCart';
 import UseAdmin from '../../CustomHook/UseAdmin';
-import Swal from 'sweetalert2';
 
 const Header = () => {
-  const { user, logOut } = useContext(AuthContext); 
-  const [isAdmin]=UseAdmin()
-  
+  const { user, handleSignOut, menus } = useContext(AuthContext);
+  const [isAdmin] = UseAdmin()
   const [cart] = UseCart()
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-  
-  
-  const handleSignOut = () => {
-    logOut()
-      .then((result) => {      
-        localStorage.removeItem('access-token');
-                Swal.fire({
-                     position: 'top-end',
-                     icon: 'success',
-                     title: 'You Successfully SignOut.',
-                     showConfirmButton: false,
-                     timer: 1500,
-                   });
-        // console.log('user Successfully signout', result);
-       
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
+
   // User Dashboard Menu
-  
   const userDashboardMenu = (
     <>
       <li>
@@ -45,14 +23,14 @@ const Header = () => {
         <NavLink
           onClick={handleSignOut}
           className="text-black font-semibold"
-          to="/dashboard"
+          to="/"
         >
           LogOut
         </NavLink>
       </li>
     </>
   );
-// Menu Items
+  // Menu Items
   const menuItem = (
     <>
       <li >
@@ -88,7 +66,7 @@ const Header = () => {
       </li>
     </>
     // User Dashboard Menu
-    
+
   );
   return (
     <>
@@ -136,50 +114,50 @@ const Header = () => {
         </div>
         <div className="navbar-end w-1/6 ml-40">
           {
-            !isAdmin?<div className="dropdown dropdown-end mr-6">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle "
-            >
-              <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
-                <span className="badge badge-sm bg-red-500 text-white font-bold indicator-item">
-                  {cart.length}
-                </span>
-              </div>
-            </div>
-            <div
-              tabIndex={0}
-              className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow "
-            >
-              <div className="card-body z-50">
-                <span className="text-lg font-bold">8 Items</span>
-                <span className="text-info">Subtotal: ${totalPrice}</span>
-                <div className="card-actions">
-                  <NavLink
-                    className="btn btn-primary btn-block"
-                    to="/dashboard/cart"
+            !isAdmin ? <div className="dropdown dropdown-end mr-6">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle "
+              >
+                <div className="indicator">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    View cart
-                  </NavLink>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span className="badge badge-sm bg-red-500 text-white font-bold indicator-item">
+                    {cart.length}
+                  </span>
                 </div>
               </div>
-            </div>
-          </div>:''
+              <div
+                tabIndex={0}
+                className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow "
+              >
+                <div className="card-body z-50">
+                  <span className="text-lg font-bold">8 Items</span>
+                  <span className="text-info">Subtotal: ${totalPrice}</span>
+                  <div className="card-actions">
+                    <NavLink
+                      className="btn btn-primary btn-block"
+                      to="/dashboard/cart"
+                    >
+                      View cart
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            </div> : ''
           }
           {user ? (
             <div className="dropdown dropdown-end">

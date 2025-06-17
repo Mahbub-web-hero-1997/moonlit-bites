@@ -1,160 +1,105 @@
-import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
-import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
-  updateProfile,
-} from 'firebase/auth';
-import auth from '../firebase.config';
 import UseAxiosPublic from '../CustomHook/UseAxiosPublic';
+import Swal from 'sweetalert2';
+
 
 export const AuthContext = createContext();
-const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [menus, setMenus] = useState([]);
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const axiosSecurePublic = UseAxiosPublic();
-  // console.log(user);
+  const axiosPublic = UseAxiosPublic();
 
-  useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log({ currentUser });
-      if (currentUser) {
-        const userInfo = { email: currentUser.email };
-        axiosSecurePublic.post('/jwt', userInfo).then((res) => {
-          localStorage.setItem('access-token', res.data.token);
-          // console.log(res.data.token);
-        });
-      }
+  //  Check user authentication
+  const checkAuth = async () => {
+    try {
+      const res = await axiosPublic.get("/user/me");
+      setUser(res.data?.data || null);
+    } catch (err) {
+      setUser(null);
+    } finally {
       setLoading(false);
-    });
-    return () => {
-      return unSubscribe();
-    };
-  }, []);
+    }
+  };
 
   useEffect(() => {
-    axiosSecurePublic
-      .get('http://localhost:5000/api/v1/menus/all')
+    checkAuth();
+  }, [user]);
 
-      .then((res) => {
-        if (res.data) {
-          setMenus(res.data.data);
-          // console.log(res.data.data);     
-        }
-      });
-  }, []);
+  const handleSignOut = () => {
+    axiosPublic.post('/user/logout').then((res) => {
+      if (res) {
+        setUser(null);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Logout Successful',
+          showConfirmButton: false,
+          timer: 1500,
+        });
 
-  useEffect(() => {
-    axiosSecurePublic.get('/api/v1/blogs/all').then((res) => {
-      if (res.data) {
-        setBlogs(res.data.data);
-        // console.log(res.data.data);
       }
+    }
+    ).catch((error) => {
+      console.error('Logout failed:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong during logout!',
+      });
+    });
+  };
+  //  Fetch all menus
+  useEffect(() => {
+    axiosPublic.get('/menus/all').then((res) => {
+      if (res.data?.data) setMenus(res.data.data);
     });
   }, []);
 
-  const createUser = (email, password) => {
-    loading;
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
+  //  Fetch all blogs
+  useEffect(() => {
+    axiosPublic.get('/blogs/all').then((res) => {
+      if (res.data?.data) setBlogs(res.data.data);
+    });
+  }, []);
 
-  const login = (email, password) => {
-    loading;
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-
-  const googleLogin = () => {
-    loading;
-    return signInWithPopup(auth, provider);
-  };
-
-  const logOut = () => {
-    loading;
-    return signOut(auth);
-  };
-
-  const updateUserProfile = (firstName, url) => {
-    return updateProfile(auth.currentUser, {
-      displayName: firstName,
-      photoURL: url,
-    });
-  };
-
-  const handleAllMenus = () => {
-    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      setMenus(res.data.data);
-    });
-  };
-  const handlePopularMenus = () => {
-    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      const items = res.data.data.filter((item) => item.category === 'Popular');
-      setMenus(items);
-      console.log(res.data);
-    });
-  };
-  const handleSaladItems = () => {
-    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      const items = res.data.data.filter((item) => item.category === 'salad');
-      setMenus(items);
-    });
-  };
-  const handlePizzaItems = () => {
-    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      const items = res.data.data.filter((item) => item.category === 'pizza');
-      setMenus(items);
-    });
-  };
-  const handleDessertItems = () => {
-    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      const items = res.data.data.filter((item) => item.category === 'dessert');
-      setMenus(items);
-    });
-  };
-  const handleDrinksItems = () => {
-    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      const items = res.data.data.filter((item) => item.category === 'drinks');
-      setMenus(items);
-    });
-  };
-  const handleSoupItems = () => {
-    axios.get('http://localhost:5000/api/v1/menus/all').then((res) => {
-      const items = res.data.data.filter((item) => item.category === 'soup');
-      setMenus(items);
-    });
+  //  Filtered menus by category
+  const fetchAndFilterMenus = async (category = null) => {
+    const res = await axiosPublic.get('/menus/all');
+    if (res.data?.data) {
+      setMenus(
+        category
+          ? res.data.data.filter((item) => item.category === category)
+          : res.data.data
+      );
+    }
   };
 
   const AuthInfo = {
-    handlePopularMenus,
-    handleAllMenus,
-    handleSaladItems,
-    handlePizzaItems,
-    handleDessertItems,
-    handleDrinksItems,
-    handleSoupItems,
-    createUser,
-    login,
-    googleLogin,
-    logOut,
-    updateUserProfile,
+    user,
+    loading,
+    setUser,
     setLoading,
     menus,
     setMenus,
-    user,
-    loading,
     blogs,
+    handleSignOut,
+    handleAllMenus: () => fetchAndFilterMenus(),
+    handlePopularMenus: () => fetchAndFilterMenus('Popular'),
+    handleSaladItems: () => fetchAndFilterMenus('salad'),
+    handlePizzaItems: () => fetchAndFilterMenus('pizza'),
+    handleDessertItems: () => fetchAndFilterMenus('dessert'),
+    handleDrinksItems: () => fetchAndFilterMenus('drinks'),
+    handleSoupItems: () => fetchAndFilterMenus('soup'),
   };
 
   return (
-    <AuthContext.Provider value={AuthInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={AuthInfo}>
+      {children}
+    </AuthContext.Provider>
   );
 };
+
 export default AuthProvider;

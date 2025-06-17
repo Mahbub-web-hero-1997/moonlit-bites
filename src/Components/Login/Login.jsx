@@ -6,46 +6,58 @@ import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import UseAxios from '../../CustomHook/UseAxios';
+import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
+import axios from 'axios';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, setLoading, loading } = useContext(AuthContext);
+  const { setUser, setLoading, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || '/';
-  const axiosSecure=UseAxios()
+  const axiosSecure = UseAxios()
+  const axiosPublic = UseAxiosPublic();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    loading;
-    login(data.email, data.password)
-      .then((result) => {
-        const loggedInUser = result.user;
-        const userInfo={name:loggedInUser.displayName, email:loggedInUser.email}
-        console.log(loggedInUser);
-        axiosSecure.post('/user', userInfo).then((res) => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Login Successful',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate(from, { replace: true });
-        });
+  { loading && <p className="text-center text-orange-500">Logging in...</p> }
+
+  const onSubmit = async (data) => {
+    try {
+      const userInfo = {
+        email: data.email,
+        password: data.password,
+      };
+      axiosPublic.post("/user/login", userInfo)
+        .then((res) => {
+          if (res.data?.data?.user) {
+            setUser(res.data.data.user);
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Login Successful',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate(from, { replace: true });
+          } else {
+            Swal.fire('Login Failed', res.data?.message || 'Try again', 'error');
+          }
         })
-        
-      .catch((err) => {
-        console.error(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+        .catch((err) => {
+          Swal.fire('Login Failed', err.response?.data?.message || 'Try again', 'error');
+        });
+
+    } catch (err) {
+      Swal.fire('Login Failed', err.response?.data?.message || 'Try again', 'error');
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <>
       <div className="w-full h-screen md:h-[350px] md:w-1/4 mx-auto p-4 mt-16 shadow-lg ">

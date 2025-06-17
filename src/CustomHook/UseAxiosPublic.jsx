@@ -1,13 +1,11 @@
 import axios from 'axios';
-import React from 'react';
 
 const axiosSecurePublic = axios.create({
   baseURL: 'http://localhost:5000/api/v1',
+  withCredentials: true,
 });
-const UseAxiosPublic = () => {
-  return axiosSecurePublic;
-};
 
-export default UseAxiosPublic;
+// ✅ This is just a normal utility function, not a React hook
+const useAxiosPublic = () => axiosSecurePublic;
 
-
+export default useAxiosPublic;

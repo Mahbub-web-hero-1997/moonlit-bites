@@ -1,50 +1,50 @@
 import React from 'react';
-import UseAxios from '../../../CustomHook/UseAxios';
 import { useQuery } from '@tanstack/react-query';
 import { MdDeleteForever } from 'react-icons/md';
 import { HiMiniPencilSquare } from 'react-icons/hi2';
 import Swal from 'sweetalert2';
-import Category from '../../Shared/Category';
+// import Category from '../../Shared/Category';
 import { Link } from 'react-router-dom';
+import useAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
 
 const GetItems = () => {
-  const axiosSecure = UseAxios();
+  const axiosPublic = useAxiosPublic()
   const { data: allItems = [], refetch } = useQuery({
     queryKey: 'items',
     queryFn: async () => {
-      const res = await axiosSecure.get('/menu');
+      const res = await axiosPublic.get('/menu');
       return res.data;
     },
   });
 
   const handleDeleteItem = (id) => {
-     Swal.fire({
-       title: 'Are you sure?',
-       text: "You won't be able to revert this!",
-       icon: 'warning',
-       showCancelButton: true,
-       confirmButtonColor: '#3085d6',
-       cancelButtonColor: '#d33',
-       confirmButtonText: 'Yes, delete it!',
-     }).then((result) => {
-       if (result.isConfirmed) {
-         axiosSecure.delete(`/menu/${id}`).then((res) => {
-           refetch()
-           if (res.data.modifiedCount > 0) {
-             Swal.fire({
-               title: 'Deleted!',
-               text: 'Your file has been deleted.',
-               icon: 'success',
-             });
-           }
-         });
-       }
-     });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/menu/${id}`).then((res) => {
+          refetch()
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your file has been deleted.',
+              icon: 'success',
+            });
+          }
+        });
+      }
+    });
   };
 
   return (
     <div className=" w-full mx-auto bg-white p-5">
-      {/* <Category/> */}
+      <Category />
       <div className="flex justify-between items-center p-3 bg-[#614500] text-white">
         <p className="text-xl text-center">
           Total Users:{' '}

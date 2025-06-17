@@ -5,10 +5,10 @@ import Swal from 'sweetalert2';
 import UseAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
 
 const AddBlogs = () => {
-    const axiosPublic=UseAxiosPublic()
-    const blog = [
-     
-    ];
+  const axiosPublic = UseAxiosPublic()
+  const blog = [
+
+  ];
   const {
     register,
     handleSubmit,
@@ -17,9 +17,9 @@ const AddBlogs = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-      axiosPublic.post('/blogs').then((res) => {
-        console.log(res.data);
-      });
+    axiosPublic.post('/blogs').then((res) => {
+      console.log(res.data);
+    });
   };
 
   return (

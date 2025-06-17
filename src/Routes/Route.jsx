@@ -11,20 +11,25 @@ import Login from '../Components/Login/Login';
 import Register from '../Components/Register/Register';
 import PrivateRoute from './PrivateRoute';
 import Cart from '../Components/Dashboard/UserDashboard/Cart';
-import UserHome from '../Components/Dashboard/UserDashboard/UserHome';
+
 // import Order from '../Components/Dashboard/UserDashboard/UserOrder/UserOrders';
 // import UserOrder from '../Components/Dashboard/UserDashboard/UserOrder/UserOrders';
+
+
+import AllUsers from '../Components/Dashboard/AdminDashboard/AllUsers/AllUsers';
+import AddItems from '../Components/Dashboard/AdminDashboard/AddItems/AddItems';
+import GetItems from '../Components/Dashboard/AdminDashboard/GetAllItems/GetItems';
+import AllOrders from '../Components/Dashboard/AdminDashboard/AllOrders/AllOrders';
+import ManageItems from '../Components/Dashboard/AdminDashboard/ManageItems/ManageItems';
+import AdminRoute from './AdminRoute';
+import Dashboard from '../Components/Dashboard/Dashboard';
+import Checkout from '../Components/CheckOut/Checkout';
+import UserHome from '../Components/Dashboard/UserDashboard/UserHome';
 import UserPayment from '../Components/Dashboard/UserDashboard/UserPayment';
 import UserReview from '../Components/Dashboard/UserDashboard/UserReview';
-import Dashboard from '../Components/Dashboard/UserDashboard/Dashboard';
-import AllUsers from '../Components/Dashboard/AllUsers/AllUsers';
-import AdminRoute from './AdminRoute';
-import AddItems from '../Components/Dashboard/AddItems/AddItems';
-import GetItems from '../Components/Dashboard/GetAllItems/GetItems';
-import ManageItems from '../Components/Dashboard/ManageItems/ManageItems';
-import UserBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
-import Checkout from '../Components/CheckOut/Checkout';
-import AllOrders from '../Components/Dashboard/AllOrders/AllOrders';
+import AddBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
+
+
 
 export const router = createBrowserRouter([
   {
@@ -152,7 +157,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'blogs',
-        element: <UserBlogs />,
+        element: <AddBlogs />,
       },
     ],
   },

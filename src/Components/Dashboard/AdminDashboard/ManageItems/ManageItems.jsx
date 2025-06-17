@@ -40,7 +40,7 @@ const ManageItem = () => {
         <div className="flex w-full gap-2">
           <input
             type="number"
-            value={ item.price}
+            value={item.price}
             {...register('price')}
             required
             placeholder="Price"

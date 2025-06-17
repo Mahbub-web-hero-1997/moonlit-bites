@@ -16,13 +16,13 @@ import { FcHome } from 'react-icons/fc';
 import { MdCancel, MdLogout } from 'react-icons/md';
 import { ImSpoonKnife } from 'react-icons/im';
 import { TbBrandBooking } from 'react-icons/tb';
-import UseAdmin from '../../../CustomHook/UseAdmin';
-import { AuthContext } from '../../../ContextAPI/AuthProvider';
+import { AuthContext } from '../../ContextAPI/AuthProvider';
+
 
 const Dashboard = () => {
-  const [isAdmin] = UseAdmin();
-  const { handleSignOut } = useContext(AuthContext);
+  const { handleSignOut, user } = useContext(AuthContext);
   const [isShow, setIsShow] = useState(false);
+  const isAdmin = user.role === 'admin';
   const handleSidebar = () => {
     if (isShow) {
       setIsShow(false);

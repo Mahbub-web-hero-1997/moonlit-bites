@@ -3,11 +3,11 @@ import './Header.module.css';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useContext } from 'react';
 import UseCart from '../../CustomHook/UseCart';
-import UseAdmin from '../../CustomHook/UseAdmin';
+
 
 const Header = () => {
   const { user, handleSignOut, menus } = useContext(AuthContext);
-  const [isAdmin] = UseAdmin()
+  const isAdmin = user?.role === 'admin';
   const [cart] = UseCart()
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 

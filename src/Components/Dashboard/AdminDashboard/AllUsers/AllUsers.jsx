@@ -1,22 +1,23 @@
 import React, { useContext } from 'react';
-import UseAxios from '../../../CustomHook/UseAxios';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaUsers } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import { AuthContext } from '../../../ContextAPI/AuthProvider';
+
+import useAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
+import { AuthContext } from '../../../../ContextAPI/AuthProvider';
 
 
 const AllUsers = () => {
-  const {user}=useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   // Load All user Using Tanstack Query
-  const axiosSecure = UseAxios();  
+  const axiosPublic = useAxiosPublic();
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
-    enabled:!!user.email&&!!localStorage.getItem("access-token"),
+    enabled: !!user.email && !!localStorage.getItem("access-token"),
     queryFn: async () => {
-      const res = await axiosSecure.get('/user');
+      const res = await axiosPublic.get('/user');
 
       return res.data;
     },
@@ -50,7 +51,7 @@ const AllUsers = () => {
   const handleMakeAdmin = (id) => {
     axiosSecure.patch(`/user/admin/${id}`).then((res) => {
       refetch();
-    //   console.log(res.data);
+      //   console.log(res.data);
       if (res.data.modifiedCount > 0) {
         Swal.fire({
           position: 'top-end',

@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState([]);
   const axiosPublic = UseAxiosPublic();
 
   //  Check user authentication
@@ -27,6 +28,20 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkAuth();
   }, [user]);
+  const getCartItems = async () => {
+    try {
+      const res = await axiosPublic.get("/cart/getItem");
+      setCart(res.data?.data || null);
+    } catch (err) {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getCartItems();
+  }, [cart]);
 
   const handleSignOut = () => {
     axiosPublic.post('/user/logout').then((res) => {

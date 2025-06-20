@@ -9,6 +9,7 @@ const Header = () => {
   const { user, handleSignOut, menus } = useContext(AuthContext);
   const isAdmin = user?.role === 'admin';
   const [cart] = UseCart()
+  // console.log(cart);
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
   // User Dashboard Menu

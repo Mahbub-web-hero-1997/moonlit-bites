@@ -1,17 +1,22 @@
 import React from 'react';
+import { FaRegNewspaper } from 'react-icons/fa';
+import { MdOutlineImage } from 'react-icons/md';
 
 const Blog = ({ blog }) => {
-  const { title, description, images } = blog;
+  const { title, content, images } = blog;
 
   return (
-    <div className="w-full md:w-2/3  mx-auto ">
-      <div className="relative ">
-        <img className="w-full md:h-[400px]  " src={images[0]} alt="" />
-        <div className="bg-black w-full md:h-[400px] absolute top-0 left-0 inset-0 opacity-30 hover:hidden"></div>
+    <div className="w-full md:w-2/3 mx-auto bg-white shadow-md rounded-xl overflow-hidden mb-10 border border-orange-100">
+      <div className="relative group">
+        <img className="w-full md:h-[400px] transition-transform duration-300 group-hover:scale-105" src={images[0]} alt="Blog Cover" />
+
       </div>
-      <div className="mt-6 mb-16 ">
-        <h1 className='text-xl md:text-2xl font-semibold md:font-bold my-4'>{title}</h1>
-        <p>{description}</p>
+
+      <div className="p-6">
+        <h1 className="text-2xl font-bold text-orange-600 flex items-center gap-2">
+          <FaRegNewspaper /> {title}
+        </h1>
+        <p className="text-gray-700 mt-4 leading-relaxed">{content}</p>
       </div>
     </div>
   );

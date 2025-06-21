@@ -15,7 +15,7 @@ const UseCart = () => {
             return res.data?.data || {};
         },
     });
-    
+
 
     return [cartData.items || [], refetch];
 };

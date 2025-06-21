@@ -1,10 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-import { Link, replace, useLocation, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 import Swal from 'sweetalert2';
-import UseAxios from '../../CustomHook/UseAxios';
 import UseCart from '../../CustomHook/UseCart';
-import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
 import axios from 'axios';
 
 const Menu = ({ menu }) => {
@@ -12,9 +10,8 @@ const Menu = ({ menu }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  // const axiosSecure = UseAxios();
-  // const axiosPublic = UseAxiosPublic();
   const [, refetch] = UseCart();
+
   const handleAddToCart = () => {
     if (user && user?.email) {
       const cartData = {
@@ -23,9 +20,10 @@ const Menu = ({ menu }) => {
       };
 
       axios
-        .post('http://localhost:5000/api/v1/cart/addToCart', cartData, { withCredentials: true })
+        .post('http://localhost:5000/api/v1/cart/addToCart', cartData, {
+          withCredentials: true,
+        })
         .then((res) => {
-          console.log(res.data);
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -36,10 +34,9 @@ const Menu = ({ menu }) => {
           refetch();
         })
         .catch((err) => {
-          console.error('Error adding to cart:', err);
           Swal.fire({
             icon: 'error',
-            title: 'Something went wrong!',
+            title: 'Oops!',
             text: err?.response?.data?.message || 'Failed to add to cart.',
           });
         });
@@ -60,40 +57,43 @@ const Menu = ({ menu }) => {
     }
   };
 
-  // Handle Checkout Function
-
   const handleBuyNow = (id) => {
-    // console.log(id);
+    // Placeholder for buy now action
   };
 
   return (
-    <div className="card bg-base-100 w-full h-[500px] rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-none  shadow-xl mx-auto  ">
-      <figure className="relative ">
+    <div className="card bg-white w-full max-w-sm rounded-tl-md rounded-tr-md shadow-xl mx-auto hover:shadow-orange-100 transition-shadow duration-500 cursor-pointer">
+      <figure className="relative overflow-hidden rounded-tl-md rounded-tr-md">
         <img
-          className="w-full h-[200px] rounded-tl-md rounded-tr-md "
+          className="w-full h-[200px] object-cover transform hover:scale-105 transition-transform duration-500"
           src={image}
-          alt="image"
+          alt={name}
         />
+        {/* <div className="absolute inset- bg-black bg-opacity-90 hover:bg-opacity-30 transition-opacity duration-500 rounded-tl-md rounded-tr-md"></div> */}
+        <span className="absolute top-3 right-3 bg-gradient-to-tr from-orange-500 to-yellow-400 text-white font-extrabold text-lg px-5 py-2 rounded-full shadow-lg drop-shadow-lg">
+          ${price}
+        </span>
       </figure>
-      <div className="absolute w-full h-[200px] md:h-[200px] bg-black hover:opacity-36 transition-all duration-300 opacity-60 top-0 left-0 rounded-tl-md rounded-tr-md mb-1"></div>
-      <h4 className=" absolute right-3 top-3 text-md text-white text-center font-bold  bg-orange-500 w-[80px] h-[50px] rounded-full p-3">
-        ${price}
-      </h4>
-      <div className=" card-body w-[95%] mx-auto ">
-        <h2 className="card-title">{name}</h2>
-        <p>{recipe.slice(0, 200)}</p>
-        <div className="card-actions justify-between ">
-          <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold ">
-            <Link onClick={handleAddToCart} className="">
-              Add to cart
-            </Link>
-          </div>
 
-          <div className="badge hover:bg-orange-500 hover:text-white badge-outline border-orange-500 p-5 text-orange-500 font-semibold hov">
-            <Link to={`/checkout/${_id}`} onClick={() => handleBuyNow(_id)}>
-              Buy Now
-            </Link>
-          </div>
+      <div className="card-body p-6">
+        <h2 className="card-title text-xl font-extrabold mb-2">{name}</h2>
+        <p className="text-gray-700 leading-relaxed mb-6">
+          {recipe.length > 200 ? recipe.slice(0, 200) + '...' : recipe}
+        </p>
+        <div className="card-actions justify-between">
+          <button
+            onClick={handleAddToCart}
+            className="inline-block bg-transparent border-2 border-orange-500 text-orange-500 font-semibold rounded-lg px-6 py-2 hover:bg-orange-500 hover:text-white transition-colors duration-300 shadow-md hover:shadow-orange-400"
+          >
+            Add to Cart
+          </button>
+          <Link
+            to={`/checkout/${_id}`}
+            onClick={() => handleBuyNow(_id)}
+            className="inline-block bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold rounded-lg px-6 py-2 shadow-lg hover:brightness-110 transition-all duration-300"
+          >
+            Buy Now
+          </Link>
         </div>
       </div>
     </div>

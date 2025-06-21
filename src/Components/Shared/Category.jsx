@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
+
 const Category = () => {
   const {
     handlePopularMenus,
@@ -11,87 +12,107 @@ const Category = () => {
     handleSoupItems,
   } = useContext(AuthContext);
 
+  const categories = [
+    { name: 'All', onClick: handleAllMenus, img: 'https://i.ibb.co/k9RHBXB/salad-bg.jpg' },
+    { name: 'Salad', onClick: handleSaladItems, img: 'https://i.ibb.co/k9RHBXB/salad-bg.jpg' },
+    { name: 'Pizza', onClick: handlePizzaItems, img: 'https://i.ibb.co/f9mTDGf/slide2.jpg' },
+    { name: 'Dessert', onClick: handleDessertItems, img: 'https://i.ibb.co/VgF9TFd/slide4.jpg' },
+    { name: 'Popular', onClick: handlePopularMenus, img: 'https://i.ibb.co/8Y6vBWR/slide1.jpg' },
+    { name: 'Drinks', onClick: handleDrinksItems, img: 'https://i.ibb.co/KsMZps5/slide3.jpg' },
+    { name: 'Soup', onClick: handleSoupItems, img: 'https://i.ibb.co/7ntTWNp/soup-bg.jpg' },
+  ];
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('Select Category');
+  const dropdownRef = useRef(null);
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleSelectCategory = (category) => {
+    category.onClick(); // Call the filter handler
+    setSelectedCategory(category.name); // Update selected text
+    setDropdownOpen(false); // Close dropdown
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll top smoothly
+  };
+
   return (
     <>
-      <div className="grid grid-cols-7 gap-4 md:gap-20 p-4  border-y my-8 sticky top-16 left-12  bg-base-100 z-10 ">
+      {/* Desktop / Tablet Categories */}
+      <div className="sticky top-16 bg-white z-10 border-y border-gray-200 shadow-md py-4 px-2 md:px-10 hidden md:block">
+        <div className="max-w-7xl mx-auto grid grid-cols-7 gap-10 justify-items-center">
+          {categories.map(({ name, onClick, img }) => (
+            <button
+              key={name}
+              onClick={() => handleSelectCategory({ name, onClick })}
+              className={`flex flex-col items-center gap-2 text-gray-700 hover:text-orange-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg p-2 ${selectedCategory === name ? 'text-orange-600 font-semibold' : ''
+                }`}
+            >
+              <img
+                src={img}
+                alt={name}
+                className="w-14 h-14 rounded-full object-cover border-2 border-transparent hover:border-orange-500 transition-all duration-300 shadow-md hover:shadow-lg"
+                loading="lazy"
+              />
+              <span className="text-lg font-medium select-none">{name}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile Dropdown */}
+      <div className="md:hidden relative" ref={dropdownRef}>
         <button
-          onClick={() => handleAllMenus()}
-          className=" flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-sm md:text-xl font-normal md:font-semibold  "
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          className="w-full flex items-center justify-between px-4 py-3 bg-orange-100 rounded-md font-semibold text-orange-600 hover:bg-orange-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          aria-haspopup="listbox"
+          aria-expanded={dropdownOpen}
         >
-          <img
-            className=" w-8 h-8 md:w-10 md:h-10 rounded-full hover:scale-105 "
-            src="https://i.ibb.co.com/k9RHBXB/salad-bg.jpg"
-            alt=""
-          />
-          <h1 className="">All</h1>
+          {selectedCategory}
+          <svg
+            className={`w-5 h-5 ml-2 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : 'rotate-0'
+              }`}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         </button>
-        <button
-          onClick={() => handleSaladItems()}
-          className=" flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-sm md:text-xl font-normal md:font-semibold"
-        >
-          <img
-            className=" w-8 h-8 md:w-10 md:h-10 rounded-full hover:scale-105 "
-            src="https://i.ibb.co.com/k9RHBXB/salad-bg.jpg"
-            alt=""
-          />
-          <h1 className="">Salad</h1>
-        </button>
-        <button
-          onClick={() => handlePizzaItems()}
-          to="#"
-          className=" flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-sm md:text-xl font-normal md:font-semibold"
-        >
-          <img
-            className=" w-8 h-8 md:w-10 md:h-10 rounded-full hover:scale-105 "
-            src="https://i.ibb.co.com/f9mTDGf/slide2.jpg"
-            alt=""
-          />
-          <h1 className="">Pizza</h1>
-        </button>
-        <button
-          onClick={() => handleDessertItems()}
-          className=" flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-sm md:text-xl font-normal md:font-semibold"
-        >
-          <img
-            className=" w-8 h-8 md:w-10 md:h-10 rounded-full hover:scale-105 "
-            src="https://i.ibb.co.com/VgF9TFd/slide4.jpg"
-            alt=""
-          />
-          <h1 className="">Dessert</h1>
-        </button>
-        <button
-          onClick={() => handlePopularMenus()}
-          className=" flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-sm md:text-xl font-normal md:font-semibold"
-        >
-          <img
-            className=" w-8 h-8 md:w-10 md:h-10 rounded-full hover:scale-105 "
-            src="https://i.ibb.co.com/8Y6vBWR/slide1.jpg"
-            alt=""
-          />
-          <h1 className="">Popular</h1>
-        </button>
-        <button
-          onClick={() => handleDrinksItems()}
-          className=" flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-sm md:text-xl font-normal md:font-semibold"
-        >
-          <img
-            className=" w-8 h-8 md:w-10 md:h-10 rounded-full hover:scale-105 "
-            src="https://i.ibb.co.com/KsMZps5/slide3.jpg"
-            alt=""
-          />
-          <h1 className="">Drinks</h1>
-        </button>
-        <button
-          onClick={() => handleSoupItems()}
-          className=" flex flex-col justify-center items-center gap-x-10  hover:text-orange-500 text-sm md:text-xl font-normal md:font-semibold"
-        >
-          <img
-            className=" w-8 h-8 md:w-10 md:h-10 rounded-full hover:scale-105 "
-            src="https://i.ibb.co.com/7ntTWNp/soup-bg.jpg"
-            alt=""
-          />
-          <h1 className="">Soup</h1>
-        </button>
+
+        {dropdownOpen && (
+          <ul
+            className="absolute z-50 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none"
+            role="listbox"
+            tabIndex={-1}
+          >
+            {categories.map(({ name, onClick, img }) => (
+              <li key={name} className="cursor-pointer hover:bg-orange-100" role="option" tabIndex={0}>
+                <button
+                  onClick={() => handleSelectCategory({ name, onClick })}
+                  className="w-full flex items-center gap-3 p-3 text-gray-700 hover:text-orange-600 transition-colors duration-300 focus:outline-none"
+                >
+                  <img
+                    src={img}
+                    alt={name}
+                    className="w-8 h-8 rounded-full object-cover border-2 border-transparent hover:border-orange-500 transition-all duration-300 shadow"
+                    loading="lazy"
+                  />
+                  <span className="font-medium">{name}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );

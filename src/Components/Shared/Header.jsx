@@ -10,7 +10,10 @@ const Header = () => {
   const isAdmin = user?.role === 'admin';
   const [cart] = UseCart()
   // console.log(cart);
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+  const totalPrice = cart.reduce((total, item) => {
+    const price = item.productId?.price || 0
+    return total + price * item.quantity;
+  }, 0);
 
   // User Dashboard Menu
   const userDashboardMenu = (

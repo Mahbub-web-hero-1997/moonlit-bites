@@ -28,20 +28,20 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkAuth();
   }, [user]);
-  const getCartItems = async () => {
-    try {
-      const res = await axiosPublic.get("/cart/getItem");
-      setCart(res.data?.data || null);
-    } catch (err) {
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const getCartItems = async () => {
+  //   try {
+  //     const res = await axiosPublic.get("/cart/getItem");
+  //     setCart(res.data?.data || null);
+  //   } catch (err) {
+  //     setUser(null);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    getCartItems();
-  }, [cart]);
+  // useEffect(() => {
+  //   getCartItems();
+  // }, [cart]);
 
   const handleSignOut = () => {
     axiosPublic.post('/user/logout').then((res) => {
@@ -100,6 +100,7 @@ const AuthProvider = ({ children }) => {
     menus,
     setMenus,
     blogs,
+    setBlogs,
     handleSignOut,
     handleAllMenus: () => fetchAndFilterMenus(),
     handlePopularMenus: () => fetchAndFilterMenus('Popular'),

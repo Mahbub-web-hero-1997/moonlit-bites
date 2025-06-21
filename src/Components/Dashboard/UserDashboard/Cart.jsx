@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import UseCart from '../../../CustomHook/UseCart';
 import SectionHeading from '../../Shared/SectionHeading';
 import { Link } from 'react-router-dom';
 import { MdDeleteForever } from 'react-icons/md';
 import Swal from 'sweetalert2';
-import UseAxios from '../../../CustomHook/UseAxios';
 import { FaCartArrowDown } from 'react-icons/fa6';
+import useAxiosPublic from '../../../CustomHook/UseAxiosPublic';
 
 const Cart = () => {
   const [cart, refetch] = UseCart();
 
   // console.log(cart);
-  const axiosSecure = UseAxios();
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-  const handleDelete = (id) => {
+  const axiosPublic = useAxiosPublic();
+  const totalPrice = cart.reduce((total, item) => {
+    const price = item.productId?.price || 0
+    return total + price * item.quantity;
+  }, 0);
+  const handleDelete = (productId) => {
+
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -24,7 +28,8 @@ const Cart = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/cart/${id}`).then((res) => {
+        axiosPublic.delete(`/cart/remove/${productId}`).then((res) => {
+          console.log(res.data);
           refetch();
           if (res.data.deletedCount > 0) {
             Swal.fire({
@@ -38,7 +43,7 @@ const Cart = () => {
     });
   };
   const handleBuyNow = (id) => {
-  
+
   };
   return (
     <>
@@ -78,19 +83,19 @@ const Cart = () => {
             <tbody>
               {/* row 1 */}
               {cart.map((item, index) => (
-                <tr key={item._id} className="shadow-md">
+                <tr key={item.productId?._id} className="shadow-md">
                   <th>{index + 1}</th>
                   <td>
                     <img
                       className="w-[40px] h-[45px] rounded-full"
-                      src={item.image}
+                      src={item.productId?.image}
                       alt=""
                     />
                   </td>
-                  <td>{item.name}</td>
-                  <td>{item.price}</td>
+                  <td>{item.productId?.name}</td>
+                  <td>{item.productId?.price}</td>
                   <td className="text-center">
-                    <button onClick={() => handleDelete(item._id)}>
+                    <button onClick={() => handleDelete(item.productId._id)}>
                       <MdDeleteForever className="text-3xl text-orange-500" />
                     </button>
                   </td>

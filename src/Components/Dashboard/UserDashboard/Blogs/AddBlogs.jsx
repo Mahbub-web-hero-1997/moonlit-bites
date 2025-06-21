@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import UseAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
+import useAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
+import { AuthContext } from '../../../../ContextAPI/AuthProvider';
+
 
 const AddBlogs = () => {
-  const axiosPublic = UseAxiosPublic()
-  const blog = [
-
-  ];
+  const axiosPublic = useAxiosPublic()
   const {
     register,
     handleSubmit,
@@ -17,9 +16,24 @@ const AddBlogs = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    axiosPublic.post('/blogs').then((res) => {
-      console.log(res.data);
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('content', data.recipe);
+    formData.append('images', data.images[0]);
+    axiosPublic.post('/blogs/create', formData).then((res) => {
+      if (res.data) {
+        console.log(res.data?.data);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Blog Added Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        reset();       
+      }
     });
+
   };
 
   return (
@@ -35,21 +49,21 @@ const AddBlogs = () => {
       >
         <input
           type="text"
-          {...register('name')}
+          {...register('title')}
           required
           placeholder="Title"
           className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
         />
         <textarea
           type="text"
-          {...register('recipe')}
+          {...register('content')}
           required
           placeholder="Blog Description"
           className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
         />
         <input
           type="file"
-          {...register('image')}
+          {...register('images')}
           required
           className=" outline-none border-b-[1px] border-orange-500 px-2 py-4 bg-white text-gray-500"
         />

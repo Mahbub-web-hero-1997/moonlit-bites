@@ -71,7 +71,7 @@ const Menu = ({ menu }) => {
       <figure className="relative ">
         <img
           className="w-full h-[200px] rounded-tl-md rounded-tr-md "
-          src={image[0]}
+          src={image}
           alt="image"
         />
       </figure>

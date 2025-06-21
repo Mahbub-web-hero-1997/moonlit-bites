@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 const Checkout = () => {
   const { user } = useContext(AuthContext);
   const item = useLoaderData();
+
   const { image, name, recipe, price, _id } = item;
   const axiosSecure = UseAxios();
   const navigate = useNavigate();

@@ -13,18 +13,46 @@ const Category = () => {
   } = useContext(AuthContext);
 
   const categories = [
-    { name: 'All', onClick: handleAllMenus, img: 'https://i.ibb.co/k9RHBXB/salad-bg.jpg' },
-    { name: 'Salad', onClick: handleSaladItems, img: 'https://i.ibb.co/k9RHBXB/salad-bg.jpg' },
-    { name: 'Pizza', onClick: handlePizzaItems, img: 'https://i.ibb.co/f9mTDGf/slide2.jpg' },
-    { name: 'Dessert', onClick: handleDessertItems, img: 'https://i.ibb.co/VgF9TFd/slide4.jpg' },
-    { name: 'Popular', onClick: handlePopularMenus, img: 'https://i.ibb.co/8Y6vBWR/slide1.jpg' },
-    { name: 'Drinks', onClick: handleDrinksItems, img: 'https://i.ibb.co/KsMZps5/slide3.jpg' },
-    { name: 'Soup', onClick: handleSoupItems, img: 'https://i.ibb.co/7ntTWNp/soup-bg.jpg' },
+    {
+      name: 'All',
+      onClick: handleAllMenus,
+      img: 'https://i.ibb.co/k9RHBXB/salad-bg.jpg',
+    },
+    {
+      name: 'Salad',
+      onClick: handleSaladItems,
+      img: 'https://i.ibb.co/k9RHBXB/salad-bg.jpg',
+    },
+    {
+      name: 'Pizza',
+      onClick: handlePizzaItems,
+      img: 'https://i.ibb.co/f9mTDGf/slide2.jpg',
+    },
+    {
+      name: 'Dessert',
+      onClick: handleDessertItems,
+      img: 'https://i.ibb.co/VgF9TFd/slide4.jpg',
+    },
+    {
+      name: 'Popular',
+      onClick: handlePopularMenus,
+      img: 'https://i.ibb.co/8Y6vBWR/slide1.jpg',
+    },
+    {
+      name: 'Drinks',
+      onClick: handleDrinksItems,
+      img: 'https://i.ibb.co/KsMZps5/slide3.jpg',
+    },
+    {
+      name: 'Soup',
+      onClick: handleSoupItems,
+      img: 'https://i.ibb.co/7ntTWNp/soup-bg.jpg',
+    },
   ];
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('Select Category');
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef();
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -37,38 +65,35 @@ const Category = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSelectCategory = (category) => {
-    category.onClick(); // Call the filter handler
-    setSelectedCategory(category.name); // Update selected text
-    setDropdownOpen(false); // Close dropdown
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll top smoothly
+  const handleSelect = (name, onClick) => {
+    setSelectedCategory(name);
+    onClick();
+    setDropdownOpen(false);
   };
 
   return (
-    <>
-      {/* Desktop / Tablet Categories */}
-      <div className="sticky top-16 bg-white z-10 border-y border-gray-200 shadow-md py-4 px-2 md:px-10 hidden md:block">
-        <div className="max-w-7xl mx-auto grid grid-cols-7 gap-10 justify-items-center">
-          {categories.map(({ name, onClick, img }) => (
-            <button
-              key={name}
-              onClick={() => handleSelectCategory({ name, onClick })}
-              className={`flex flex-col items-center gap-2 text-gray-700 hover:text-orange-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg p-2 ${selectedCategory === name ? 'text-orange-600 font-semibold' : ''
-                }`}
-            >
-              <img
-                src={img}
-                alt={name}
-                className="w-14 h-14 rounded-full object-cover border-2 border-transparent hover:border-orange-500 transition-all duration-300 shadow-md hover:shadow-lg"
-                loading="lazy"
-              />
-              <span className="text-lg font-medium select-none">{name}</span>
-            </button>
-          ))}
-        </div>
+    <div className="sticky top-16 bg-white z-10 border-y border-gray-200 shadow-md py-4 px-2 md:px-10 max-w-7xl mx-auto">
+
+      {/* Desktop / Tablet: grid menu */}
+      <div className="hidden md:grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4 md:gap-10 justify-items-center">
+        {categories.map(({ name, onClick, img }) => (
+          <button
+            key={name}
+            onClick={() => handleSelect(name, onClick)}
+            className="flex flex-col items-center gap-2 text-gray-700 hover:text-orange-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg p-2"
+          >
+            <img
+              src={img}
+              alt={name}
+              className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-transparent hover:border-orange-500 transition-all duration-300 shadow-md hover:shadow-lg"
+              loading="lazy"
+            />
+            <span className="text-sm md:text-lg font-medium select-none">{name}</span>
+          </button>
+        ))}
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile: dropdown menu */}
       <div className="md:hidden relative" ref={dropdownRef}>
         <button
           onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -78,8 +103,7 @@ const Category = () => {
         >
           {selectedCategory}
           <svg
-            className={`w-5 h-5 ml-2 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : 'rotate-0'
-              }`}
+            className={`w-5 h-5 ml-2 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : 'rotate-0'}`}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -98,7 +122,7 @@ const Category = () => {
             {categories.map(({ name, onClick, img }) => (
               <li key={name} className="cursor-pointer hover:bg-orange-100" role="option" tabIndex={0}>
                 <button
-                  onClick={() => handleSelectCategory({ name, onClick })}
+                  onClick={() => handleSelect(name, onClick)}
                   className="w-full flex items-center gap-3 p-3 text-gray-700 hover:text-orange-600 transition-colors duration-300 focus:outline-none"
                 >
                   <img
@@ -114,7 +138,7 @@ const Category = () => {
           </ul>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

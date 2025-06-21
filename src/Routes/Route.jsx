@@ -28,6 +28,7 @@ import UserHome from '../Components/Dashboard/UserDashboard/UserHome';
 import UserPayment from '../Components/Dashboard/UserDashboard/UserPayment';
 import UserReview from '../Components/Dashboard/UserDashboard/UserReview';
 import AddBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
+import NotFound from '../Components/NotFound';
 
 
 
@@ -80,10 +81,22 @@ export const router = createBrowserRouter([
             <Checkout />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/menus/single/${params.id}`),
-      },
+        loader: async ({ params }) => {
+          const res = await fetch(`http://localhost:5000/api/v1/menus/single/${params.id}`);
+          if (!res.ok) {
+            throw new Response('Not Found', { status: 404 });
+          }
+          const data = await res.json();
+          return data;
+        },
+      }
+
     ],
+
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
   {
     path: '/dashboard',

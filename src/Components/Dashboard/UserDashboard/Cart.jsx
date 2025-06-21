@@ -74,6 +74,7 @@ const Cart = () => {
               <th className="px-6 py-3 text-left">Item Image</th>
               <th className="px-6 py-3 text-left">Item Name</th>
               <th className="px-6 py-3 text-left">Price</th>
+              <th className="px-6 py-3 text-left">Quantity</th>
               <th className="px-6 py-3 text-center">Delete</th>
               <th className="px-6 py-3 text-center">Buy</th>
             </tr>
@@ -108,6 +109,9 @@ const Cart = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-yellow-600 font-semibold">
                     ${item.productId?.price.toFixed(2)}
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-yellow-600 font-semibold">
+                    {item?.quantity || 1}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
                     <button
                       onClick={() => handleDelete(item.productId._id)}
@@ -119,7 +123,7 @@ const Cart = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
                     <Link
-                      to={`/checkout/${item.cartId}`}
+                      to={`/checkout/${item.productId._id}`}
                       onClick={() => handleBuyNow(item)}
                       className="text-yellow-600 hover:text-yellow-800 transition text-2xl"
                       aria-label="Buy Now"

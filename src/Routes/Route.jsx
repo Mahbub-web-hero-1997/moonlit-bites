@@ -81,16 +81,9 @@ export const router = createBrowserRouter([
             <Checkout />
           </PrivateRoute>
         ),
-        loader: async ({ params }) => {
-          const res = await fetch(`http://localhost:5000/api/v1/menus/single/${params.id}`);
-          if (!res.ok) {
-            throw new Response('Not Found', { status: 404 });
-          }
-          const data = await res.json();
-          return data;
-        },
-      }
-
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/v1/menus/single/${params.id}`),
+      },
     ],
 
   },

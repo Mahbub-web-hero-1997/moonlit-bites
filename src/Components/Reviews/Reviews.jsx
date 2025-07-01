@@ -2,13 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import SectionHeading from '../Shared/SectionHeading';
 import Review from './Review';
+import { useContext } from 'react';
+import { AuthContext } from '../../ContextAPI/AuthProvider';
 
 const Reviews = () => {
-  const [reviews, setReviews] = useState([]);
-  useEffect(() => {
-    const url = 'http://localhost:5000/review';
-    axios(url).then((res) => setReviews(res.data));
-  }, []);
+  const { reviews } = useContext(AuthContext)
 
   return (
     <>

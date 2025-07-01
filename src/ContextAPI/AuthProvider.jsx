@@ -8,9 +8,10 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [menus, setMenus] = useState([]);
   const [blogs, setBlogs] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const [cart, setCart] = useState([]);
+
   const axiosPublic = UseAxiosPublic();
 
   //  Check user authentication
@@ -24,25 +25,9 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     checkAuth();
-  }, [user]);
-  // const getCartItems = async () => {
-  //   try {
-  //     const res = await axiosPublic.get("/cart/getItem");
-  //     setCart(res.data?.data || null);
-  //   } catch (err) {
-  //     setUser(null);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getCartItems();
-  // }, [cart]);
-
+  }, []);
   const handleSignOut = () => {
     axiosPublic.post('/user/logout').then((res) => {
       if (res) {
@@ -72,14 +57,6 @@ const AuthProvider = ({ children }) => {
       if (res.data?.data) setMenus(res.data.data);
     });
   }, []);
-
-  //  Fetch all blogs
-  useEffect(() => {
-    axiosPublic.get('/blogs/all').then((res) => {
-      if (res.data?.data) setBlogs(res.data.data);
-    });
-  }, []);
-
   //  Filtered menus by category
   const fetchAndFilterMenus = async (category = null) => {
     const res = await axiosPublic.get('/menus/all');
@@ -92,6 +69,18 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  //  Fetch all blogs
+  useEffect(() => {
+    axiosPublic.get('/blogs/all').then((res) => {
+      if (res.data?.data) setBlogs(res.data.data);
+    });
+  }, []);
+  useEffect(() => {
+    axiosPublic.get('/reviews/all').then((res) => {
+      if (res.data?.data) setReviews(res.data.data);
+    });
+  }, [])
+
   const AuthInfo = {
     user,
     loading,
@@ -100,6 +89,7 @@ const AuthProvider = ({ children }) => {
     menus,
     setMenus,
     blogs,
+    reviews,
     setBlogs,
     handleSignOut,
     handleAllMenus: () => fetchAndFilterMenus(),

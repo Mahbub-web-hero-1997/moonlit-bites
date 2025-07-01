@@ -2,15 +2,16 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
-import UseAxios from '../../CustomHook/UseAxios';
+import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
 import Swal from 'sweetalert2';
 
 const Checkout = () => {
   const { user } = useContext(AuthContext);
   const item = useLoaderData();
 
-  const { image, name, recipe, price, _id } = item;
-  const axiosSecure = UseAxios();
+  const { image, name, recipe, price, _id } = item.data;
+  console.log(image, name, recipe, price, _id);
+  const axiosPublic = UseAxiosPublic
   const navigate = useNavigate();
   const orderData = {
     image,

@@ -21,18 +21,23 @@ const Menus = () => {
       <Helmet>
         <title>moonlit || menu</title>
       </Helmet>
-      <MenuBanner />
+      {/* <MenuBanner /> */}
       <SectionHeading
         subHeading={'---From 9:00am to 9:00pm---'}
         heading={'Try our best menu'}
       />
       <Category />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5 w-full md:w-[95%] mx-auto md:mb-20 mt-5">
-        {menus.map((menu) => (
+      <div
+        className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5 w-full md:w-[95%] mx-auto md:mb-20 mt-5"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        {menus.map((menu, idx) => (
           <Menu
             key={menu._id}
             menu={menu}
             handleConfirmOrder={handleConfirmOrder}
+            aosDelay={idx * 100} // pass delay per item
           />
         ))}
       </div>

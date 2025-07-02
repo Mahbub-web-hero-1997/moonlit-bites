@@ -62,7 +62,7 @@ const Menu = ({ menu }) => {
   };
 
   return (
-    <div className="card bg-white w-full max-w-sm rounded-tl-md rounded-tr-md shadow-xl mx-auto hover:shadow-orange-100 transition-shadow duration-500 cursor-pointer">
+    <div className="card bg-white w-full max-w-sm rounded-tl-md rounded-tr-md shadow-xl mx-auto hover:shadow-orange-100 transition-shadow duration-500 cursor-pointer ">
       <figure className="relative overflow-hidden rounded-tl-md rounded-tr-md">
         <img
           className="w-full h-[200px] object-cover transform hover:scale-105 transition-transform duration-500"

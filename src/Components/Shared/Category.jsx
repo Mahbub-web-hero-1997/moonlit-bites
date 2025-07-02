@@ -54,7 +54,6 @@ const Category = () => {
   const [selectedCategory, setSelectedCategory] = useState('Select Category');
   const dropdownRef = useRef();
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -73,27 +72,30 @@ const Category = () => {
 
   return (
     <div className="sticky top-16 bg-white z-10 border-y border-gray-200 shadow-md py-4 px-2 md:px-10 max-w-7xl mx-auto">
-
-      {/* Desktop / Tablet: grid menu */}
-      <div className="hidden md:grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4 md:gap-10 justify-items-center">
+      {/* Desktop / Tablet View */}
+      <div className="hidden md:grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-6 md:gap-10 justify-items-center">
         {categories.map(({ name, onClick, img }) => (
           <button
             key={name}
             onClick={() => handleSelect(name, onClick)}
-            className="flex flex-col items-center gap-2 text-gray-700 hover:text-orange-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg p-2"
+            className="group flex flex-col items-center gap-3 transition-all duration-300 transform hover:scale-105 focus:outline-none"
           >
-            <img
-              src={img}
-              alt={name}
-              className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-transparent hover:border-orange-500 transition-all duration-300 shadow-md hover:shadow-lg"
-              loading="lazy"
-            />
-            <span className="text-sm md:text-lg font-medium select-none">{name}</span>
+            <div className="relative p-[3px] rounded-full bg-gradient-to-tr from-orange-400 to-yellow-300 shadow-lg group-hover:shadow-2xl transition-shadow duration-300">
+              <img
+                src={img}
+                alt={name}
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-4 border-white group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <span className="text-sm md:text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-400">
+              {name}
+            </span>
           </button>
         ))}
       </div>
 
-      {/* Mobile: dropdown menu */}
+      {/* Mobile View */}
       <div className="md:hidden relative" ref={dropdownRef}>
         <button
           onClick={() => setDropdownOpen(!dropdownOpen)}

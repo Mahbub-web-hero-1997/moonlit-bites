@@ -88,7 +88,7 @@ const PopularMenu = ({ menu }) => {
         <div className="flex justify-between mt-6 gap-4">
           <button
             onClick={handleAddToCart}
-            className="flex-1 bg-orange-500 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 focus:outline-none transition duration-300"
+            className="flex-1 bg-orange-500 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 focus:outline-none transition duration-300 cursor-pointer"
             aria-label={`Add ${name} to cart`}
           >
             Add to Cart

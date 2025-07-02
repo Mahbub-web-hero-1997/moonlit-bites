@@ -13,6 +13,7 @@ import MyReviews from './Reviews/MyReviews';
 
 const UserHome = () => {
     const { user } = useContext(AuthContext);
+    const isAdmin = user.role === 'admin'
     const [activeSection, setActiveSection] = useState('orders');
 
     const sections = [

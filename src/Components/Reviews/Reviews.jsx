@@ -4,13 +4,19 @@ import SectionHeading from '../Shared/SectionHeading';
 import Review from './Review';
 import { useContext } from 'react';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const Reviews = () => {
+
   const { reviews } = useContext(AuthContext)
   console.log(reviews);
 
   return (
+
     <>
+      <Helmet>
+        <title>moonlit || review</title>
+      </Helmet>
       <SectionHeading heading={'Testimonials'} subHeading={'Reviews'} />
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-0">
         {reviews.map((review) => (

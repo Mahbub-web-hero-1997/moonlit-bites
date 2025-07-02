@@ -208,11 +208,11 @@ const Dashboard = () => {
             </li>
             <li className="text-center text-sm md:text-md font-semibold flex items-center gap-2 mt-3 ">
               <FaBlog />
-              <NavLink to="/menu">Blog</NavLink>
+              <NavLink to="/blogs">Blog</NavLink>
             </li>
             <li className="text-center text-sm md:text-md font-semibold flex items-center gap-2 mt-3 ">
               <MdLogout />
-              <NavLink onClick={handleSignOut} to="/menu">Logout</NavLink>
+              <NavLink onClick={handleSignOut} to="/login">Logout</NavLink>
             </li>
           </ul>
         </div>

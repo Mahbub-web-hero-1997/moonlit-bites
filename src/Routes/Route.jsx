@@ -23,10 +23,11 @@ import Dashboard from '../Components/Dashboard/Dashboard';
 import Checkout from '../Components/CheckOut/Checkout';
 import UserHome from '../Components/Dashboard/UserDashboard/UserHome';
 import UserPayment from '../Components/Dashboard/UserDashboard/UserPayment';
-import UserReview from '../Components/Dashboard/UserDashboard/UserReview';
+import UserReview from '../Components/Dashboard/UserDashboard/Reviews/UserReview';
 import AddBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
 import NotFound from '../Components/NotFound';
 import PaymentForm from '../Components/Dashboard/UserDashboard/UserOrder/PaymentForm';
+import MyReviews from '../Components/Dashboard/UserDashboard/Reviews/MyReviews';
 
 
 
@@ -165,6 +166,10 @@ export const router = createBrowserRouter([
       {
         path: 'userReview',
         element: <UserReview />,
+      },
+      {
+        path: "myReviews",
+        element: <MyReviews />
       },
       {
         path: 'blogs',

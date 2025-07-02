@@ -1,12 +1,14 @@
-import React from 'react';
-import UseAxiosPublic from '../../../CustomHook/UseAxiosPublic';
+import React, { useState } from 'react';
+import UseAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import { FaUserAlt, FaCommentDots, FaImage, FaPaperPlane } from 'react-icons/fa';
+import { FaUserAlt, FaCommentDots, FaPaperPlane, FaStar, FaRegStar } from 'react-icons/fa';
 import { HiOutlineSpeakerphone } from 'react-icons/hi';
+import Rating from 'react-rating';
 
 const UserReview = () => {
   const axiosSecurePublic = UseAxiosPublic();
+  const [rating, setRating] = useState(0);
 
   const {
     register,
@@ -16,13 +18,14 @@ const UserReview = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append('title', data.name);
-    formData.append('content', data.recipe);
-    formData.append('image', data.image[0]);
+    const reviewData = {
+      title: data.name,
+      details: data.recipe,
+      rating,
+    };
 
-    axiosSecurePublic.post('/blogs', formData).then((res) => {
-      if (res.data) {
+    axiosSecurePublic.post('/reviews/create', reviewData).then((res) => {
+      if (res.data?.statusCode === 201) {
         Swal.fire({
           icon: 'success',
           title: 'Review Submitted!',
@@ -30,6 +33,7 @@ const UserReview = () => {
           timer: 1500,
         });
         reset();
+        setRating(0);
       }
     });
   };
@@ -55,6 +59,7 @@ const UserReview = () => {
               placeholder="John Doe"
               className="w-full mt-1 px-4 py-3 border border-orange-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
+            {errors.name && <p className="text-red-500 text-sm mt-1">Name is required</p>}
           </div>
 
           <div>
@@ -67,16 +72,18 @@ const UserReview = () => {
               rows={5}
               className="w-full mt-1 px-4 py-3 border border-orange-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
+            {errors.recipe && <p className="text-red-500 text-sm mt-1">Review is required</p>}
           </div>
 
           <div>
-            <label className="text-sm text-gray-600 flex items-center gap-2">
-              <FaImage /> Upload an Image
+            <label className="text-sm text-gray-600 flex items-center gap-2 mb-2">
+              <FaStar className="text-yellow-400" /> Your Rating
             </label>
-            <input
-              type="file"
-              {...register('image', { required: true })}
-              className="w-full mt-1 px-3 py-2 border border-orange-300 rounded-lg bg-white text-gray-700 cursor-pointer"
+            <Rating
+              initialRating={rating}
+              emptySymbol={<FaRegStar className="text-2xl text-gray-300" />}
+              fullSymbol={<FaStar className="text-2xl text-yellow-500" />}
+              onChange={(value) => setRating(value)}
             />
           </div>
 

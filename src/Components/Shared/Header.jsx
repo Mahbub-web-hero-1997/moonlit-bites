@@ -24,7 +24,7 @@ const Header = () => {
               ? 'text-orange-600 font-bold'
               : 'text-black font-semibold hover:text-orange-500 transition-colors duration-300'
           }
-          to="/dashboard"
+          to="/dashboard/userHome"
         >
           Dashboard
         </NavLink>

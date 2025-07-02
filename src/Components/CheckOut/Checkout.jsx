@@ -24,13 +24,10 @@ const Checkout = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data, id) => {
-    console.log("Data", data);
-    console.log("Order Data", orderData);
+  const onSubmit = (data) => {
     const orderInfo = { data, orderData };
     axiosPublic.post('/order/create', orderInfo).then((res) => {
-      console.log(res.data);
-      if (res.data?.insertedId) {
+      if (res.data?.data?._id || res.data?.insertedId) {
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -39,16 +36,33 @@ const Checkout = () => {
           timer: 2000,
         });
 
+        axiosPublic.delete(`/cart/remove/${_id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            console.log("Item removed from cart");
+          } else {
+            console.warn("Failed to remove item from cart");
+          }
+        });
+
+        reset();
+        navigate('/menu');
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to place order',
+          text: 'Please try again.',
+        });
       }
+    }).catch(err => {
+      console.error("Order failed:", err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Server Error',
+        text: 'Something went wrong. Please try again later.',
+      });
     });
-    axiosPublic.delete(`/cart/remove/${_id}`).then((res) => {
-      if (res.data.deletedCount > 0) {
-        console.log("Item removed from cart");
-      }
-    });
-    reset()
-    navigate('/menu');
   };
+
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 justify-center w-full md:w-[95%] mx-auto px-4 py-3 mt-4 shadow-lg">

@@ -9,7 +9,7 @@ import useAxiosPublic from '../../../CustomHook/UseAxiosPublic';
 const Cart = () => {
   const [cart, refetch] = UseCart();
   const axiosPublic = useAxiosPublic();
-
+  console.log(cart);
   const totalPrice = cart.reduce((total, item) => {
     const price = item.productId?.price || 0;
     return total + price * item.quantity;
@@ -124,6 +124,7 @@ const Cart = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-center">
                     <Link
                       to={`/checkout/${item.productId._id}`}
+                      state={{ quantity: item.quantity }}
                       onClick={() => handleBuyNow(item)}
                       className="text-yellow-600 hover:text-yellow-800 transition text-2xl"
                       aria-label="Buy Now"

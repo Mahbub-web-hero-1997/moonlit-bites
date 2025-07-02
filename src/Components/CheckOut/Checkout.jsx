@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
 import Swal from 'sweetalert2';
@@ -8,15 +8,15 @@ import Swal from 'sweetalert2';
 const Checkout = () => {
   const { user } = useContext(AuthContext);
   const item = useLoaderData();
-
   const { image, name, recipe, price, _id } = item.data;
-  console.log(image, name, recipe, price, _id);
-  const axiosPublic = UseAxiosPublic
+  const location = useLocation();
+  const axiosPublic = UseAxiosPublic()
   const navigate = useNavigate();
+  const quantity = location.state?.quantity || 1;
+  const totalPrice = price * quantity;
   const orderData = {
-    image,
-    name,
-    price,
+    productId: _id,
+    quantity
   };
   const {
     register,
@@ -25,16 +25,25 @@ const Checkout = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data, id) => {
+    console.log("Data", data);
+    console.log("Order Data", orderData);
     const orderInfo = { data, orderData };
-    axiosSecure.post('/booking', orderInfo).then((res) => {
-      if (res.data.insertedId) {
+    axiosPublic.post('/order/create', orderInfo).then((res) => {
+      console.log(res.data);
+      if (res.data?.insertedId) {
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           icon: 'success',
           title: 'Your Order Has Been Successfully Booked',
           showConfirmButton: false,
           timer: 2000,
         });
+
+      }
+    });
+    axiosPublic.delete(`/cart/remove/${_id}`).then((res) => {
+      if (res.data.deletedCount > 0) {
+        console.log("Item removed from cart");
       }
     });
     reset()
@@ -47,8 +56,8 @@ const Checkout = () => {
         <img className=" w-full " src={image} alt="" />
         <h1 className="text-xl text-orange-600 font-semibold my-2">{name}</h1>
         <p className="pr-8">{recipe}</p>
-        <h4 className=" z-20 absolute right-8 top-3 text-md text-white text-center font-bold  bg-orange-600 w-[80px] h-[50px] rounded-full p-3">
-          ${price}
+        <h4 className=" z-20 absolute right-8 top-3 text-[15px] text-white text-center font-bold  bg-orange-600 w-[150px] h-[50px] rounded-full p-3">
+          Total Price: $ {totalPrice}
         </h4>
       </div>
       {/* Form */}
@@ -62,31 +71,15 @@ const Checkout = () => {
           className="flex flex-col gap-4 mt-4"
           action=""
         >
-          <div className="md:flex  w-full gap-2">
-            <input
-              type="text"
-              {...register('name')}
-              required
-              placeholder="Type Your Full Name"
-              value={user?.displayName}
-              className="border-b-[1px] border-orange-500 outline-none px-2 py-4 w-full md:w-[50%]"
-            />
-            <input
-              type="number"
-              {...register('phone')}
-              required
-              placeholder="+880"
-              className="border-b-[1px] border-orange-500 outline-none px-2 py-4 w-full md:w-[50%]"
-            />
-          </div>
+
           <input
-            type="email"
-            {...register('email')}
+            type="number"
+            {...register('phone')}
             required
-            value={user?.email}
-            placeholder="example@gmail.com"
-            className="border-b-[1px] border-orange-500 outline-none px-2 py-4 w-full"
+            placeholder="+880"
+            className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
           />
+
           <textarea
             type="text"
             {...register('address')}

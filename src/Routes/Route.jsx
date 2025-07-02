@@ -11,9 +11,7 @@ import Login from '../Components/Login/Login';
 import Register from '../Components/Register/Register';
 import PrivateRoute from './PrivateRoute';
 import Cart from '../Components/Dashboard/UserDashboard/Cart';
-
 import UserOrder from '../Components/Dashboard/UserDashboard/UserOrder/UserOrders';
-
 
 import AllUsers from '../Components/Dashboard/AdminDashboard/AllUsers/AllUsers';
 import AddItems from '../Components/Dashboard/AdminDashboard/AddItems/AddItems';
@@ -28,6 +26,7 @@ import UserPayment from '../Components/Dashboard/UserDashboard/UserPayment';
 import UserReview from '../Components/Dashboard/UserDashboard/UserReview';
 import AddBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
 import NotFound from '../Components/NotFound';
+import PaymentForm from '../Components/Dashboard/UserDashboard/UserOrder/PaymentForm';
 
 
 
@@ -153,6 +152,11 @@ export const router = createBrowserRouter([
       {
         path: 'userOrder',
         element: <UserOrder />,
+      },
+      {
+        path: "paymentForm/:id",
+        element: <PaymentForm />,
+
       },
       {
         path: 'myPayment',

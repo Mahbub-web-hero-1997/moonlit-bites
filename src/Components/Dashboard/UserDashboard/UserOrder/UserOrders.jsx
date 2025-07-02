@@ -10,7 +10,8 @@ const UserOrders = () => {
   const navigate = useNavigate();
 
   const handlePayment = (order) => {
-    navigate(`/dashboard/payment/${order._id}`);
+    navigate(`/dashboard/paymentForm/${order._id}`);
+
   };
 
   const handleCancel = async (orderId) => {

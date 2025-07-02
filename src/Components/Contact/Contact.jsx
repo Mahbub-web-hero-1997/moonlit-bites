@@ -9,97 +9,88 @@ const Contact = () => {
     register,
     handleSubmit,
     reset,
-
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     console.log(data);
+    reset();
   };
+
   return (
     <>
       <Helmet>
-        <title>moonlit || contact</title>
+        <title>Moonlit || Contact</title>
       </Helmet>
-      <div className="w-full flex flex-col md:flex-row mt-4 md:mt-8 px-4">
-        <div className="w-full md:w-1/3  px-4  shadow-lg overflow-hidden ">
-          <h1 className="text-2xl font-semibold text-center text-orange-500">
-            Drop us a line
-          </h1>
-          <hr className="w-2/3 md:w-1/2  mx-auto mt-3" />
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4 mt-4 p-4"
-            action=""
-          >
-            <input
-              type="text"
-              {...register('name')}
-              required
-              placeholder="Name"
-              className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
-            />
-            <input
-              type="email"
-              {...register('email')}
-              required
-              placeholder="Example@gmail.com"
-              className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
-            />
-            <input
-              type="phone"
-              {...register('phone')}
-              required
-              placeholder="+880"
-              className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
-            />
 
-            <textarea
-              type="text"
-              {...register('recipe')}
-              required
-              placeholder="Product Description"
-              className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
-            />
-            <input
-              type="submit"
-              value="Publish"
-              className="btn bg-orange-500 text-white text-xl hover:bg-white hover:text-orange-500 hover:border-orange-500"
-            />
-          </form>
-        </div>
-
-        <div className=" w-full md:w-2/3 px-4 mt-8 md:mt-0 md:ml-8 ">
-          <div className="px-20">
-            <h1 className="text-orange-500 text-2xl font-semibold text-center">
-              Contact Us
-            </h1>
-            <p className="text-md text-center">
-              For Any Information, Feel Free to Contact Us Using Below Way!
-            </p>
-            <hr className="w-2/3 md:w-1/3  mx-auto my-3" />
+      <div className="w-full min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 py-10 px-6 md:px-16">
+        <div className="flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto">
+          {/* Contact Form */}
+          <div className="w-full lg:w-1/2 bg-white p-8 rounded-xl shadow-xl">
+            <h2 className="text-3xl font-bold text-orange-500 mb-2 text-center">Drop Us a Line</h2>
+            <p className="text-center text-gray-500 mb-6">We’d love to hear from you. Send us a message!</p>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <input
+                type="text"
+                {...register('name')}
+                required
+                placeholder="Your Name"
+                className="w-full px-4 py-3 border border-orange-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+              <input
+                type="email"
+                {...register('email')}
+                required
+                placeholder="Your Email"
+                className="w-full px-4 py-3 border border-orange-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+              <input
+                type="tel"
+                {...register('phone')}
+                required
+                placeholder="+8801..."
+                className="w-full px-4 py-3 border border-orange-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+              <textarea
+                rows={5}
+                {...register('recipe')}
+                required
+                placeholder="Write your message..."
+                className="w-full px-4 py-3 border border-orange-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+              <input
+                type="submit"
+                value="Send Message"
+                className="w-full py-3 bg-orange-500 text-white rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300"
+              />
+            </form>
           </div>
-          <div className="grid grid-cols-1 justify-center md:grid-cols-2 gap-3 mt-6">
-            <p className="w-3/2 mb-10 shadow-inner text-xl text-gray-500 p-4 flex items-center gap-3">
-              <FaEnvelope className="text-2xl text-orange-500" />
-              moonlitBite@gmail.com
-            </p>
-            <p className="w-3/2 mb-10 shadow-inner text-xl text-gray-500 p-4 flex items-center gap-3">
-              <FaPhone className="text-2xl text-orange-500" />
-              +8801644196242
-            </p>
-            <p className="w-3/2 mb-10 shadow-inner text-xl text-gray-500 p-4 flex items-center gap-3">
-              <MdShareLocation className="text-4xl text-orange-500" />
-              22 Baker Street, London, United Kingdom, W1U 3BW
-            </p>
 
-            <p className="w-3/2 mb-10 shadow-inner text-xl text-gray-500 p-4 flex flex-col md:flex-row md:items-center gap-3">
-              <FaClock className="text-2xl text-orange-500" />
-              <span>
-                Sun-wed :- <span className="text-orange-500">9:00 am</span>
-                {'to'}
-                <span className="text-orange-500"> 5:00 pm</span>
-              </span>
-            </p>
+          {/* Contact Info */}
+          <div className="w-full lg:w-1/2 p-6 flex flex-col justify-center bg-white rounded-xl shadow-xl">
+            <h2 className="text-3xl font-bold text-orange-500 mb-4 text-center">Contact Info</h2>
+            <p className="text-center text-gray-600 mb-6">We are here to assist you — reach us anytime!</p>
+            <div className="space-y-6">
+              <div className="flex items-center gap-4 text-gray-700">
+                <FaEnvelope className="text-2xl text-orange-500" />
+                <span>moonlitBite@gmail.com</span>
+              </div>
+              <div className="flex items-center gap-4 text-gray-700">
+                <FaPhone className="text-2xl text-orange-500" />
+                <span>+8801644196242</span>
+              </div>
+              <div className="flex items-start gap-4 text-gray-700">
+                <MdShareLocation className="text-3xl text-orange-500 mt-1" />
+                <span>22 Baker Street, London, United Kingdom, W1U 3BW</span>
+              </div>
+              <div className="flex items-center gap-4 text-gray-700">
+                <FaClock className="text-2xl text-orange-500" />
+                <span>
+                  Sun–Wed: <span className="text-orange-500">9:00 AM</span> to{' '}
+                  <span className="text-orange-500">5:00 PM</span>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

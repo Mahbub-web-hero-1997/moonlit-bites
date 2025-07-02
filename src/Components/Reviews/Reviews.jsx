@@ -7,6 +7,7 @@ import { AuthContext } from '../../ContextAPI/AuthProvider';
 
 const Reviews = () => {
   const { reviews } = useContext(AuthContext)
+  console.log(reviews);
 
   return (
     <>

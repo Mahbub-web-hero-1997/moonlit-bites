@@ -1,76 +1,88 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../ContextAPI/AuthProvider';
-import { FaShoppingCart, FaMoneyCheckAlt, FaClipboardList, FaUserCircle } from 'react-icons/fa';
+import {
+    FaShoppingCart,
+    FaMoneyCheckAlt,
+    FaClipboardList,
+    FaUserCircle,
+} from 'react-icons/fa';
 import UserOrders from '../UserDashboard/UserOrder/UserOrders';
 import Cart from '../UserDashboard/Cart';
 import UserPayment from '../UserDashboard/UserPayment';
-import UserReview from './Reviews/UserReview';
 import MyReviews from './Reviews/MyReviews';
 
 const UserHome = () => {
     const { user } = useContext(AuthContext);
-    const [activeSection, setActiveSection] = useState(null);
+    const [activeSection, setActiveSection] = useState('orders');
 
-    const toggleSection = (section) => {
-        setActiveSection(activeSection === section ? null : section);
+    const sections = [
+        {
+            id: 'orders',
+            icon: <FaClipboardList className="text-2xl" />,
+            title: 'My Orders',
+        },
+        {
+            id: 'cart',
+            icon: <FaShoppingCart className="text-2xl" />,
+            title: 'My Cart',
+        },
+        {
+            id: 'payment',
+            icon: <FaMoneyCheckAlt className="text-2xl" />,
+            title: 'Payments',
+        },
+        {
+            id: 'review',
+            icon: <FaUserCircle className="text-2xl" />,
+            title: 'My Reviews',
+        },
+    ];
+
+    const renderSection = () => {
+        switch (activeSection) {
+            case 'orders':
+                return <UserOrders />;
+            case 'cart':
+                return <Cart />;
+            case 'payment':
+                return <UserPayment />;
+            case 'review':
+                return <MyReviews />;
+            default:
+                return null;
+        }
     };
 
     return (
-        <div className="w-full md:w-4/5 mx-auto px-6 py-10">
-            <div className="bg-gradient-to-r from-orange-400 to-yellow-300 text-white p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">
-                    Welcome Back, {user?.displayName || 'User'}!
-                </h2>
-                <p className="text-sm md:text-base">
-                    Access all your account activities and manage orders easily.
-                </p>
+        <div className="w-full max-w-7xl mx-auto px-4 py-10">
+            {/* Welcome Banner */}
+            <div className="bg-gradient-to-br from-orange-500 to-yellow-400 text-white p-6 md:p-8 rounded-xl shadow-lg mb-8 text-center">
+                <h1 className="text-2xl md:text-4xl font-bold">
+                    Welcome, {user?.displayName || 'Valued User'}!
+                </h1>
+                <p className="mt-2 text-sm md:text-base">Manage everything from here at a glance.</p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-                <button
-                    onClick={() => toggleSection('orders')}
-                    className="p-6 bg-white border rounded-lg shadow-md hover:shadow-xl transition duration-300 group"
-                >
-                    <FaClipboardList className="text-3xl text-orange-500 group-hover:scale-110 transition" />
-                    <h4 className="mt-4 font-bold text-lg">My Orders</h4>
-                    <p className="text-sm text-gray-500">Track your recent orders</p>
-                </button>
-
-                <button
-                    onClick={() => toggleSection('cart')}
-                    className="p-6 bg-white border rounded-lg shadow-md hover:shadow-xl transition duration-300 group"
-                >
-                    <FaShoppingCart className="text-3xl text-orange-500 group-hover:scale-110 transition" />
-                    <h4 className="mt-4 font-bold text-lg">My Cart</h4>
-                    <p className="text-sm text-gray-500">View or manage cart items</p>
-                </button>
-
-                <button
-                    onClick={() => toggleSection('payment')}
-                    className="p-6 bg-white border rounded-lg shadow-md hover:shadow-xl transition duration-300 group"
-                >
-                    <FaMoneyCheckAlt className="text-3xl text-orange-500 group-hover:scale-110 transition" />
-                    <h4 className="mt-4 font-bold text-lg">Payments</h4>
-                    <p className="text-sm text-gray-500">See your payment history</p>
-                </button>
-
-                <button
-                    onClick={() => toggleSection('review')}
-                    className="p-6 bg-white border rounded-lg shadow-md hover:shadow-xl transition duration-300 group"
-                >
-                    <FaUserCircle className="text-3xl text-orange-500 group-hover:scale-110 transition" />
-                    <h4 className="mt-4 font-bold text-lg">My Reviews</h4>
-                    <p className="text-sm text-gray-500">Give feedback on purchases</p>
-                </button>
+            {/* Navigation Tabs */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+                {sections.map((section) => (
+                    <button
+                        key={section.id}
+                        onClick={() => setActiveSection(section.id)}
+                        className={`flex items-center gap-2 px-5 py-3 rounded-lg border transition-all duration-300 font-semibold text-sm md:text-base shadow-sm
+              ${activeSection === section.id
+                                ? 'bg-orange-500 text-white'
+                                : 'bg-white text-gray-700 hover:bg-orange-100'
+                            }`}
+                    >
+                        {section.icon}
+                        {section.title}
+                    </button>
+                ))}
             </div>
 
-            {/* Section Output Below */}
-            <div className="mt-10">
-                {activeSection === 'orders' && <UserOrders />}
-                {activeSection === 'cart' && <Cart />}
-                {activeSection === 'payment' && <UserPayment />}
-                {activeSection === 'review' && <MyReviews />}
-            </div>
+            {/* Dynamic Content Section */}
+            <div className="transition-all duration-300">{renderSection()}</div>
         </div>
     );
 };

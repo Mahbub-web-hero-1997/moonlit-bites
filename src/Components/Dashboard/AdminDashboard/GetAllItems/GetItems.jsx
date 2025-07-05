@@ -5,17 +5,13 @@ import { HiMiniPencilSquare } from 'react-icons/hi2';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import useAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
+import UseMenu from '../../../../CustomHook/UseMenu';
 // import Category from '../../../Shared/Category';
 
 const GetItems = () => {
   const axiosPublic = useAxiosPublic();
-  const { data: allItems = [], refetch, isLoading } = useQuery({
-    queryKey: ['items'],
-    queryFn: async () => {
-      const res = await axiosPublic.get('/menus/all');
-      return res.data?.data || [];
-    },
-  });
+  const [allItems, refetch] = UseMenu();
+  console.log(allItems);
 
   const handleDeleteItem = (id) => {
     Swal.fire({
@@ -28,8 +24,9 @@ const GetItems = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.delete(`/menu/delete/${id}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
+        axiosPublic.delete(`/menus/delete/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data?.statusCode === 200) {
             refetch();
             Swal.fire('Deleted!', 'Item removed successfully.', 'success');
           }
@@ -92,7 +89,7 @@ const GetItems = () => {
                   </Link>
                 </td>
                 <td>
-                  <button onClick={() => handleDeleteItem(item._id)}>
+                  <button onClick={() => handleDeleteItem(item._id)} refetch={refetch}>
                     <MdDeleteForever className="text-3xl text-red-500 hover:text-red-600" />
                   </button>
                 </td>

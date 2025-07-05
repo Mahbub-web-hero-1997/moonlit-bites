@@ -5,7 +5,7 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import UseAxios from '../../CustomHook/UseAxios';
+
 import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
 import axios from 'axios';
 
@@ -15,7 +15,6 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || '/';
-  const axiosSecure = UseAxios()
   const axiosPublic = UseAxiosPublic();
   const {
     register,

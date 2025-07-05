@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../ContextAPI/AuthProvider';
-import UseAxios from '../../../CustomHook/UseAxios';
+
 import UseCart from '../../../CustomHook/UseCart';
 import axios from 'axios';
 
@@ -11,7 +11,7 @@ const PopularMenu = ({ menu }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const axiosSecure = UseAxios();
+
   const [, refetch] = UseCart();
 
   const handleAddToCart = () => {

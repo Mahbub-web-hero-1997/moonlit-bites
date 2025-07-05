@@ -55,11 +55,11 @@ const UserHome = () => {
     };
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 py-10">
+        <div className="w-full max-w-7xl mx-auto px-4  ">
             {/* Welcome Banner */}
             <div className="bg-gradient-to-br from-orange-500 to-yellow-400 text-white p-6 md:p-8 rounded-xl shadow-lg mb-8 text-center">
                 <h1 className="text-2xl md:text-4xl font-bold">
-                    Welcome, {user?.displayName || 'Valued User'}!
+                    Welcome, {user?.fullName || 'Valued User'}!
                 </h1>
                 <p className="mt-2 text-sm md:text-base">Manage everything from here at a glance.</p>
             </div>

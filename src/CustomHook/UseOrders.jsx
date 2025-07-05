@@ -9,7 +9,9 @@ const UseOrders = () => {
       const res = await axiosPublic.get('/order/myOrder');
       return res.data.data;
     },
+    enabled: true,
   });
+
 
   return [orders, refetch];
 };

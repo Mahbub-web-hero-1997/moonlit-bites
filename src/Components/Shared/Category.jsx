@@ -78,7 +78,7 @@ const Category = () => {
           <button
             key={name}
             onClick={() => handleSelect(name, onClick)}
-            className="cursor-pointer group flex flex-col items-center gap-3 transition-all duration-300 transform hover:scale-105 focus:outline-none"
+            className="group flex flex-col items-center gap-3 transition-all duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
           >
             <div className="relative p-[3px] rounded-full bg-gradient-to-tr from-orange-400 to-yellow-300 shadow-lg group-hover:shadow-2xl transition-shadow duration-300">
               <img
@@ -125,7 +125,7 @@ const Category = () => {
               <li key={name} className="cursor-pointer hover:bg-orange-100" role="option" tabIndex={0}>
                 <button
                   onClick={() => handleSelect(name, onClick)}
-                  className="cursor-pointer w-full flex items-center gap-3 p-3 text-gray-700 hover:text-orange-600 transition-colors duration-300 focus:outline-none"
+                  className="w-full flex items-center gap-3 p-3 text-gray-700 hover:text-orange-600 transition-colors duration-300 focus:outline-none"
                 >
                   <img
                     src={img}

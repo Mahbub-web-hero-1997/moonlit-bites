@@ -5,7 +5,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthProvider';
 import video from '../../assets/banner/bg_video_3.mp4';
@@ -14,15 +13,11 @@ const Banner = () => {
   const { menus } = useContext(AuthContext);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const slideIn = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
   return (
     <div className="relative w-full h-[calc(100vh-24px)] overflow-hidden">
+      {/* Background video */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover brightness-[.4] z-0"
+        className="absolute top-0 left-0 w-full h-full object-cover brightness-[.8] z-0"
         autoPlay
         loop
         muted
@@ -32,16 +27,18 @@ const Banner = () => {
         Your browser does not support the video tag.
       </video>
 
+      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-tr from-black/70 via-black/50 to-black/30 z-10"></div>
 
+      {/* Slider Content */}
       <div className="relative z-20 flex items-center justify-center h-full max-w-7xl mx-auto px-5">
         <Swiper
           modules={[Autoplay, Pagination, EffectCoverflow]}
-          effect="fadeUp"
+          effect="fade"
           grabCursor={true}
           centeredSlides={true}
           slidesPerView={1}
-          loop
+          loop={true}
           autoplay={{ delay: 9000 }}
           pagination={{ clickable: true }}
           coverflowEffect={{ rotate: 30, stretch: 0, depth: 150, modifier: 2.5, slideShadows: true }}
@@ -60,29 +57,29 @@ const Banner = () => {
                     variants={{}}
                     className="bg-white/10 border border-white/30 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-10 text-white text-center space-y-6"
                   >
+                    {/* Title - from top */}
                     <motion.h1
                       initial={{ y: -50, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.6 }}
-                      className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-orange-400 to-yellow-400 text-transparent bg-clip-text"
+                      className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-orange-400 to-yellow-400 text-transparent bg-clip-text py-3"
                     >
                       {menu.name}
                     </motion.h1>
 
-                    <motion.div
+                    {/* Description - fade in (no typing) */}
+                    <motion.p
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
+                      transition={{ duration: 0.6, delay: 0.5 }}
                       className="text-sm md:text-base text-gray-200 max-w-xl mx-auto leading-relaxed"
                     >
-                      <TypeAnimation
-                        sequence={[menu.recipe.slice(0, 250) + '...', 1000]}
-                        speed={50}
-                        wrapper="p"
-                        cursor={false}
-                      />
-                    </motion.div>
+                      {menu.recipe.length > 250
+                        ? menu.recipe.slice(0, 250) + '...'
+                        : menu.recipe}
+                    </motion.p>
 
+                    {/* Price & Category */}
                     <div className="flex justify-center items-center gap-4 flex-wrap">
                       <motion.span
                         initial={{ x: -100, opacity: 0 }}
@@ -92,6 +89,7 @@ const Banner = () => {
                       >
                         ${menu.price}
                       </motion.span>
+
                       <motion.span
                         initial={{ x: 100, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
@@ -102,6 +100,7 @@ const Banner = () => {
                       </motion.span>
                     </div>
 
+                    {/* Button - from bottom */}
                     <motion.div
                       initial={{ y: 100, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}

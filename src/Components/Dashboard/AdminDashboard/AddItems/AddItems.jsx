@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
+import { AuthContext } from '../../../../ContextAPI/AuthProvider';
+
 
 const AddItems = () => {
+  const axiosPublic = useAxiosPublic();
+  const { setMenus } = useContext(AuthContext)
   const {
     register,
     handleSubmit,
@@ -12,7 +17,27 @@ const AddItems = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('price', data.price);
+    formData.append('category', data.category);
+    formData.append('recipe', data.recipe);
+    formData.append('image', data.image[0]);
+    axiosPublic.post('/menus/create', formData).then((res) => {
+      console.log(res.data?.data);
+      if (res.data) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Item Added Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setMenus((prevMenus) => [...prevMenus, res.data?.data]);
+        reset();
+      }
+    });
+
   };
 
   return (

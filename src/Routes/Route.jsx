@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
       {
         path: '/menu',
         element: <Menu />,
-        loader: () => fetch('http://localhost:5000/pagination'),
+        // loader: () => fetch('http://localhost:5000/pagination'),
       },
       {
         path: '/blogs',
@@ -139,8 +139,8 @@ export const router = createBrowserRouter([
             <ManageItems />
           </AdminRoute>
         ),
-        // loader: ({ params }) =>
-        //   fetch(`http://localhost:5000/menu/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/v1/menus/${params.id}`),
       },
       {
         path: 'cart/',

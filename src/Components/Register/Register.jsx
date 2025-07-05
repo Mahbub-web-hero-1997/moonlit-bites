@@ -10,7 +10,7 @@ import UseAxiosPublic from '../../CustomHook/UseAxiosPublic';
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { createUser, updateUserProfile } = useContext(AuthContext);
-  const axiosPublic=UseAxiosPublic()
+  const axiosPublic = UseAxiosPublic()
   const {
     register,
     handleSubmit,
@@ -18,41 +18,34 @@ const Register = () => {
 
     formState: { errors },
   } = useForm();
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
   const onSubmit = (data) => {
-    createUser(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        
-        updateUserProfile(data.name, data.photoUrl)
-          .then(()=> {
-            const userInfo = {
-              name: data.name,
-              email: data.email,
-            }
-            axiosPublic.post("/user", userInfo)
-              .then(res => {
-                if (res.data.insertedId) {
-                  Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Account Successfully Created',
-                    showConfirmButton: false,
-                    timer: 1500,
-                  });
-              }
-            })
-            reset()    
-        
-          navigate("/")  
-        })
+    const formData = new FormData();
+    formData.append('fullName', data.name);
+    formData.append('email', data.email);
+    formData.append('avatar', data.photoUrl[0]); // assuming single file upload
+    formData.append('password', data.password);
+    formData.append('confirmPassword', data.confirmPassword);
+
+    axiosPublic
+      .post('/user/register', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        Swal.fire('Success', 'Registration completed!', 'success');
+        reset();
+        navigate('/login');
       })
       .catch((err) => {
         console.error(err.message);
+        Swal.fire('Error', 'Registration failed', 'error');
       });
   };
+
 
   return (
     <div className="w-full h-screen md:h-[500px] md:w-1/3 mx-auto p-4 mt-18 shadow-lg ">

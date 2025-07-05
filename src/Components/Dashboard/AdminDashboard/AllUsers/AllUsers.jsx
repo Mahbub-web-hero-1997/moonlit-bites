@@ -15,11 +15,10 @@ const AllUsers = () => {
   const axiosPublic = useAxiosPublic();
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
-    enabled: !!user.email && !!localStorage.getItem("access-token"),
     queryFn: async () => {
-      const res = await axiosPublic.get('/user');
+      const res = await axiosPublic.get('/user/all');
 
-      return res.data;
+      return res.data?.data;
     },
   });
   // User Deleted Function

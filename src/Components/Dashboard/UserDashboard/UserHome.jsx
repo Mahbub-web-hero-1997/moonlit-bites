@@ -70,7 +70,7 @@ const UserHome = () => {
                     <button
                         key={section.id}
                         onClick={() => setActiveSection(section.id)}
-                        className={`flex items-center gap-2 px-5 py-3 rounded-lg border transition-all duration-300 font-semibold text-sm md:text-base shadow-sm
+                        className={`flex items-center gap-2 px-5 py-3 rounded-lg border transition-all duration-300 font-semibold text-sm md:text-base shadow-sm cursor-pointer
               ${activeSection === section.id
                                 ? 'bg-orange-500 text-white'
                                 : 'bg-white text-gray-700 hover:bg-orange-100'

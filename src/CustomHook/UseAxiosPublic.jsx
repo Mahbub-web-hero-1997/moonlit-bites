@@ -5,7 +5,7 @@ const axiosSecurePublic = axios.create({
   withCredentials: true,
 });
 
-// ✅ This is just a normal utility function, not a React hook
+
 const useAxiosPublic = () => axiosSecurePublic;
 
 export default useAxiosPublic;

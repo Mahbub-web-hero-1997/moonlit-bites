@@ -1,10 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import useBlogs from '../../CustomHook/useBlogs';
+
 import Blog from './Blog';
+import UseBlogs from '../../CustomHook/UseBlogs';
 
 const Blogs = () => {
-  const { blogs, isLoading, error } = useBlogs();
+  const { blogs, isLoading, error } = UseBlogs();
 
   if (isLoading)
     return <p className="text-center mt-8 text-orange-500 font-semibold animate-pulse">Loading blogs...</p>;

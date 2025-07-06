@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from './UseAxiosPublic';
 
 
-const useBlogs = () => {
+const UseBlogs = () => {
     const axiosPublic = useAxiosPublic();
 
     const { data: blogs = [], isLoading, error, refetch } = useQuery({
@@ -16,4 +16,4 @@ const useBlogs = () => {
     return { blogs, isLoading, error, refetch };
 };
 
-export default useBlogs;
+export default UseBlogs;

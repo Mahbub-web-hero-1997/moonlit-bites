@@ -13,7 +13,7 @@ const PopularMenus = () => {
   return (
     <>
       <Marquee className="w-full md:w-[90%]" speed={50} pauseOnHover={true}>
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-5 gap-x-1 gap-y-5 w-full md:mb-20 mt-5">
+        <div className=" flex flex-row gap-1 md:grid md:grid-cols-5 md:gap-x-1 w-full md:mb-20 mt-5">
           {menus.length > 0 ? (
             menus.slice(0, 5).map((menu) => <PopularMenu key={menu._id} menu={menu} />)
           ) : (

@@ -33,7 +33,7 @@ const Dashboard = () => {
   };
   return (
     <>
-      <div className="flex w-full relative">
+      <div className="flex w-full relative bg-white">
         <button
           onClick={handleSidebar}
           className="absolute top-0 left-0 m-4 md:hidden"
@@ -96,6 +96,17 @@ const Dashboard = () => {
                   to="/dashboard/allOrder"
                 >
                   Manage Bookings
+                </NavLink>
+              </li>
+              <li className="text-center text-md font-semibold flex items-center gap-2 mt-3 ">
+                <TbBrandBooking />
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? 'text-gray-600' : ''
+                  }
+                  to="/dashboard/story"
+                >
+                  Write Story
                 </NavLink>
               </li>
               <li className="text-center text-md font-semibold flex items-center gap-2 mt-3 ">

@@ -28,6 +28,7 @@ import AddBlogs from '../Components/Dashboard/UserDashboard/Blogs/AddBlogs';
 import NotFound from '../Components/NotFound';
 import PaymentForm from '../Components/Dashboard/UserDashboard/UserOrder/PaymentForm';
 import MyReviews from '../Components/Dashboard/UserDashboard/Reviews/MyReviews';
+import Story from '../Components/Dashboard/AdminDashboard/Story/Story';
 
 
 
@@ -147,7 +148,13 @@ export const router = createBrowserRouter([
 
       },
       {
-        path: 'cart/',
+        path: "story",
+        element: <AdminRoute>
+          <Story />
+        </AdminRoute>
+      },
+      {
+        path: 'cart',
         element: <Cart />,
       },
       {

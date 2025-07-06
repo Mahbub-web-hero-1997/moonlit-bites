@@ -12,37 +12,38 @@ const Story = () => {
   const [selected, setSelected] = useState();
   useEffect(() => {
     axios
-      .get('http://localhost:5000/Story')
-      .then((res) => setStories(res.data));
+      .get('http://localhost:5000/api/v1/Story/get')
+      .then((res) => setStories(res.data?.data || []));
   }, []);
 
   return (
     <>
       <div className="w-full mx-aut flex flex-col md:flex-row gap-6 md:grid-cols-2 h-auto bg-[#F7F7F7] px-8 py-14">
-        <div className="w-full md:w-[60%] mt-2 ">
-          <h1 className="text-3xl md:text-4xl text-center md:text-left text-orange-500 mb-5 ">
+        <div className="w-full md:w-[60%] mt-2 py-4 ">
+          <h1 className="text-3xl md:text-4xl text-center font-semibold md:text-left text-orange-500 mb-5 ">
             Our Story
           </h1>
+          <hr className='w-1/6 mb-5 text-orange-500' />
           {stories.map((story) => (
-            <div key={story._id} className="flex flex-col">
-              <h2 className="text-xl md:text-3xl mb-4 md:mb-8">
+            <div key={story._id} className="flex flex-col ">
+              <h2 className="text-xl md:text-5xl mb-4 md:mb-8 font-semibold text-gray-700 text-center md:text-left">
                 {story.title}
               </h2>
-              <p className="mb-4 md:mb-8 leading-7 justify-self-auto">
-                {story.description}
+              <p className="mb-4 md:mb-8 leading-7 justify-self-auto text-gray-700 text-md md:text-lg">
+                {story.details}
               </p>
-              <div className="flex justify-start mb-16 md:mb-0">
-                <div className="flex items-center w-1/2 border-b-[1px] p-1">
+              <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-start mb-16 md:mb-0">
+                <div className="flex items-center w-1/2 p-1">
                   <IoMdCall className="text-4xl md:text-6xl text-orange-500 mx-3" />
                   <div className="w-full">
                     <h4 className="text-xl font-semibold ">Phone</h4>
                     <p className="text-md">{story.phone}</p>
                   </div>
                 </div>
-                <div className="flex items-center w-1/2 border-b-[1px] p-1 ">
-                  <MdEmail className="text-4xl md:text-6xl text-orange-500 mx-3" />
+                <div className="flex w-full md:w-1/2 p-1 ">
+                  <MdEmail className="text-4xl md:text-6xl text-orange-500 mx-3 " />
                   <div className="w-full">
-                    <h4 className="text-xl font-semibold ">Phone</h4>
+                    <h4 className="text-xl font-semibold ">Mail</h4>
                     <p className="text-md">{story.email}</p>
                   </div>
                 </div>
@@ -61,8 +62,8 @@ const Story = () => {
               type="text"
               placeholder="Name Here"
             />
-            <input             
-              
+            <input
+
               className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3"
               type="email"
               placeholder="Example@gmail"

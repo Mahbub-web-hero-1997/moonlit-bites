@@ -6,11 +6,11 @@ import Footer from './Shared/Footer';
 const Root = () => {
   return (
     <>
-      <div className=''>
+      <div className='bg-white text-black'>
         <Header />
         {<Outlet />}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

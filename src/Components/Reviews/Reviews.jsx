@@ -18,7 +18,7 @@ const Reviews = () => {
         <title>moonlit || review</title>
       </Helmet>
       <SectionHeading heading={'Testimonials'} subHeading={'Reviews'} />
-      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-0">
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5">
         {reviews.map((review) => (
           <Review review={review} key={review._id} />
         ))}

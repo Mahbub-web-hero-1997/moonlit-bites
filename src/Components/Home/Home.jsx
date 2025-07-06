@@ -8,6 +8,7 @@ import Story from './Story';
 import Party from './Party';
 import Expert from './Expert';
 import PopularMenus from './PopularMenu/PopularMenus';
+import Reviews from '../Reviews/Reviews';
 
 const Home = () => {
   return (
@@ -25,6 +26,7 @@ const Home = () => {
         <Story />
         <Party />
         <Expert />
+        <Reviews />
       </div>
     </>
   );

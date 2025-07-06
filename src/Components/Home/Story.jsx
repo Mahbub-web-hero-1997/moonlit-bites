@@ -6,6 +6,7 @@ import { GiForkKnifeSpoon } from 'react-icons/gi';
 import axios from 'axios';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/style.css';
+import SectionHeading from '../Shared/SectionHeading';
 
 const Story = () => {
   const [stories, setStories] = useState([]);

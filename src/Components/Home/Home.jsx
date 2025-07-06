@@ -10,6 +10,7 @@ import Expert from './Expert';
 import PopularMenus from './PopularMenu/PopularMenus';
 import Reviews from '../Reviews/Reviews';
 
+
 const Home = () => {
   return (
     <>
@@ -27,6 +28,7 @@ const Home = () => {
         <Party />
         <Expert />
         <Reviews />
+
       </div>
     </>
   );

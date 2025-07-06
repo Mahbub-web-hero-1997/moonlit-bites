@@ -55,8 +55,8 @@ const Footer = () => {
 
       {/* Bottom Footer with Flex */}
       <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-        <div className="text-gray-500">
-          <span className="font-semibold text-white">🚀 ACME Industries</span> © 2025. All rights reserved.
+        <div className="text-gray-400">
+          <span className="font-semibold text-white">MoonLit-Bites</span> © 2025. All rights reserved.
         </div>
 
         <div className="flex gap-5 text-lg">

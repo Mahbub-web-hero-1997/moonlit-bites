@@ -4,13 +4,14 @@ import { TiSocialFacebook } from 'react-icons/ti';
 import { FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import SectionHeading from '../Shared/SectionHeading';
+import UseExpert from '../../CustomHook/UseExpert';
 
 const Expert = () => {
-
+  const [experts] = UseExpert()
   return (
     <>
       <SectionHeading heading="Our Expert" subHeading="--- CHEFS ---" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 md:px-10 mt-6">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 md:px-10 mt-6">
         {experts.map((expert) => (
           <div
             key={expert._id}
@@ -19,9 +20,9 @@ const Expert = () => {
             {/* Expert Image */}
             <div className="relative">
               <img
-                src={expert.img}
+                src={expert.image}
                 alt={expert.name}
-                className="w-full h-64 object-cover"
+                className="w-full h-96 object-cover"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 px-4 py-3 text-center">
                 <h2 className="text-lg font-bold text-gray-800">{expert.name}</h2>
@@ -33,7 +34,7 @@ const Expert = () => {
 
             {/* About and Socials */}
             <div className="p-5 text-center">
-              <p className="text-gray-600 text-sm leading-relaxed">{expert.about}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">{expert.bio}</p>
               <div className="flex justify-center items-center gap-4 mt-4">
                 <Link to="#">
                   <TiSocialFacebook className="text-2xl text-sky-600 hover:scale-110 transition" />

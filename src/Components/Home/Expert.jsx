@@ -6,12 +6,6 @@ import { Link } from 'react-router-dom';
 import SectionHeading from '../Shared/SectionHeading';
 
 const Expert = () => {
-  const [experts, setExperts] = useState([]);
-  const url = 'http://localhost:5000/expert';
-
-  useEffect(() => {
-    axios(url).then((res) => setExperts(res.data));
-  }, []);
 
   return (
     <>

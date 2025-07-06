@@ -58,18 +58,18 @@ const Story = () => {
           <h1 className="mt-12 text-center text-4xl mb-5">Book A Table</h1>
           <form className="flex flex-col items-center" action="">
             <input
-              className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3"
+              className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3 border-orange-500"
               type="text"
               placeholder="Name Here"
             />
             <input
 
-              className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3"
+              className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3 border-orange-500"
               type="email"
               placeholder="Example@gmail"
             />
             <select
-              className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3 text-gray-500"
+              className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3 border-orange-500"
               name="number"
               id=""
             >
@@ -80,7 +80,7 @@ const Story = () => {
               <option value="4">4</option>
             </select>
             <input
-              className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3 text-gray-500"
+              className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3 text-gray-500 border-orange-500"
               type="date"
               name="date"
               id=""

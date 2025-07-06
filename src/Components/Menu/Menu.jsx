@@ -62,7 +62,7 @@ const Menu = ({ menu }) => {
   };
 
   return (
-    <div className="card bg-white w-full max-w-sm rounded-tl-md rounded-tr-md shadow-xl mx-auto hover:shadow-orange-100 transition-shadow duration-500 cursor-pointer ">
+    <div className="card bg-white w-[98%] max-w-sm rounded-tl-md rounded-tr-md shadow-xl mx-auto hover:shadow-orange-100 transition-shadow duration-500 cursor-pointer ">
       <figure className="relative overflow-hidden rounded-tl-md rounded-tr-md">
         <img
           className="w-full h-[200px] object-cover transform hover:scale-105 transition-transform duration-500"
@@ -83,14 +83,14 @@ const Menu = ({ menu }) => {
         <div className="card-actions justify-between">
           <button
             onClick={handleAddToCart}
-            className="inline-block bg-transparent border-2 border-orange-500 text-orange-500 font-semibold rounded-lg px-6 py-2 hover:bg-orange-500 hover:text-white transition-colors duration-300 shadow-md hover:shadow-orange-400"
+            className="inline-block bg-transparent border-2 border-orange-500 text-orange-500 font-semibold rounded-lg px-3 py-2 hover:bg-orange-500 hover:text-white transition-colors duration-300 shadow-md hover:shadow-orange-400"
           >
             Add to Cart
           </button>
           <Link
             to={`/checkout/${_id}`}
             onClick={() => handleBuyNow(_id)}
-            className="inline-block bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold rounded-lg px-6 py-2 shadow-lg hover:brightness-110 transition-all duration-300"
+            className="inline-block bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold rounded-lg px-6 py-3 shadow-lg hover:brightness-110 transition-all duration-300"
           >
             Buy Now
           </Link>

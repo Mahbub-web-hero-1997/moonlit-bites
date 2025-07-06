@@ -15,7 +15,7 @@ const Expert = () => {
 
   return (
     <>
-      <SectionHeading heading="Our Expert" />
+      <SectionHeading heading="Our Expert" subHeading="--- CHEFS ---" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 md:px-10 mt-6">
         {experts.map((expert) => (
           <div

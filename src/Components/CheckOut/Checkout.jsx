@@ -10,20 +10,20 @@ const Checkout = () => {
   const item = useLoaderData();
   const { image, name, recipe, price, _id } = item.data;
   const location = useLocation();
-  const axiosPublic = UseAxiosPublic()
+  const axiosPublic = UseAxiosPublic();
   const navigate = useNavigate();
   const quantity = location.state?.quantity || 1;
   const totalPrice = price * quantity;
-  const orderData = {
-    productId: _id,
-    quantity
-  };
+
+  const orderData = { productId: _id, quantity };
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     const orderInfo = { data, orderData };
     axiosPublic.post('/order/create', orderInfo).then((res) => {
@@ -31,7 +31,7 @@ const Checkout = () => {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Your Order Has Been Successfully Booked',
+          title: 'Order Booked Successfully!',
           showConfirmButton: false,
           timer: 2000,
         });
@@ -39,8 +39,6 @@ const Checkout = () => {
         axiosPublic.delete(`/cart/remove/${_id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             console.log("Item removed from cart");
-          } else {
-            console.warn("Failed to remove item from cart");
           }
         });
 
@@ -63,50 +61,52 @@ const Checkout = () => {
     });
   };
 
-
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 justify-center w-full md:w-[95%] mx-auto px-4 py-3 mt-4 shadow-lg">
-      <div className=" relative  p-2">
-        <img className=" w-full " src={image} alt="" />
-        <h1 className="text-xl text-orange-600 font-semibold my-2">{name}</h1>
-        <p className="pr-8">{recipe}</p>
-        <h4 className=" z-20 absolute right-8 top-3 text-[15px] text-white text-center font-bold  bg-orange-600 w-[150px] h-[50px] rounded-full p-3">
-          Total Price: $ {totalPrice}
-        </h4>
-      </div>
-      {/* Form */}
-      <div className="w-full mx-auto px-4 py-8 mt-18  overflow-hidden">
-        <h1 className="text-2xl font-semibold text-center text-orange-500">
-          Please Fill-Up Below Form!
-        </h1>
-        <hr className="w-2/3 md:w-1/2  mx-auto mt-3" />
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-4 mt-4"
-          action=""
-        >
+    <div className="min-h-screen bg-gradient-to-tr from-orange-100 to-white flex items-center justify-center px-4 py-10">
+      <div className="max-w-3xl w-full bg-white/60 backdrop-blur-lg rounded-3xl shadow-lg border border-orange-200 p-6 sm:p-10 space-y-8">
+        {/* Product Info */}
+        <div className="flex flex-col sm:flex-row items-center gap-6">
+          <img src={image} alt={name} className="w-full sm:w-1/2 h-64 object-cover rounded-xl shadow-md" />
+          <div className="text-center sm:text-left">
+            <h2 className="text-2xl font-bold text-orange-600">{name}</h2>
+            <p className="text-gray-600 mt-2">{recipe}</p>
+            <div className="mt-4 inline-block bg-orange-500 text-white px-5 py-2 rounded-full font-semibold shadow">
+              Total: ${totalPrice}
+            </div>
+          </div>
+        </div>
 
-          <input
-            type="number"
-            {...register('phone')}
-            required
-            placeholder="+880"
-            className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
-          />
-
-          <textarea
-            type="text"
-            {...register('address')}
-            required
-            placeholder="Enter Your Delivery Address. "
-            className="border-b-[1px] border-orange-500 outline-none px-2 py-4"
-          />
-          <input
-            type="submit"
-            value="Confirm-Order"
-            className=" py-3 rounded-sm bg-orange-500 text-white text-xl hover:transition-all cursor-pointer focus:scale-[99%]"
-          />
-        </form>
+        {/* Form */}
+        <div>
+          <h3 className="text-center text-2xl font-semibold text-orange-500 mb-4">Enter Delivery Details</h3>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+              <input
+                type="number"
+                {...register('phone')}
+                required
+                placeholder="+880..."
+                className="w-full px-4 py-3 rounded-lg border border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Delivery Address</label>
+              <textarea
+                {...register('address')}
+                required
+                placeholder="Enter full delivery address"
+                className="w-full px-4 py-3 rounded-lg border border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400 transition resize-none"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg transition-all duration-200 shadow-lg active:scale-95"
+            >
+              Confirm Order
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

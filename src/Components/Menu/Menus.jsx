@@ -10,6 +10,7 @@ import { Helmet } from 'react-helmet-async';
 
 const Menus = () => {
   const { menus } = useContext(AuthContext);
+  console.log(menus);
 
 
   const handleConfirmOrder = (id) => {
@@ -29,15 +30,12 @@ const Menus = () => {
       <Category />
       <div
         className="grid grid-cols-1 md:grid-cols-5 gap-x-3 gap-y-5 w-full md:w-[100%] mx-auto md:mb-20 mt-5"
-        data-aos="fade-up"
-        data-aos-delay="100"
       >
         {menus.map((menu, idx) => (
           <Menu
             key={menu._id}
             menu={menu}
             handleConfirmOrder={handleConfirmOrder}
-            aosDelay={idx * 100} // pass delay per item
           />
         ))}
       </div>

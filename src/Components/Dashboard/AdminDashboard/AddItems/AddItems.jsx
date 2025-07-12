@@ -95,7 +95,7 @@ const AddItems = () => {
           <input
             type="submit"
             value="Publish"
-            className="w-full py-3 bg-orange-500 text-white font-semibold rounded-xl hover:bg-white hover:text-orange-600 hover:border hover:border-orange-500 transition-all duration-300 shadow-md"
+            className="w-full py-3 bg-orange-500 text-white font-semibold rounded-xl hover:bg-white hover:text-orange-600 hover:border hover:border-orange-500 transition-all duration-300 shadow-md cursor-pointer"
           />
         </form>
       </div>

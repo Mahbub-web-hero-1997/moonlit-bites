@@ -94,11 +94,11 @@ const AuthProvider = ({ children }) => {
     handleSignOut,
     handleAllMenus: () => fetchAndFilterMenus(),
     handlePopularMenus: () => fetchAndFilterMenus('Popular'),
-    handleSaladItems: () => fetchAndFilterMenus('salad'),
-    handlePizzaItems: () => fetchAndFilterMenus('pizza'),
-    handleDessertItems: () => fetchAndFilterMenus('dessert'),
-    handleDrinksItems: () => fetchAndFilterMenus('drinks'),
-    handleSoupItems: () => fetchAndFilterMenus('soup'),
+    handleSaladItems: () => fetchAndFilterMenus('Salad'),
+    handlePizzaItems: () => fetchAndFilterMenus('Pizza'),
+    handleDessertItems: () => fetchAndFilterMenus('Dessert'),
+    handleDrinksItems: () => fetchAndFilterMenus('Drinks'),
+    handleSoupItems: () => fetchAndFilterMenus('Soup'),
   };
 
   return (

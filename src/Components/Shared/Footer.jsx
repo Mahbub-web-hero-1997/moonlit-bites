@@ -11,7 +11,12 @@ const Footer = () => {
           <h4 className="text-orange-400 text-xl font-semibold mb-4">Services</h4>
           <ul className="space-y-2">
             {['Branding', 'Design', 'Marketing', 'Advertisement'].map((item, i) => (
-              <li key={i}><a className="hover:text-white transition">{item}</a></li>
+              <li key={i}>
+                <a className="group relative inline-block text-sm hover:text-white transition cursor-pointer">
+                  {item}
+                  <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
+                </a>
+              </li>
             ))}
           </ul>
         </div>
@@ -21,7 +26,12 @@ const Footer = () => {
           <h4 className="text-orange-400 text-xl font-semibold mb-4">Company</h4>
           <ul className="space-y-2">
             {['About us', 'Contact', 'Jobs', 'Press kit'].map((item, i) => (
-              <li key={i}><a className="hover:text-white transition">{item}</a></li>
+              <li key={i}>
+                <a className="group relative inline-block text-sm hover:text-white transition cursor-pointer">
+                  {item}
+                  <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
+                </a>
+              </li>
             ))}
           </ul>
         </div>
@@ -31,7 +41,12 @@ const Footer = () => {
           <h4 className="text-orange-400 text-xl font-semibold mb-4">Legal</h4>
           <ul className="space-y-2">
             {['Terms of use', 'Privacy policy', 'Cookie policy'].map((item, i) => (
-              <li key={i}><a className="hover:text-white transition">{item}</a></li>
+              <li key={i}>
+                <a className="group relative inline-block text-sm hover:text-white transition cursor-pointer">
+                  {item}
+                  <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
+                </a>
+              </li>
             ))}
           </ul>
         </div>

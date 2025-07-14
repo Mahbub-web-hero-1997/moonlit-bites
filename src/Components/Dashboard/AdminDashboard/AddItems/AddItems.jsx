@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
 import { AuthContext } from '../../../../ContextAPI/AuthProvider';
-import axios from 'axios';
+import UseCloudinary from '../../../../CustomHook/UseCloudinary';
 
 const AddItems = () => {
   const axiosPublic = useAxiosPublic();
@@ -14,28 +14,43 @@ const AddItems = () => {
     reset,
     formState: { errors },
   } = useForm();
-
-  const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append('name', data.name);
-    formData.append('price', data.price);
-    formData.append('category', data.category);
-    formData.append('recipe', data.recipe);
-    formData.append('image', data.image[0]);
-
-    axiosPublic.post('/menus/create', formData).then((res) => {   
-      if (res.data) {
+  const { uploadImage, err } = UseCloudinary();
+  const onSubmit = async (data) => {
+    try {
+      const file = data.image[0];
+      const imageUrl = await uploadImage(file);
+      console.log(imageUrl);
+      if (!imageUrl) {
         Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Item Added Successfully',
-          showConfirmButton: false,
-          timer: 1500,
+          icon: "error",
+          title: "Image Upload Error",
+          text: err,
         });
-        setMenus((prevMenus) => [...prevMenus, res.data?.data]);
-        reset();
+        return;
       }
-    });
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('price', data.price);
+      formData.append('category', data.category);
+      formData.append('recipe', data.recipe);
+      formData.append('image', imageUrl);
+      axiosPublic.post('/menus/create', formData).then((res) => {
+        if (res.data) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Item Added Successfully',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setMenus((prevMenus) => [...prevMenus, res.data?.data]);
+          reset();
+        }
+      });
+    } catch (error) {
+      console.log(error);
+
+    }
   };
 
   return (

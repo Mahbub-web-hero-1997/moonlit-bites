@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosSecurePublic = axios.create({
-  baseURL: 'http://localhost:5000/api/v1',
+  baseURL: 'https://moonlitbite-server.onrender.com/api/v1',
   withCredentials: true,
 });
 

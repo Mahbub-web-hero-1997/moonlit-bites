@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../../../CustomHook/UseAxiosPublic';
 import { AuthContext } from '../../../../ContextAPI/AuthProvider';
+import axios from 'axios';
 
 const AddItems = () => {
   const axiosPublic = useAxiosPublic();
@@ -22,7 +23,7 @@ const AddItems = () => {
     formData.append('recipe', data.recipe);
     formData.append('image', data.image[0]);
 
-    axiosPublic.post('/menus/create', formData).then((res) => {
+    axiosPublic.post('/menus/create', formData).then((res) => {   
       if (res.data) {
         Swal.fire({
           position: 'center',

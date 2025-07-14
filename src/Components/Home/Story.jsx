@@ -13,7 +13,7 @@ const Story = () => {
   const [selected, setSelected] = useState();
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/v1/Story/get')
+      .get('https://moonlitbite-server.onrender.com/api/v1/Story/get')
       .then((res) => setStories(res.data?.data || []));
   }, []);
 

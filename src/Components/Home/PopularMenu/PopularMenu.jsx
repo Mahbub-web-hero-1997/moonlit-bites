@@ -22,7 +22,7 @@ const PopularMenu = ({ menu }) => {
       };
 
       axios
-        .post('http://localhost:5000/api/v1/cart/addToCart', cartData, {
+        .post('https://moonlitbite-server.onrender.com/api/v1/cart/addToCart', cartData, {
           withCredentials: true,
         })
         .then((res) => {

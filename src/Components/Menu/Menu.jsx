@@ -4,6 +4,7 @@ import { AuthContext } from '../../ContextAPI/AuthProvider';
 import Swal from 'sweetalert2';
 import UseCart from '../../CustomHook/UseCart';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 
 const Menu = ({ menu }) => {
   const { name, image, price, recipe, _id } = menu;
@@ -20,7 +21,7 @@ const Menu = ({ menu }) => {
       };
 
       axios
-        .post('http://localhost:5000/api/v1/cart/addToCart', cartData, {
+        .post('https://moonlitbite-server.onrender.com/api/v1/cart/addToCart', cartData, {
           withCredentials: true,
         })
         .then((res) => {
@@ -58,12 +59,16 @@ const Menu = ({ menu }) => {
   };
 
   const handleBuyNow = (id) => {
-    // Placeholder for buy now action
+    // Future use
   };
 
   return (
-    <div className="card bg-white w-[98%] max-w-sm rounded-tl-md rounded-tr-md shadow-xl mx-auto hover:shadow-orange-100 transition-shadow duration-500 cursor-pointer "
-      data-aos="fade-up"
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: 'easeIn' }}
+      viewport={{ once: false, amount: 0.3 }}
+      className="card bg-white w-[98%] max-w-sm rounded-tl-md rounded-tr-md shadow-xl mx-auto hover:shadow-orange-100 transition-shadow duration-500 cursor-pointer"
     >
       <figure className="relative overflow-hidden rounded-tl-md rounded-tr-md">
         <img
@@ -71,7 +76,6 @@ const Menu = ({ menu }) => {
           src={image}
           alt={name}
         />
-        {/* <div className="absolute inset- bg-black bg-opacity-90 hover:bg-opacity-30 transition-opacity duration-500 rounded-tl-md rounded-tr-md"></div> */}
         <span className="absolute top-3 right-3 bg-gradient-to-tr from-orange-500 to-yellow-400 text-white font-extrabold text-lg px-5 py-2 rounded-full shadow-lg drop-shadow-lg">
           ${price}
         </span>
@@ -98,7 +102,7 @@ const Menu = ({ menu }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/menus/single/${params.id}`, {
+          fetch(`https://moonlitbite-server.onrender.com/api/v1/menus/single/${params.id}`, {
             credentials: 'include',
           }),
       },
@@ -136,7 +136,7 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/menus/single/${params.id}`, {
+          fetch(`https://moonlitbite-server.onrender.com/api/v1/menus/single/${params.id}`, {
             credentials: 'include',
           }),
 

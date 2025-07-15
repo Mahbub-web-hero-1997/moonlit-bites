@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
       {
         path: '/menu',
         element: <Menu />,
-        // loader: () => fetch('http://localhost:5000/pagination'),
+        // loader: () => fetch('https://moonlit-bite-server.vercel.app/pagination'),
       },
       {
         path: '/blogs',
@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/menus/single/${params.id}`, {
+          fetch(`https://moonlit-bite-server.vercel.app/api/v1/menus/single/${params.id}`, {
             credentials: 'include',
           }),
       },
@@ -136,7 +136,7 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/menus/single/${params.id}`, {
+          fetch(`https://moonlit-bite-server.vercel.app/api/v1/menus/single/${params.id}`, {
             credentials: 'include',
           }),
 

@@ -11,7 +11,7 @@ import UseMenu from '../../../../CustomHook/UseMenu';
 const GetItems = () => {
   const axiosPublic = useAxiosPublic();
   const [allItems, refetch] = UseMenu();
-  console.log(allItems[0].image);
+  // console.log(allItems[0].image);
 
   const handleDeleteItem = (id) => {
     Swal.fire({
@@ -71,7 +71,7 @@ const GetItems = () => {
                 <td>{index + 1}</td>
                 <td>
                   <img
-                    src={item.image}
+                    // src={item.image}
                     alt={item.name}
                     className="w-14 h-14 rounded-md object-cover border border-orange-100 shadow"
                   />

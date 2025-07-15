@@ -39,7 +39,7 @@ const AddItems = () => {
         image: imageUrl,
       };
 
-      const res = await axiosPublic.post('/menus/create', payload);
+      const res = await axiosPublic.post('/menus/create', payload, { withCredentials: true });
       if (res.data?.data) {
         Swal.fire({
           position: 'center',

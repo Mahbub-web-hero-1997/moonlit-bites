@@ -10,7 +10,7 @@ const Party = () => {
   const [parties, setParties] = useState([]);
   // console.log(parties);
   useEffect(() => {
-    const url = 'https://moonlit-bite-server.vercel.app/api/v1/api/v1/party/get';
+    const url = 'http://localhost:5000/api/v1/api/v1/party/get';
     axios.get(url).then((res) => setParties(res.data?.data));
   }, []);
 

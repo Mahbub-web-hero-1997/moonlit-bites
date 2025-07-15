@@ -11,7 +11,7 @@ import UseMenu from '../../../../CustomHook/UseMenu';
 const GetItems = () => {
   const axiosPublic = useAxiosPublic();
   const [allItems, refetch] = UseMenu();
-  console.log(allItems);
+  console.log(allItems[0].image);
 
   const handleDeleteItem = (id) => {
     Swal.fire({

@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-
+  console.log(menus);
   const axiosPublic = UseAxiosPublic();
 
   //  Check user authentication
@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
   //  Fetch all menus
   useEffect(() => {
     axiosPublic.get('/menus/all').then((res) => {
-      if (res.data?.data) setMenus(res.data.data);
+      if (res.data?.data) setMenus(res.data?.data);
     });
   }, []);
   //  Filtered menus by category

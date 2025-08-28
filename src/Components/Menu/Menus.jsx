@@ -29,7 +29,7 @@ const Menus = () => {
       /> */}
       <Category />
       <div
-        className="grid grid-cols-1 md:grid-cols-5 gap-x-3 gap-y-5 w-full md:w-[100%] mx-auto md:mb-20 mt-5"
+        className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-x-3 gap-y-5 w-full md:w-[100%] mx-auto md:mb-20 mt-5"
       >
         {menus.map((menu, idx) => (
           <Menu

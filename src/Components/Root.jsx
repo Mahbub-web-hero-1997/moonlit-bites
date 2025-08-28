@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Shared/Header';
 import { Outlet } from 'react-router-dom';
 import Footer from './Shared/Footer';
-import Facebook from '../Plugin/Facebook';
+// import Facebook from '../Plugin/Facebook';
 
 const Root = () => {
   return (
@@ -10,8 +10,7 @@ const Root = () => {
       <div className='bg-white text-black'>
         <Header />
         {<Outlet />}
-      </div>
-      <Facebook />
+      </div>    
       <Footer />
     </>
   );

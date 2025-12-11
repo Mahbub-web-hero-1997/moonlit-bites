@@ -21,9 +21,13 @@ const Menu = ({ menu }) => {
       };
 
       axios
-        .post('https://moonlit-bite-server.vercel.app/api/v1/api/v1/cart/addToCart', cartData, {
-          withCredentials: true,
-        })
+        .post(
+          'https://moonlitbite-server.onrender.com/api/v1/cart/addToCart',
+          cartData,
+          {
+            withCredentials: true,
+          }
+        )
         .then((res) => {
           Swal.fire({
             position: 'center',

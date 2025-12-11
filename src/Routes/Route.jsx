@@ -29,8 +29,6 @@ import PaymentForm from '../Components/Dashboard/UserDashboard/UserOrder/Payment
 import MyReviews from '../Components/Dashboard/UserDashboard/Reviews/MyReviews';
 import Story from '../Components/Dashboard/AdminDashboard/Story/Story';
 
-
-
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -43,7 +41,7 @@ export const router = createBrowserRouter([
       {
         path: '/menu',
         element: <Menu />,
-        // loader: () => fetch('https://moonlit-bite-server.vercel.app/pagination'),
+        // loader: () => fetch('https://moonlitbite-server.onrender.com/pagination'),
       },
       {
         path: '/blogs',
@@ -77,12 +75,14 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://moonlit-bite-server.vercel.app/api/v1/menus/single/${params.id}`, {
-            credentials: 'include',
-          }),
+          fetch(
+            `https://moonlitbite-server.onrender.com/api/v1/menus/single/${params.id}`,
+            {
+              credentials: 'include',
+            }
+          ),
       },
     ],
-
   },
   {
     path: '*',
@@ -136,17 +136,20 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://moonlit-bite-server.vercel.app/api/v1/menus/single/${params.id}`, {
-            credentials: 'include',
-          }),
-
-
+          fetch(
+            `https://moonlitbite-server.onrender.com/api/v1/menus/single/${params.id}`,
+            {
+              credentials: 'include',
+            }
+          ),
       },
       {
-        path: "story",
-        element: <AdminRoute>
-          <Story />
-        </AdminRoute>
+        path: 'story',
+        element: (
+          <AdminRoute>
+            <Story />
+          </AdminRoute>
+        ),
       },
       {
         path: 'cart',
@@ -161,9 +164,8 @@ export const router = createBrowserRouter([
         element: <UserOrder />,
       },
       {
-        path: "paymentForm/:id",
+        path: 'paymentForm/:id',
         element: <PaymentForm />,
-
       },
       {
         path: 'myPayment',
@@ -174,8 +176,8 @@ export const router = createBrowserRouter([
         element: <UserReview />,
       },
       {
-        path: "myReviews",
-        element: <MyReviews />
+        path: 'myReviews',
+        element: <MyReviews />,
       },
       {
         path: 'blogs',

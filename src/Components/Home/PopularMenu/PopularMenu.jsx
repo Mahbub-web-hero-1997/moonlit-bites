@@ -22,9 +22,13 @@ const PopularMenu = ({ menu }) => {
       };
 
       axios
-        .post('https://moonlit-bite-server.vercel.app/api/v1/api/v1/cart/addToCart', cartData, {
-          withCredentials: true,
-        })
+        .post(
+          'https://moonlitbite-server.onrender.com/api/v1/cart/addToCart',
+          cartData,
+          {
+            withCredentials: true,
+          }
+        )
         .then((res) => {
           Swal.fire({
             position: 'center',
@@ -58,9 +62,7 @@ const PopularMenu = ({ menu }) => {
       });
     }
   };
-  const handleBuyNow = (id) => {
-
-  };
+  const handleBuyNow = (id) => {};
 
   return (
     <div className="card bg-white w-[98%] max-w-sm rounded-tl-md rounded-tr-md shadow-xl mx-auto hover:shadow-orange-100 transition-shadow duration-500 cursor-pointer ">

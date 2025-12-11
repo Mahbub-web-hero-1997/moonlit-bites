@@ -1,10 +1,9 @@
 import axios from 'axios';
 
 const axiosSecurePublic = axios.create({
-  baseURL: 'https://moonlit-bite-server.vercel.app/api/v1',
+  baseURL: 'https://moonlitbite-server.onrender.com/api/v1',
   withCredentials: true,
 });
-
 
 const useAxiosPublic = () => axiosSecurePublic;
 

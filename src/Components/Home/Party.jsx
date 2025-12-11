@@ -10,7 +10,7 @@ const Party = () => {
   const [parties, setParties] = useState([]);
   // console.log(parties);
   useEffect(() => {
-    const url = 'https://moonlit-bite-server.vercel.app/api/v1/party/get';
+    const url = 'https://moonlitbite-server.onrender.com/api/v1/party/get';
     axios.get(url).then((res) => setParties(res.data?.data));
   }, []);
 
@@ -32,9 +32,12 @@ const Party = () => {
             <SwiperSlide key={party._id}>
               <div className="flex flex-col md:flex-row w-full mx-auto ">
                 <div className="relative w-full md:w-[45%] ">
-                  <img className="w-full h-[100%]" src={party.image} alt={party.image} />
+                  <img
+                    className="w-full h-[100%]"
+                    src={party.image}
+                    alt={party.image}
+                  />
                   <div className="w-20 h-20 rounded-full bg-white shadow-inner absolute top-[170px] right-[140px] md:top-[37%] md:right-[-44px] bg-white shadow-2xl border-t-[2px] border-l-[1px] border-r-[1px] border-orange-500">
-
                     <p className="text-xl font-semibold text-orange-500 text-center mt-3">
                       Price
                     </p>

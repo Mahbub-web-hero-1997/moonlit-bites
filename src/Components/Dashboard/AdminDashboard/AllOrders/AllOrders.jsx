@@ -6,12 +6,14 @@ import { MdDeleteForever } from 'react-icons/md';
 import UseOrders from '../../../../CustomHook/UseOrders';
 import UseAdminOrders from '../../../../CustomHook/UseAdminOrders';
 
-
 const AllOrders = () => {
-  const [orders, refetch] = UseAdminOrders()
+  const [orders, refetch] = UseAdminOrders();
   console.log(orders[0]);
-  const totalAmount = orders.reduce((total, item) => total + item.totalPrice, 0)
-
+  const totalAmount = orders.reduce(
+    (total, item) => total + item.totalPrice,
+    0
+  );
+  console.log(orders);
   return (
     <>
       {/* <SectionHeading subHeading={'My cart'} /> */}
@@ -48,12 +50,12 @@ const AllOrders = () => {
                   <td>
                     <img
                       className="w-[40px] h-[45px] rounded-full"
-                      src={item?.productId.image}
+                      src={item?.productId?.image}
                       alt=""
                     />
                   </td>
-                  <td>{item?.productId.name}</td>
-                  <td>{item?.productId.price}</td>
+                  <td>{item?.productId?.name}</td>
+                  <td>{item?.productId?.price}</td>
                   <td className="text-center">
                     <button onClick={() => handleDelete(item._id)}>
                       <MdDeleteForever className="text-3xl text-orange-500" />

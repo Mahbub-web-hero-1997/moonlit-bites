@@ -13,7 +13,7 @@ const Story = () => {
   const [selected, setSelected] = useState();
   useEffect(() => {
     axios
-      .get('https://moonlit-bite-server.vercel.app/api/v1/Story/get')
+      .get('https://moonlitbite-server.onrender.com/api/v1/Story/get')
       .then((res) => setStories(res.data?.data || []));
   }, []);
 
@@ -24,7 +24,7 @@ const Story = () => {
           <h1 className="text-3xl md:text-4xl text-center font-semibold md:text-left text-orange-500 mb-5 ">
             Our Story
           </h1>
-          <hr className='w-1/6 mb-5 text-orange-500' />
+          <hr className="w-1/6 mb-5 text-orange-500" />
           {stories.map((story) => (
             <div key={story._id} className="flex flex-col ">
               <h2 className="text-xl md:text-5xl mb-4 md:mb-8 font-semibold text-gray-700 text-center md:text-left">
@@ -64,7 +64,6 @@ const Story = () => {
               placeholder="Name Here"
             />
             <input
-
               className="w-full md:w-[95%] p-3 border-[1px] text-center outline-none rounded-sm mb-3 border-orange-500"
               type="email"
               placeholder="Example@gmail"

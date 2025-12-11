@@ -14,7 +14,7 @@ const Cart = () => {
     const price = item.productId?.price || 0;
     return total + price * item.quantity;
   }, 0);
-
+  console.log(cart);
   const handleDelete = (productId) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -45,10 +45,12 @@ const Cart = () => {
       <header className="flex flex-col md:flex-row justify-between items-center bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-5 rounded-lg mb-6 shadow-md">
         <div className="text-center md:text-left space-y-2">
           <p className="text-lg font-semibold">
-            Total Selected Items: <span className="text-yellow-700">{cart.length}</span>
+            Total Selected Items:{' '}
+            <span className="text-yellow-700">{cart.length}</span>
           </p>
           <p className="text-lg font-semibold">
-            Total Price: <span className="text-yellow-700">${totalPrice.toFixed(2)}</span>
+            Total Price:{' '}
+            <span className="text-yellow-700">${totalPrice.toFixed(2)}</span>
           </p>
         </div>
         {/* Uncomment if you want Pay Now button */}
@@ -78,7 +80,10 @@ const Cart = () => {
           <tbody className="bg-white divide-y divide-gray-100">
             {cart.length === 0 ? (
               <tr>
-                <td colSpan="6" className="text-center py-10 text-gray-500 italic">
+                <td
+                  colSpan="6"
+                  className="text-center py-10 text-gray-500 italic"
+                >
                   Your cart is empty.
                 </td>
               </tr>
@@ -119,7 +124,7 @@ const Cart = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
                     <Link
-                      to={`/checkout/${item.productId._id}`}
+                      to={`/checkout/${item.productId?._id}`}
                       state={{ quantity: item.quantity }}
                       className="text-yellow-600 hover:text-yellow-800 transition text-2xl"
                       aria-label="Buy Now"

@@ -8,10 +8,18 @@ const Blogs = () => {
   const { blogs, isLoading, error } = UseBlogs();
 
   if (isLoading)
-    return <p className="text-center mt-8 text-orange-500 font-semibold animate-pulse">Loading blogs...</p>;
+    return (
+      <p className="text-center mt-8 text-orange-500 font-semibold animate-pulse">
+        Loading blogs...
+      </p>
+    );
 
   if (error)
-    return <p className="text-center text-red-500 mt-8 font-medium">Failed to load blogs.</p>;
+    return (
+      <p className="text-center text-red-500 mt-8 font-medium">
+        Failed to load blogs.
+      </p>
+    );
 
   return (
     <>
@@ -26,9 +34,7 @@ const Blogs = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {blogs.map((blog) => (
-            <div
-              key={blog._id}
-            >
+            <div key={blog._id}>
               <Blog blog={blog} />
             </div>
           ))}
